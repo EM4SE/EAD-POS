@@ -9,7 +9,6 @@ import javax.swing.JPanel;
 import javax.swing.ButtonGroup;
 import pos.swing.RoundPanel;
 
-
 /**
  *
  * @author Anjana
@@ -50,13 +49,13 @@ public class Main extends javax.swing.JFrame {
         buttonProducts = new pos.swing.ButtonMenu();
         win_Button1 = new pos.winButtons.Win_Button();
         panelShadow3 = new pos.swing.PanelShadow();
-        panelCategories = new pos.swing.RoundPanel();
+        Sellers = new pos.swing.RoundPanel();
         jLabel1 = new javax.swing.JLabel();
-        panelBills = new pos.swing.RoundPanel();
+        Bills = new pos.swing.RoundPanel();
         jLabel2 = new javax.swing.JLabel();
-        panelSellers = new pos.swing.RoundPanel();
+        Categories = new pos.swing.RoundPanel();
         jLabel3 = new javax.swing.JLabel();
-        panelProduct = new pos.swing.RoundPanel();
+        Products = new pos.swing.RoundPanel();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -138,106 +137,110 @@ public class Main extends javax.swing.JFrame {
             panelShadow1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelShadow1Layout.createSequentialGroup()
                 .addComponent(profile1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(buttonProducts, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(buttonSellers, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(buttonCategories, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(buttonBills, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
         panelShadow3.setLayout(new javax.swing.OverlayLayout(panelShadow3));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 48)); // NOI18N
-        jLabel1.setText("Categories");
+        Sellers.setBackground(new java.awt.Color(242, 246, 253));
 
-        javax.swing.GroupLayout panelCategoriesLayout = new javax.swing.GroupLayout(panelCategories);
-        panelCategories.setLayout(panelCategoriesLayout);
-        panelCategoriesLayout.setHorizontalGroup(
-            panelCategoriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCategoriesLayout.createSequentialGroup()
-                .addGap(377, 377, 377)
+        jLabel1.setText("sellers");
+
+        javax.swing.GroupLayout SellersLayout = new javax.swing.GroupLayout(Sellers);
+        Sellers.setLayout(SellersLayout);
+        SellersLayout.setHorizontalGroup(
+            SellersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SellersLayout.createSequentialGroup()
+                .addContainerGap(986, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(410, Short.MAX_VALUE))
+                .addContainerGap())
         );
-        panelCategoriesLayout.setVerticalGroup(
-            panelCategoriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCategoriesLayout.createSequentialGroup()
-                .addGap(235, 235, 235)
+        SellersLayout.setVerticalGroup(
+            SellersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SellersLayout.createSequentialGroup()
+                .addContainerGap(537, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(270, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
-        panelShadow3.add(panelCategories);
+        panelShadow3.add(Sellers);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 3, 48)); // NOI18N
-        jLabel2.setText("Bills");
+        Bills.setBackground(new java.awt.Color(242, 246, 253));
 
-        javax.swing.GroupLayout panelBillsLayout = new javax.swing.GroupLayout(panelBills);
-        panelBills.setLayout(panelBillsLayout);
-        panelBillsLayout.setHorizontalGroup(
-            panelBillsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBillsLayout.createSequentialGroup()
-                .addGap(377, 377, 377)
+        jLabel2.setText("bills");
+
+        javax.swing.GroupLayout BillsLayout = new javax.swing.GroupLayout(Bills);
+        Bills.setLayout(BillsLayout);
+        BillsLayout.setHorizontalGroup(
+            BillsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BillsLayout.createSequentialGroup()
+                .addContainerGap(997, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addContainerGap(550, Short.MAX_VALUE))
+                .addContainerGap())
         );
-        panelBillsLayout.setVerticalGroup(
-            panelBillsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBillsLayout.createSequentialGroup()
-                .addGap(235, 235, 235)
+        BillsLayout.setVerticalGroup(
+            BillsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BillsLayout.createSequentialGroup()
+                .addContainerGap(537, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addContainerGap(270, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
-        panelShadow3.add(panelBills);
+        panelShadow3.add(Bills);
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 3, 48)); // NOI18N
-        jLabel3.setText("Sellers");
+        Categories.setBackground(new java.awt.Color(242, 246, 253));
 
-        javax.swing.GroupLayout panelSellersLayout = new javax.swing.GroupLayout(panelSellers);
-        panelSellers.setLayout(panelSellersLayout);
-        panelSellersLayout.setHorizontalGroup(
-            panelSellersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelSellersLayout.createSequentialGroup()
-                .addGap(377, 377, 377)
+        jLabel3.setText("Categories");
+
+        javax.swing.GroupLayout CategoriesLayout = new javax.swing.GroupLayout(Categories);
+        Categories.setLayout(CategoriesLayout);
+        CategoriesLayout.setHorizontalGroup(
+            CategoriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CategoriesLayout.createSequentialGroup()
+                .addContainerGap(962, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addContainerGap(501, Short.MAX_VALUE))
+                .addContainerGap())
         );
-        panelSellersLayout.setVerticalGroup(
-            panelSellersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelSellersLayout.createSequentialGroup()
-                .addGap(235, 235, 235)
+        CategoriesLayout.setVerticalGroup(
+            CategoriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CategoriesLayout.createSequentialGroup()
+                .addContainerGap(537, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addContainerGap(270, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
-        panelShadow3.add(panelSellers);
+        panelShadow3.add(Categories);
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 3, 48)); // NOI18N
+        Products.setBackground(new java.awt.Color(242, 246, 253));
+
         jLabel4.setText("Products");
 
-        javax.swing.GroupLayout panelProductLayout = new javax.swing.GroupLayout(panelProduct);
-        panelProduct.setLayout(panelProductLayout);
-        panelProductLayout.setHorizontalGroup(
-            panelProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelProductLayout.createSequentialGroup()
-                .addGap(377, 377, 377)
+        javax.swing.GroupLayout ProductsLayout = new javax.swing.GroupLayout(Products);
+        Products.setLayout(ProductsLayout);
+        ProductsLayout.setHorizontalGroup(
+            ProductsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ProductsLayout.createSequentialGroup()
+                .addContainerGap(971, Short.MAX_VALUE)
                 .addComponent(jLabel4)
-                .addContainerGap(452, Short.MAX_VALUE))
+                .addContainerGap())
         );
-        panelProductLayout.setVerticalGroup(
-            panelProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelProductLayout.createSequentialGroup()
-                .addGap(235, 235, 235)
+        ProductsLayout.setVerticalGroup(
+            ProductsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ProductsLayout.createSequentialGroup()
+                .addContainerGap(537, Short.MAX_VALUE)
                 .addComponent(jLabel4)
-                .addContainerGap(270, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
-        panelShadow3.add(panelProduct);
+        panelShadow3.add(Products);
 
         javax.swing.GroupLayout background1Layout = new javax.swing.GroupLayout(background1);
         background1.setLayout(background1Layout);
@@ -258,9 +261,9 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(win_Button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(background1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panelShadow1, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelShadow3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(137, 137, 137))
+                    .addComponent(panelShadow1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelShadow3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(143, 143, 143))
         );
 
         getContentPane().add(background1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 650));
@@ -271,42 +274,39 @@ public class Main extends javax.swing.JFrame {
 
     private void buttonProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonProductsActionPerformed
 
-        panelProduct.setVisible(true);
-
-        panelSellers.setVisible(false);
-        panelCategories.setVisible(false);
-        panelBills.setVisible(false);
+        Products.setVisible(true);
+        Sellers.setVisible(false);
+        Categories.setVisible(false);
+        Bills.setVisible(false);
     }//GEN-LAST:event_buttonProductsActionPerformed
 
     private void buttonCategoriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCategoriesActionPerformed
-        panelProduct.setVisible(false);
 
-        panelSellers.setVisible(false);
-        panelCategories.setVisible(true);
-        panelBills.setVisible(false);
+        Products.setVisible(false);
+        Sellers.setVisible(false);
+        Categories.setVisible(true);
+        Bills.setVisible(false);
     }//GEN-LAST:event_buttonCategoriesActionPerformed
 
     private void buttonBillsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBillsActionPerformed
-        panelProduct.setVisible(false);
 
-        panelSellers.setVisible(false);
-        panelCategories.setVisible(false);
-        panelBills.setVisible(true);
+        Products.setVisible(false);
+        Sellers.setVisible(false);
+        Categories.setVisible(false);
+        Bills.setVisible(true);
     }//GEN-LAST:event_buttonBillsActionPerformed
 
     private void buttonSellersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSellersActionPerformed
-        panelProduct.setVisible(false);
 
-        panelSellers.setVisible(true);
-        panelCategories.setVisible(false);
-        panelBills.setVisible(false);
+        Products.setVisible(false);
+        Sellers.setVisible(true);
+        Categories.setVisible(false);
+        Bills.setVisible(false);
     }//GEN-LAST:event_buttonSellersActionPerformed
 
     /**
      * @param args the command line arguments
      */
-
-
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -341,6 +341,10 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private pos.swing.RoundPanel Bills;
+    private pos.swing.RoundPanel Categories;
+    private pos.swing.RoundPanel Products;
+    private pos.swing.RoundPanel Sellers;
     private pos.swing.Background background1;
     private pos.swing.ButtonMenu buttonBills;
     private pos.swing.ButtonMenu buttonCategories;
@@ -350,10 +354,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private pos.swing.RoundPanel panelBills;
-    private pos.swing.RoundPanel panelCategories;
-    private pos.swing.RoundPanel panelProduct;
-    private pos.swing.RoundPanel panelSellers;
     private pos.swing.PanelShadow panelShadow1;
     private pos.swing.PanelShadow panelShadow3;
     private pos.includes.Profile profile1;

@@ -25,8 +25,8 @@ import java.util.List;
 
 public class ButtonMenu extends JButton {
 
-    private String iconName = "/pos/icon/1.png"; // Default icon
-    private String selectedIconName = "/pos/icon/1.png"; // Selected icon
+    private String iconName ; // Default icon
+    private String selectedIconName ; // Selected icon
     private Color effectColor = new Color(173, 173, 173);
     private Color clickedColor = new Color(242, 242, 242);
     private Color unselectedTextColor = new Color(76, 76, 76);
@@ -50,7 +50,7 @@ public class ButtonMenu extends JButton {
         setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         setCursor(new Cursor(Cursor.HAND_CURSOR));
         buttonGroup.add(this); // Add to the button group
-        updateIcon(); // Initialize with default icon
+       // updateIcon(); // Initialize with default icon
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent me) {
@@ -97,7 +97,7 @@ public class ButtonMenu extends JButton {
 
     public void setIconName(String iconName) {
         this.iconName = iconName;
-        updateIcon();
+        //updateIcon();
     }
 
     public String getSelectedIconName() {
@@ -107,7 +107,7 @@ public class ButtonMenu extends JButton {
     public void setSelectedIconName(String selectedIconName) {
         this.selectedIconName = selectedIconName;
         if (toggled) {
-            updateIcon();
+            //updateIcon();
         }
     }
 
@@ -151,14 +151,7 @@ public class ButtonMenu extends JButton {
         }
     }
 
-    private void updateIcon() {
-        String iconToUse = toggled ? selectedIconName : iconName;
-        if (iconToUse != null && !iconToUse.isEmpty()) {
-            setIcon(new ImageIcon(getClass().getResource(iconToUse)));
-        } else {
-            setIcon(null);
-        }
-    }
+   
 
     @Override
     protected void paintComponent(Graphics grphcs) {
@@ -198,11 +191,11 @@ public class ButtonMenu extends JButton {
         super.setSelected(bln);
         toggled = bln; // Set toggle state based on selected state
         if (bln) {
-            updateIcon(); // Update to selected icon
+           // updateIcon(); // Update to selected icon
             setForeground(selectedTextColor); // Set text color to selected text color
             setEffectColor(new Color(255, 255, 255));
         } else {
-            updateIcon(); // Update to default icon
+           // updateIcon(); // Update to default icon
             setForeground(unselectedTextColor); // Set text color to unselected text color
             setEffectColor(new Color(173, 173, 173));
         }

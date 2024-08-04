@@ -149,12 +149,12 @@ public class Menu extends javax.swing.JPanel {
 
     private void buttonProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonProductsActionPerformed
        Main main = new Main();
-       main.LoadProducts();;
+
     }//GEN-LAST:event_buttonProductsActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        Main main = new Main();
-       main.LoadProducts();
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
    private void addButtonListeners() {

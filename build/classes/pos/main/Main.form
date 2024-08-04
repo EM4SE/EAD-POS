@@ -106,7 +106,7 @@
             <Component class="pos.swing.ButtonMenu" name="buttonSellers">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/pos/icon/1.png"/>
+                  <Image iconType="3" name="/pos/icon/3.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Sellers"/>
                 <Property name="clickedColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -117,7 +117,7 @@
                   <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
                 <Property name="selectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/pos/icon/1.png"/>
+                  <Image iconType="3" name="/pos/icon/3.png"/>
                 </Property>
                 <Property name="selectedTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="0" red="0" type="rgb"/>
@@ -160,7 +160,7 @@
             <Component class="pos.swing.ButtonMenu" name="buttonBills">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/pos/icon/1.png"/>
+                  <Image iconType="3" name="/pos/icon/4.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Bills"/>
                 <Property name="clickedColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -171,7 +171,7 @@
                   <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
                 <Property name="selectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/pos/icon/1.png"/>
+                  <Image iconType="3" name="/pos/icon/4.png"/>
                 </Property>
                 <Property name="selectedTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="0" red="0" type="rgb"/>
@@ -187,7 +187,7 @@
             <Component class="pos.swing.ButtonMenu" name="buttonProducts">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/pos/icon/1.png"/>
+                  <Image iconType="3" name="/pos/icon/2.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Products"/>
                 <Property name="clickedColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -198,7 +198,7 @@
                   <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
                 <Property name="selectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/pos/icon/1.png"/>
+                  <Image iconType="3" name="/pos/icon/2.png"/>
                 </Property>
                 <Property name="selectedTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="0" red="0" type="rgb"/>

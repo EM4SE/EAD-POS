@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.ButtonGroup;
 import pos.swing.RoundPanel;
 
+
 /**
  *
  * @author Anjana
@@ -22,7 +23,7 @@ public class Main extends javax.swing.JFrame {
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
         mainFrame = this;
-        
+
         buttonGroup = new ButtonGroup();
         buttonGroup.add(buttonSellers);
         buttonGroup.add(buttonCategories);
@@ -62,12 +63,12 @@ public class Main extends javax.swing.JFrame {
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        buttonSellers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/icon/1.png"))); // NOI18N
+        buttonSellers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/icon/3.png"))); // NOI18N
         buttonSellers.setText("Sellers");
         buttonSellers.setClickedColor(new java.awt.Color(51, 204, 255));
         buttonSellers.setFocusPainted(false);
         buttonSellers.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        buttonSellers.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/icon/1.png"))); // NOI18N
+        buttonSellers.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/icon/3.png"))); // NOI18N
         buttonSellers.setSelectedTextColor(new java.awt.Color(0, 0, 0));
         buttonSellers.setUnselectedTextColor(new java.awt.Color(0, 0, 0));
         buttonSellers.addActionListener(new java.awt.event.ActionListener() {
@@ -90,12 +91,12 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        buttonBills.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/icon/1.png"))); // NOI18N
+        buttonBills.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/icon/4.png"))); // NOI18N
         buttonBills.setText("Bills");
         buttonBills.setClickedColor(new java.awt.Color(51, 204, 255));
         buttonBills.setFocusPainted(false);
         buttonBills.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        buttonBills.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/icon/1.png"))); // NOI18N
+        buttonBills.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/icon/4.png"))); // NOI18N
         buttonBills.setSelectedTextColor(new java.awt.Color(0, 0, 0));
         buttonBills.setUnselectedTextColor(new java.awt.Color(0, 0, 0));
         buttonBills.addActionListener(new java.awt.event.ActionListener() {
@@ -104,12 +105,12 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        buttonProducts.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/icon/1.png"))); // NOI18N
+        buttonProducts.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/icon/2.png"))); // NOI18N
         buttonProducts.setText("Products");
         buttonProducts.setClickedColor(new java.awt.Color(51, 204, 255));
         buttonProducts.setFocusPainted(false);
         buttonProducts.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        buttonProducts.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/icon/1.png"))); // NOI18N
+        buttonProducts.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/icon/2.png"))); // NOI18N
         buttonProducts.setSelectedTextColor(new java.awt.Color(0, 0, 0));
         buttonProducts.setUnselectedTextColor(new java.awt.Color(0, 0, 0));
         buttonProducts.addActionListener(new java.awt.event.ActionListener() {
@@ -248,7 +249,7 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(panelShadow3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, background1Layout.createSequentialGroup()
-                .addGap(0, 1152, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(win_Button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         background1Layout.setVerticalGroup(
@@ -277,14 +278,6 @@ public class Main extends javax.swing.JFrame {
         panelBills.setVisible(false);
     }//GEN-LAST:event_buttonProductsActionPerformed
 
-    private void buttonSellersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSellersActionPerformed
-        panelProduct.setVisible(false);
-
-        panelSellers.setVisible(true);
-        panelCategories.setVisible(false);
-        panelBills.setVisible(false);
-    }//GEN-LAST:event_buttonSellersActionPerformed
-
     private void buttonCategoriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCategoriesActionPerformed
         panelProduct.setVisible(false);
 
@@ -301,13 +294,18 @@ public class Main extends javax.swing.JFrame {
         panelBills.setVisible(true);
     }//GEN-LAST:event_buttonBillsActionPerformed
 
+    private void buttonSellersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSellersActionPerformed
+        panelProduct.setVisible(false);
+
+        panelSellers.setVisible(true);
+        panelCategories.setVisible(false);
+        panelBills.setVisible(false);
+    }//GEN-LAST:event_buttonSellersActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public void LoadProducts() {
-        //HomePanel.setSelectedIndex(3);
-        System.out.println("Panel reloaded.");
-    }
+
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

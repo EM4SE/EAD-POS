@@ -1,6 +1,6 @@
 package pos.swing;
 
-import com.raven.shadow.ShadowBorder;
+import pos.swing.ShadowBorder;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;

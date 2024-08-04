@@ -50,7 +50,15 @@ public class Main extends javax.swing.JFrame {
         win_Button1 = new pos.winButtons.Win_Button();
         panelShadow3 = new pos.swing.PanelShadow();
         Sellers = new pos.swing.RoundPanel();
+        textField1 = new pos.swing.TextField();
         jLabel1 = new javax.swing.JLabel();
+        textField2 = new pos.swing.TextField();
+        textField3 = new pos.swing.TextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        comboBoxSuggestion2 = new pos.combox.ComboBoxSuggestion();
         Bills = new pos.swing.RoundPanel();
         jLabel2 = new javax.swing.JLabel();
         Categories = new pos.swing.RoundPanel();
@@ -61,6 +69,8 @@ public class Main extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelShadow1.setBackground(new java.awt.Color(255, 255, 255));
 
         buttonSellers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/icon/3.png"))); // NOI18N
         buttonSellers.setText("Sellers");
@@ -148,27 +158,91 @@ public class Main extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        panelShadow3.setBackground(new java.awt.Color(255, 255, 255));
         panelShadow3.setLayout(new javax.swing.OverlayLayout(panelShadow3));
 
-        Sellers.setBackground(new java.awt.Color(242, 246, 253));
+        Sellers.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setText("sellers");
+        textField1.setText("textField1");
+        textField1.setShadowColor(new java.awt.Color(23, 102, 255));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(23, 102, 255));
+        jLabel1.setText("Manage Sellers");
+
+        textField2.setText("textField1");
+        textField2.setShadowColor(new java.awt.Color(23, 102, 255));
+
+        textField3.setText("textField1");
+        textField3.setShadowColor(new java.awt.Color(23, 102, 255));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 153, 255));
+        jLabel5.setText("Seller ID");
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 153, 255));
+        jLabel6.setText("Seller ID");
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 153, 255));
+        jLabel7.setText("Seller ID");
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 153, 255));
+        jLabel8.setText("Seller ID");
+
+        comboBoxSuggestion2.setPreferredSize(new java.awt.Dimension(151, 34));
 
         javax.swing.GroupLayout SellersLayout = new javax.swing.GroupLayout(Sellers);
         Sellers.setLayout(SellersLayout);
         SellersLayout.setHorizontalGroup(
             SellersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SellersLayout.createSequentialGroup()
-                .addContainerGap(986, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addContainerGap())
+            .addGroup(SellersLayout.createSequentialGroup()
+                .addGroup(SellersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(SellersLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(SellersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5))))
+                .addContainerGap(771, Short.MAX_VALUE))
+            .addGroup(SellersLayout.createSequentialGroup()
+                .addGroup(SellersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(textField3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                    .addComponent(textField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                    .addComponent(textField2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                    .addGroup(SellersLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(SellersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 228, Short.MAX_VALUE))
+                    .addComponent(comboBoxSuggestion2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         SellersLayout.setVerticalGroup(
             SellersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SellersLayout.createSequentialGroup()
-                .addContainerGap(537, Short.MAX_VALUE)
+            .addGroup(SellersLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap())
+                .addGap(56, 56, 56)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(comboBoxSuggestion2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(170, Short.MAX_VALUE))
         );
 
         panelShadow3.add(Sellers);
@@ -350,13 +424,21 @@ public class Main extends javax.swing.JFrame {
     private pos.swing.ButtonMenu buttonCategories;
     private pos.swing.ButtonMenu buttonProducts;
     private pos.swing.ButtonMenu buttonSellers;
+    private pos.combox.ComboBoxSuggestion comboBoxSuggestion2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private pos.swing.PanelShadow panelShadow1;
     private pos.swing.PanelShadow panelShadow3;
     private pos.includes.Profile profile1;
+    private pos.swing.TextField textField1;
+    private pos.swing.TextField textField2;
+    private pos.swing.TextField textField3;
     private pos.winButtons.Win_Button win_Button1;
     // End of variables declaration//GEN-END:variables
 }

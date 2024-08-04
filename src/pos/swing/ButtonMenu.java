@@ -20,11 +20,13 @@ import javax.swing.border.EmptyBorder;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ButtonMenu extends JButton {
 
-    private String iconName;
-    private String selectedIconName;
+    private String iconName = "/pos/icon/1.png"; // Default icon
+    private String selectedIconName = "/pos/icon/1.png"; // Selected icon
     private Color effectColor = new Color(173, 173, 173);
     private Color clickedColor = new Color(242, 242, 242);
     private Color unselectedTextColor = new Color(76, 76, 76);
@@ -37,6 +39,7 @@ public class ButtonMenu extends JButton {
     private BufferedImage shadow;
     private int shadowSize = 6;
     private boolean toggled = false; // Changed from clicked to toggled
+    private static List<ButtonMenu> buttonGroup = new ArrayList<>(); // Group to hold all ButtonMenu instances
 
     public ButtonMenu() {
         setContentAreaFilled(false);
@@ -46,6 +49,8 @@ public class ButtonMenu extends JButton {
         setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         setCursor(new Cursor(Cursor.HAND_CURSOR));
+        buttonGroup.add(this); // Add to the button group
+        updateIcon(); // Initialize with default icon
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent me) {
@@ -54,6 +59,9 @@ public class ButtonMenu extends JButton {
                 pressedPoint = me.getPoint();
                 alpha = 0.5f;
                 toggled = !toggled; // Toggle the state
+                if (toggled) {
+                    deselectOthers(); // Deselect other buttons in the group
+                }
                 if (animator.isRunning()) {
                     animator.stop();
                 }
@@ -73,6 +81,14 @@ public class ButtonMenu extends JButton {
         };
         animator = new Animator(400, target);
         animator.setResolution(0);
+    }
+
+    private void deselectOthers() {
+        for (ButtonMenu button : buttonGroup) {
+            if (button != this && button.toggled) {
+                button.setToggled(false);
+            }
+        }
     }
 
     public String getIconName() {
@@ -138,7 +154,7 @@ public class ButtonMenu extends JButton {
     private void updateIcon() {
         String iconToUse = toggled ? selectedIconName : iconName;
         if (iconToUse != null && !iconToUse.isEmpty()) {
-            setIcon(new ImageIcon(getClass().getResource("/pos/icon/" + iconToUse + ".png")));
+            setIcon(new ImageIcon(getClass().getResource(iconToUse)));
         } else {
             setIcon(null);
         }
@@ -190,6 +206,16 @@ public class ButtonMenu extends JButton {
             setForeground(unselectedTextColor); // Set text color to unselected text color
             setEffectColor(new Color(173, 173, 173));
         }
+    }
+
+    public boolean isToggled() {
+        return toggled;
+    }
+
+    public void setToggled(boolean toggled) {
+        this.toggled = toggled;
+        setSelected(toggled);
+        repaint();
     }
 
     private BufferedImage createImage() {

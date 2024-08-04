@@ -6,7 +6,7 @@ package pos.main;
 
 import java.awt.Color;
 import javax.swing.JPanel;
-
+import javax.swing.ButtonGroup;
 import pos.swing.RoundPanel;
 
 /**
@@ -16,11 +16,18 @@ import pos.swing.RoundPanel;
 public class Main extends javax.swing.JFrame {
 
     public static Main mainFrame;
+    private ButtonGroup buttonGroup;
 
     public Main() {
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
         mainFrame = this;
+        
+        buttonGroup = new ButtonGroup();
+        buttonGroup.add(buttonSellers);
+        buttonGroup.add(buttonCategories);
+        buttonGroup.add(buttonBills);
+        buttonGroup.add(buttonProducts);
 
     }
 

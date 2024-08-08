@@ -24,18 +24,30 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
+        
+        
         TableCustom.apply(TableScollPaneSellers, TableCustom.TableType.MULTI_LINE);
         TableCustom.apply(TableScollPaneProducts, TableCustom.TableType.MULTI_LINE);
+        TableCustom.apply(TableScollPaneCategories, TableCustom.TableType.MULTI_LINE);
+        
         mainFrame = this;
 
+        
+        
         buttonGroup = new ButtonGroup();
         buttonGroup.add(buttonSellers);
         buttonGroup.add(buttonCategories);
         buttonGroup.add(buttonBills);
         buttonGroup.add(buttonProducts);
-
         testData(SellersTable);
         testData(ProductsTable);
+        testData(CategoriesTable);
+        
+        Products.setVisible(false);
+        Sellers.setVisible(false);
+        Categories.setVisible(false);
+        Bills.setVisible(false);
+        Home.setVisible(true);
 
     }
 
@@ -94,15 +106,30 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         background1 = new pos.swing.Background();
+        win_Button1 = new pos.winButtons.Win_Button();
         panelShadow1 = new pos.swing.PanelShadow();
         profile1 = new pos.includes.Profile();
         buttonSellers = new pos.swing.ButtonMenu();
         buttonCategories = new pos.swing.ButtonMenu();
         buttonBills = new pos.swing.ButtonMenu();
         buttonProducts = new pos.swing.ButtonMenu();
-        win_Button1 = new pos.winButtons.Win_Button();
         panelShadow3 = new pos.swing.PanelShadow();
+        Categories = new pos.swing.RoundPanel();
+        jLabel15 = new javax.swing.JLabel();
+        textProductID1 = new pos.swing.TextField();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        textProductID2 = new pos.swing.TextField();
+        textProductID3 = new pos.swing.TextField();
+        buttonDeleteProduct1 = new pos.swing.Button();
+        buttonEditProduct1 = new pos.swing.Button();
+        buttonAddProduct1 = new pos.swing.Button();
+        roundPanel3 = new pos.swing.RoundPanel();
+        TableScollPaneCategories = new javax.swing.JScrollPane();
+        CategoriesTable = new javax.swing.JTable();
         Products = new pos.swing.RoundPanel();
         jLabel9 = new javax.swing.JLabel();
         textProductID = new pos.swing.TextField();
@@ -121,6 +148,8 @@ public class Main extends javax.swing.JFrame {
         roundPanel2 = new pos.swing.RoundPanel();
         TableScollPaneProducts = new javax.swing.JScrollPane();
         ProductsTable = new javax.swing.JTable();
+        Home = new pos.swing.RoundPanel();
+        pictureBox2 = new pos.swing.PictureBox();
         Sellers = new pos.swing.RoundPanel();
         textSellerName = new pos.swing.TextField();
         jLabel1 = new javax.swing.JLabel();
@@ -139,8 +168,9 @@ public class Main extends javax.swing.JFrame {
         SellersTable = new javax.swing.JTable();
         Bills = new pos.swing.RoundPanel();
         jLabel2 = new javax.swing.JLabel();
-        Categories = new pos.swing.RoundPanel();
-        jLabel3 = new javax.swing.JLabel();
+
+        jCheckBoxMenuItem1.setSelected(true);
+        jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -236,6 +266,147 @@ public class Main extends javax.swing.JFrame {
 
         panelShadow3.setBackground(new java.awt.Color(255, 255, 255));
         panelShadow3.setLayout(new javax.swing.OverlayLayout(panelShadow3));
+
+        Categories.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(23, 102, 255));
+        jLabel15.setText("Manage Categories");
+
+        textProductID1.setToolTipText("");
+        textProductID1.setName(""); // NOI18N
+        textProductID1.setShadowColor(new java.awt.Color(23, 102, 255));
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(0, 153, 255));
+        jLabel16.setText("Category ID");
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(0, 153, 255));
+        jLabel17.setText("Category Name");
+
+        jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(0, 153, 255));
+        jLabel18.setText("Category Description");
+
+        textProductID2.setToolTipText("");
+        textProductID2.setName(""); // NOI18N
+        textProductID2.setShadowColor(new java.awt.Color(23, 102, 255));
+
+        textProductID3.setToolTipText("");
+        textProductID3.setName(""); // NOI18N
+        textProductID3.setShadowColor(new java.awt.Color(23, 102, 255));
+
+        buttonDeleteProduct1.setBackground(new java.awt.Color(255, 102, 102));
+        buttonDeleteProduct1.setText("Delete Product");
+        buttonDeleteProduct1.setFocusPainted(false);
+        buttonDeleteProduct1.setRippleColor(new java.awt.Color(51, 0, 255));
+        buttonDeleteProduct1.setShadowColor(new java.awt.Color(0, 51, 255));
+
+        buttonEditProduct1.setBackground(new java.awt.Color(255, 204, 102));
+        buttonEditProduct1.setText("Edit Product");
+        buttonEditProduct1.setFocusPainted(false);
+        buttonEditProduct1.setRippleColor(new java.awt.Color(51, 0, 255));
+        buttonEditProduct1.setShadowColor(new java.awt.Color(0, 51, 255));
+
+        buttonAddProduct1.setBackground(new java.awt.Color(0, 204, 255));
+        buttonAddProduct1.setText("Add Product");
+        buttonAddProduct1.setFocusPainted(false);
+        buttonAddProduct1.setRippleColor(new java.awt.Color(51, 0, 255));
+        buttonAddProduct1.setShadowColor(new java.awt.Color(0, 51, 255));
+
+        roundPanel3.setBackground(new java.awt.Color(204, 255, 255));
+
+        CategoriesTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title5"
+            }
+        ));
+        TableScollPaneCategories.setViewportView(CategoriesTable);
+        if (CategoriesTable.getColumnModel().getColumnCount() > 0) {
+            CategoriesTable.getColumnModel().getColumn(0).setPreferredWidth(10);
+            CategoriesTable.getColumnModel().getColumn(1).setPreferredWidth(250);
+            CategoriesTable.getColumnModel().getColumn(2).setPreferredWidth(50);
+            CategoriesTable.getColumnModel().getColumn(3).setPreferredWidth(50);
+            CategoriesTable.getColumnModel().getColumn(4).setPreferredWidth(50);
+        }
+
+        javax.swing.GroupLayout roundPanel3Layout = new javax.swing.GroupLayout(roundPanel3);
+        roundPanel3.setLayout(roundPanel3Layout);
+        roundPanel3Layout.setHorizontalGroup(
+            roundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(roundPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(TableScollPaneCategories, javax.swing.GroupLayout.DEFAULT_SIZE, 656, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        roundPanel3Layout.setVerticalGroup(
+            roundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(roundPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(TableScollPaneCategories, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout CategoriesLayout = new javax.swing.GroupLayout(Categories);
+        Categories.setLayout(CategoriesLayout);
+        CategoriesLayout.setHorizontalGroup(
+            CategoriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CategoriesLayout.createSequentialGroup()
+                .addGroup(CategoriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, CategoriesLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(CategoriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel17)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel18)))
+                    .addComponent(textProductID1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(textProductID2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(textProductID3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, CategoriesLayout.createSequentialGroup()
+                        .addComponent(buttonAddProduct1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonEditProduct1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonDeleteProduct1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(roundPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        CategoriesLayout.setVerticalGroup(
+            CategoriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CategoriesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel15)
+                .addGap(56, 56, 56)
+                .addComponent(jLabel16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textProductID1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textProductID2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textProductID3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(CategoriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonAddProduct1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonEditProduct1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonDeleteProduct1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CategoriesLayout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(roundPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        panelShadow3.add(Categories);
 
         Products.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -406,6 +577,29 @@ public class Main extends javax.swing.JFrame {
 
         panelShadow3.add(Products);
 
+        Home.setBackground(new java.awt.Color(255, 255, 255));
+
+        pictureBox2.setImage(new javax.swing.ImageIcon(getClass().getResource("/pos/icon/rose gold text~2.png"))); // NOI18N
+
+        javax.swing.GroupLayout HomeLayout = new javax.swing.GroupLayout(Home);
+        Home.setLayout(HomeLayout);
+        HomeLayout.setHorizontalGroup(
+            HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HomeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pictureBox2, javax.swing.GroupLayout.DEFAULT_SIZE, 1004, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        HomeLayout.setVerticalGroup(
+            HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(HomeLayout.createSequentialGroup()
+                .addGap(90, 90, 90)
+                .addComponent(pictureBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(124, Short.MAX_VALUE))
+        );
+
+        panelShadow3.add(Home);
+
         Sellers.setBackground(new java.awt.Color(255, 255, 255));
 
         textSellerName.setShadowColor(new java.awt.Color(23, 102, 255));
@@ -493,13 +687,13 @@ public class Main extends javax.swing.JFrame {
             roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roundPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(TableScollPaneSellers, javax.swing.GroupLayout.PREFERRED_SIZE, 632, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(TableScollPaneSellers, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
+                .addContainerGap())
         );
         roundPanel1Layout.setVerticalGroup(
             roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roundPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addContainerGap()
                 .addComponent(TableScollPaneSellers)
                 .addContainerGap())
         );
@@ -534,8 +728,7 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(customComboBox2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(textSellerPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)))
-                .addComponent(roundPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(roundPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         SellersLayout.setVerticalGroup(
             SellersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -595,44 +788,18 @@ public class Main extends javax.swing.JFrame {
 
         panelShadow3.add(Bills);
 
-        Categories.setBackground(new java.awt.Color(242, 246, 253));
-
-        jLabel3.setText("Categories");
-
-        javax.swing.GroupLayout CategoriesLayout = new javax.swing.GroupLayout(Categories);
-        Categories.setLayout(CategoriesLayout);
-        CategoriesLayout.setHorizontalGroup(
-            CategoriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CategoriesLayout.createSequentialGroup()
-                .addContainerGap(954, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addContainerGap())
-        );
-        CategoriesLayout.setVerticalGroup(
-            CategoriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CategoriesLayout.createSequentialGroup()
-                .addContainerGap(537, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addContainerGap())
-        );
-
-        panelShadow3.add(Categories);
-
         javax.swing.GroupLayout background1Layout = new javax.swing.GroupLayout(background1);
         background1.setLayout(background1Layout);
         background1Layout.setHorizontalGroup(
             background1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(background1Layout.createSequentialGroup()
-                .addGroup(background1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(background1Layout.createSequentialGroup()
-                        .addComponent(panelShadow1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelShadow3, javax.swing.GroupLayout.PREFERRED_SIZE, 1048, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 8, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, background1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(win_Button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addComponent(panelShadow1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelShadow3, javax.swing.GroupLayout.PREFERRED_SIZE, 1048, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, background1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(win_Button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         background1Layout.setVerticalGroup(
             background1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -657,6 +824,7 @@ public class Main extends javax.swing.JFrame {
         Sellers.setVisible(false);
         Categories.setVisible(false);
         Bills.setVisible(false);
+        Home.setVisible(false);
     }//GEN-LAST:event_buttonProductsActionPerformed
 
     private void buttonCategoriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCategoriesActionPerformed
@@ -665,6 +833,7 @@ public class Main extends javax.swing.JFrame {
         Sellers.setVisible(false);
         Categories.setVisible(true);
         Bills.setVisible(false);
+        Home.setVisible(false);
     }//GEN-LAST:event_buttonCategoriesActionPerformed
 
     private void buttonBillsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBillsActionPerformed
@@ -673,6 +842,7 @@ public class Main extends javax.swing.JFrame {
         Sellers.setVisible(false);
         Categories.setVisible(false);
         Bills.setVisible(true);
+        Home.setVisible(false);
     }//GEN-LAST:event_buttonBillsActionPerformed
 
     private void buttonSellersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSellersActionPerformed
@@ -681,6 +851,7 @@ public class Main extends javax.swing.JFrame {
         Sellers.setVisible(true);
         Categories.setVisible(false);
         Bills.setVisible(false);
+        Home.setVisible(false);
     }//GEN-LAST:event_buttonSellersActionPerformed
 
     /**
@@ -722,33 +893,43 @@ public class Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private pos.swing.RoundPanel Bills;
     private pos.swing.RoundPanel Categories;
+    private javax.swing.JTable CategoriesTable;
+    private pos.swing.RoundPanel Home;
     private pos.swing.RoundPanel Products;
     private javax.swing.JTable ProductsTable;
     private pos.swing.RoundPanel Sellers;
     private javax.swing.JTable SellersTable;
+    private javax.swing.JScrollPane TableScollPaneCategories;
     private javax.swing.JScrollPane TableScollPaneProducts;
     private javax.swing.JScrollPane TableScollPaneSellers;
     private pos.swing.Background background1;
     private pos.swing.Button buttonAddProduct;
+    private pos.swing.Button buttonAddProduct1;
     private pos.swing.Button buttonAddSeller;
     private pos.swing.ButtonMenu buttonBills;
     private pos.swing.ButtonMenu buttonCategories;
     private pos.swing.Button buttonDeleteProduct;
+    private pos.swing.Button buttonDeleteProduct1;
     private pos.swing.Button buttonDeleteSeller;
     private pos.swing.Button buttonEditProduct;
+    private pos.swing.Button buttonEditProduct1;
     private pos.swing.Button buttonEditSeller;
     private pos.swing.ButtonMenu buttonProducts;
     private pos.swing.ButtonMenu buttonSellers;
     private pos.combox.CustomComboBox comboboxCategory;
     private pos.combox.CustomComboBox customComboBox2;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -756,10 +937,15 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private pos.swing.PanelShadow panelShadow1;
     private pos.swing.PanelShadow panelShadow3;
+    private pos.swing.PictureBox pictureBox2;
     private pos.includes.Profile profile1;
     private pos.swing.RoundPanel roundPanel1;
     private pos.swing.RoundPanel roundPanel2;
+    private pos.swing.RoundPanel roundPanel3;
     private pos.swing.TextField textProductID;
+    private pos.swing.TextField textProductID1;
+    private pos.swing.TextField textProductID2;
+    private pos.swing.TextField textProductID3;
     private pos.swing.TextField textProductName;
     private pos.swing.TextField textProductPrice;
     private pos.swing.TextField textProductQuantity;

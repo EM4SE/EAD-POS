@@ -4,10 +4,13 @@
  */
 package pos.main;
 
-
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 import pos.table.TableCustom;
+import java.sql.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import pos.database.DBConfig;
 
 /**
  *
@@ -21,53 +24,7 @@ public class Categories extends javax.swing.JPanel {
     public Categories() {
         initComponents();
         TableCustom.apply(TableScollPaneCategories, TableCustom.TableType.MULTI_LINE);
-        testData(CategoriesTable);
-    }
-
-    private void testData(JTable table) {
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
-
-        model.addRow(new Object[]{3, "Aniseed Syrup", "Beverages", 18, 39});
-        model.addRow(new Object[]{4, "Chef Anton's Cajun Seasoning", "Beverages", 19, 39});
-        model.addRow(new Object[]{5, "Chef Anton's Gumbo Mix", "Beverages", 18, 39});
-        model.addRow(new Object[]{6, "Grandma's Boysenberry Spread", "Beverages", 19, 39});
-        model.addRow(new Object[]{7, "Uncle Bob's Organic Dried Pears", "Beverages", 18, 39});
-        model.addRow(new Object[]{8, "Northwoods Cranberry Sauce", "Beverages", 19, 39});
-        model.addRow(new Object[]{9, "Mishi Kobe Niku", "Beverages", 18, 39});
-        model.addRow(new Object[]{10, "Ikura", "Beverages", 19, 39});
-        model.addRow(new Object[]{11, "Queso Cabrales", "Beverages", 18, 39});
-        model.addRow(new Object[]{12, "Queso Manchego La Pastora", "Beverages", 19, 39});
-        model.addRow(new Object[]{13, "Konbu", "Beverages", 18, 39});
-        model.addRow(new Object[]{14, "Tofu", "Seafood", 19, 39});
-        model.addRow(new Object[]{15, "Genen Shouyu", "Seafood", 18, 39});
-        model.addRow(new Object[]{16, "Pavlova", "Seafood", 19, 39});
-        model.addRow(new Object[]{17, "Alice Mutton", "Seafood", 18, 39});
-        model.addRow(new Object[]{18, "Carnarvon Tigers", "Seafood", 19, 39});
-        model.addRow(new Object[]{19, "Teatime Chocolate Biscuits", "Seafood", 19, 39});
-        model.addRow(new Object[]{20, "Sir Rodney's Marmalade", "Seafood", 19, 39});
-        model.addRow(new Object[]{21, "Sir Rodney's Scones", "Seafood", 19, 39});
-        model.addRow(new Object[]{22, "Gustaf's Knäckebröd", "Seafood", 19, 39});
-        model.addRow(new Object[]{23, "Tunnbröd", "Seafood", 19, 39});
-        model.addRow(new Object[]{24, "Guaraná Fantástica", "Seafood", 19, 39});
-        model.addRow(new Object[]{25, "NuNuCa Nuß-Nougat-Creme", "Seafood", 19, 39});
-        model.addRow(new Object[]{26, "Gumbär Gummibärchen", "Seafood", 19, 39});
-        model.addRow(new Object[]{27, "Schoggi Schokolade", "Seafood", 19, 39});
-        model.addRow(new Object[]{28, "Rössle Sauerkraut", "Seafood", 19, 39});
-        model.addRow(new Object[]{29, "Thüringer Rostbratwurst", "Seafood", 19, 39});
-        model.addRow(new Object[]{30, "Nord-Ost Matjeshering", "Seafood", 19, 39});
-        model.addRow(new Object[]{31, "Gorgonzola Telino", "Seafood", 19, 39});
-        model.addRow(new Object[]{32, "Mascarpone Fabioli", "Seafood", 19, 39});
-        model.addRow(new Object[]{33, "Geitost", "Seafood", 19, 39});
-        model.addRow(new Object[]{34, "Sasquatch Ale", "Seafood", 19, 39});
-        model.addRow(new Object[]{35, "Steeleye Stout", "Seafood", 19, 39});
-        model.addRow(new Object[]{36, "Inlagd Sill", "Seafood", 19, 39});
-        model.addRow(new Object[]{37, "Gravad lax", "Seafood", 19, 39});
-        model.addRow(new Object[]{38, "Côte de Blaye", "Seafood", 19, 39});
-        model.addRow(new Object[]{39, "Chartreuse verte", "Seafood", 19, 39});
-        model.addRow(new Object[]{40, "Boston Crab Meat", "Seafood", 19, 39});
-        model.addRow(new Object[]{41, "Jack's New England Clam Chowder", "Seafood", 19, 39});
-        model.addRow(new Object[]{42, "Singaporean Hokkien Fried Mee", "Seafood", 19, 39});
-        model.addRow(new Object[]{43, "Ipoh Coffee", "Seafood", 19, 39});
+        loadCategoriesData();
     }
 
     /**
@@ -79,16 +36,15 @@ public class Categories extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        textCategoryID = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        textProductID1 = new pos.swing.TextField();
-        jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        textProductID2 = new pos.swing.TextField();
-        textProductID3 = new pos.swing.TextField();
-        buttonDeleteProduct1 = new pos.swing.Button();
-        buttonEditProduct1 = new pos.swing.Button();
-        buttonAddProduct1 = new pos.swing.Button();
+        textCategoryName = new pos.swing.TextField();
+        textCategoryDescription = new pos.swing.TextField();
+        buttonDeleteProduct = new pos.swing.Button();
+        buttonEditProduct = new pos.swing.Button();
+        buttonAddProduct = new pos.swing.Button();
         roundPanel3 = new pos.swing.RoundPanel();
         TableScollPaneCategories = new javax.swing.JScrollPane();
         CategoriesTable = new javax.swing.JTable();
@@ -99,14 +55,6 @@ public class Categories extends javax.swing.JPanel {
         jLabel15.setForeground(new java.awt.Color(23, 102, 255));
         jLabel15.setText("Manage Categories");
 
-        textProductID1.setToolTipText("");
-        textProductID1.setName(""); // NOI18N
-        textProductID1.setShadowColor(new java.awt.Color(23, 102, 255));
-
-        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(0, 153, 255));
-        jLabel16.setText("Category ID");
-
         jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(0, 153, 255));
         jLabel17.setText("Category Name");
@@ -115,34 +63,39 @@ public class Categories extends javax.swing.JPanel {
         jLabel18.setForeground(new java.awt.Color(0, 153, 255));
         jLabel18.setText("Category Description");
 
-        textProductID2.setToolTipText("");
-        textProductID2.setName(""); // NOI18N
-        textProductID2.setShadowColor(new java.awt.Color(23, 102, 255));
+        textCategoryName.setToolTipText("");
+        textCategoryName.setName(""); // NOI18N
+        textCategoryName.setShadowColor(new java.awt.Color(23, 102, 255));
 
-        textProductID3.setToolTipText("");
-        textProductID3.setName(""); // NOI18N
-        textProductID3.setShadowColor(new java.awt.Color(23, 102, 255));
+        textCategoryDescription.setToolTipText("");
+        textCategoryDescription.setName(""); // NOI18N
+        textCategoryDescription.setShadowColor(new java.awt.Color(23, 102, 255));
 
-        buttonDeleteProduct1.setBackground(new java.awt.Color(255, 102, 102));
-        buttonDeleteProduct1.setText("Delete Category");
-        buttonDeleteProduct1.setFocusPainted(false);
-        buttonDeleteProduct1.setRippleColor(new java.awt.Color(51, 0, 255));
-        buttonDeleteProduct1.setShadowColor(new java.awt.Color(0, 51, 255));
+        buttonDeleteProduct.setBackground(new java.awt.Color(255, 102, 102));
+        buttonDeleteProduct.setText("Delete Category");
+        buttonDeleteProduct.setFocusPainted(false);
+        buttonDeleteProduct.setRippleColor(new java.awt.Color(51, 0, 255));
+        buttonDeleteProduct.setShadowColor(new java.awt.Color(0, 51, 255));
 
-        buttonEditProduct1.setBackground(new java.awt.Color(255, 204, 102));
-        buttonEditProduct1.setText("Edit Category");
-        buttonEditProduct1.setFocusPainted(false);
-        buttonEditProduct1.setRippleColor(new java.awt.Color(51, 0, 255));
-        buttonEditProduct1.setShadowColor(new java.awt.Color(0, 51, 255));
-
-        buttonAddProduct1.setBackground(new java.awt.Color(0, 204, 255));
-        buttonAddProduct1.setText("Add Category");
-        buttonAddProduct1.setFocusPainted(false);
-        buttonAddProduct1.setRippleColor(new java.awt.Color(51, 0, 255));
-        buttonAddProduct1.setShadowColor(new java.awt.Color(0, 51, 255));
-        buttonAddProduct1.addActionListener(new java.awt.event.ActionListener() {
+        buttonEditProduct.setBackground(new java.awt.Color(255, 204, 102));
+        buttonEditProduct.setText("Edit Category");
+        buttonEditProduct.setFocusPainted(false);
+        buttonEditProduct.setRippleColor(new java.awt.Color(51, 0, 255));
+        buttonEditProduct.setShadowColor(new java.awt.Color(0, 51, 255));
+        buttonEditProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAddProduct1ActionPerformed(evt);
+                buttonEditProductActionPerformed(evt);
+            }
+        });
+
+        buttonAddProduct.setBackground(new java.awt.Color(0, 204, 255));
+        buttonAddProduct.setText("Add Category");
+        buttonAddProduct.setFocusPainted(false);
+        buttonAddProduct.setRippleColor(new java.awt.Color(51, 0, 255));
+        buttonAddProduct.setShadowColor(new java.awt.Color(0, 51, 255));
+        buttonAddProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAddProductActionPerformed(evt);
             }
         });
 
@@ -153,10 +106,15 @@ public class Categories extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title5"
+                "Category ID", "Category Name", "Category Description"
             }
         ));
         TableScollPaneCategories.setViewportView(CategoriesTable);
+        if (CategoriesTable.getColumnModel().getColumnCount() > 0) {
+            CategoriesTable.getColumnModel().getColumn(0).setPreferredWidth(20);
+            CategoriesTable.getColumnModel().getColumn(1).setPreferredWidth(50);
+            CategoriesTable.getColumnModel().getColumn(2).setPreferredWidth(250);
+        }
 
         javax.swing.GroupLayout roundPanel3Layout = new javax.swing.GroupLayout(roundPanel3);
         roundPanel3.setLayout(roundPanel3Layout);
@@ -186,17 +144,15 @@ public class Categories extends javax.swing.JPanel {
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel17)
-                            .addComponent(jLabel16)
                             .addComponent(jLabel18)))
-                    .addComponent(textProductID1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textProductID2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textProductID3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(textCategoryName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(textCategoryDescription, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(buttonAddProduct1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonAddProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonEditProduct1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonEditProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonDeleteProduct1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(buttonDeleteProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(roundPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -207,22 +163,18 @@ public class Categories extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel15)
                 .addGap(56, 56, 56)
-                .addComponent(jLabel16)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textProductID1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel17)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textProductID2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(textCategoryName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel18)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textProductID3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(textCategoryDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonAddProduct1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonEditProduct1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonDeleteProduct1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(buttonAddProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonEditProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonDeleteProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(44, 44, 44)
@@ -231,24 +183,197 @@ public class Categories extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttonAddProduct1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddProduct1ActionPerformed
-        System.exit(0);        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonAddProduct1ActionPerformed
+    private void buttonAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddProductActionPerformed
 
+        try {
+
+            String CategoryName = textCategoryName.getText().trim();
+            String CategoryDescription = textCategoryDescription.getText().trim();
+
+            // Validate input
+            if (CategoryName.isEmpty()) {
+                showErrorMessage("Error: Category name cannot be empty.");
+                return;
+            }
+            if (CategoryDescription.isEmpty()) {
+                showErrorMessage("Error: Category Description cannot be empty.");
+                return;
+            }
+            if (!isValidName(CategoryName)) {
+                showErrorMessage("Error: Category name must contain only letters.");
+                return;
+            }
+
+            insertCategories(CategoryName, CategoryDescription);
+        } catch (NumberFormatException e) {
+            showErrorMessage("Error: Category ID must be a number.");
+        }
+    }//GEN-LAST:event_buttonAddProductActionPerformed
+
+    private void buttonEditProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditProductActionPerformed
+        try {
+
+            int CategoryID = Integer.parseInt(textCategoryID.getText().trim());
+            String CategoryName = textCategoryName.getText().trim();
+            String CategoryDescription = textCategoryDescription.getText().trim();
+
+            // Validate input
+            if (CategoryName.isEmpty()) {
+                showErrorMessage("Error: Category name cannot be empty.");
+                return;
+            }
+            if (CategoryDescription.isEmpty()) {
+                showErrorMessage("Error: Category Description cannot be empty.");
+                return;
+            }
+            if (!isValidName(CategoryName)) {
+                showErrorMessage("Error: Category name must contain only letters.");
+                return;
+            }
+
+            updateCategoryData(CategoryID, CategoryName, CategoryDescription);
+        } catch (NumberFormatException e) {
+            showErrorMessage("Error: Category ID must be a number.");
+        }
+    }//GEN-LAST:event_buttonEditProductActionPerformed
+
+    private void insertCategories(String CategoryName, String CategoryDescription) {
+
+        try {
+            DBConfig mycon = new DBConfig();
+            Connection con = mycon.connectDB();
+
+            String sql = "INSERT INTO categories (category_name ,category_description) VALUES (?, ?)";
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setString(1, CategoryName);
+            statement.setString(2, CategoryDescription);
+
+            statement.executeUpdate();
+
+            showSuccessMessage("Category data inserted successfully.");
+            loadCategoriesData();
+            clearFields();
+
+        } catch (SQLException e) {
+
+            if (e.getSQLState().equals("23000")) { // SQLState for integrity constraint violation
+                showErrorMessage("Error: Category Id Already in Used");
+            } else {
+                showErrorMessage("Error: Failed to insert Category data. Please check the connection details.");
+            }
+            clearFields();
+        }
+
+    }
+
+    private void updateCategoryData(int CategoryID, String CategoryName, String CategoryDescription) {
+
+        try {
+            DBConfig mycon = new DBConfig();
+            Connection con = mycon.connectDB();
+
+            String sqlUpdateCategory = "UPDATE categories SET category_name = ?, category_description = ? WHERE category_id = ?";
+            PreparedStatement statementUpdateCategory = con.prepareStatement(sqlUpdateCategory);
+            statementUpdateCategory.setString(1, CategoryName);
+            statementUpdateCategory.setString(2, CategoryDescription);
+            statementUpdateCategory.setInt(3, CategoryID);
+            statementUpdateCategory.executeUpdate();
+
+            showSuccessMessage("Category data Updated successfully.");
+            loadCategoriesData();
+            clearFields();
+
+        } catch (SQLException e) {
+
+            if (e.getSQLState().equals("23000")) { // SQLState for integrity constraint violation
+                showErrorMessage("Error: Category Id Already in Used");
+            } else {
+                showErrorMessage("Error: Failed to insert Category data. Please check the connection details.");
+            }
+            clearFields();
+        }
+
+    }
+
+    private void loadCategoriesData() {
+
+        CategoriesTable.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                loadSelectedRowData();
+            }
+        });
+
+        try {
+
+            DBConfig mycon = new DBConfig();
+            Connection con = mycon.connectDB();
+            String sqlGetCategories = "SELECT * FROM categories";
+            PreparedStatement statementGetCategories = con.prepareStatement(sqlGetCategories);
+            ResultSet rs = statementGetCategories.executeQuery();
+            DefaultTableModel model = (DefaultTableModel) CategoriesTable.getModel();
+            model.setRowCount(0);
+            while (rs.next()) {
+                int ID = rs.getInt("category_id");
+                String Name = rs.getString("category_name");
+                String Description = rs.getString("category_description");
+
+                model.addRow(new Object[]{ID, Name, Description});
+            }
+        } catch (SQLException e) {
+            showErrorMessage("Error: Failed to load seller data.");
+        }
+    }
+
+    private void loadSelectedRowData() {
+
+        int selectedRow = CategoriesTable.getSelectedRow();
+        if (selectedRow == -1) {
+            return;
+        }
+
+        int CategoryID = Integer.parseInt(CategoriesTable.getValueAt(selectedRow, 0).toString());
+        String CategoryName = CategoriesTable.getValueAt(selectedRow, 1).toString();
+        String CategoryDescription = CategoriesTable.getValueAt(selectedRow, 2).toString();
+
+        textCategoryID.setText(String.valueOf(CategoryID));
+        textCategoryName.setText(CategoryName);
+        textCategoryDescription.setText(CategoryDescription);
+
+    }
+
+    private boolean isValidName(String name) {
+        Pattern pattern = Pattern.compile("^[ a-zA-Z]+$");
+        Matcher matcher = pattern.matcher(name);
+        return matcher.matches();
+    }
+
+    private void clearFields() {
+
+        textCategoryID.setText("");
+        textCategoryName.setText("");
+        textCategoryDescription.setText("");
+    }
+
+    private void showErrorMessage(String message) {
+        JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    private void showSuccessMessage(String message) {
+        JOptionPane.showMessageDialog(this, message, "Success", JOptionPane.INFORMATION_MESSAGE);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable CategoriesTable;
     private javax.swing.JScrollPane TableScollPaneCategories;
-    private pos.swing.Button buttonAddProduct1;
-    private pos.swing.Button buttonDeleteProduct1;
-    private pos.swing.Button buttonEditProduct1;
+    private pos.swing.Button buttonAddProduct;
+    private pos.swing.Button buttonDeleteProduct;
+    private pos.swing.Button buttonEditProduct;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private pos.swing.RoundPanel roundPanel3;
-    private pos.swing.TextField textProductID1;
-    private pos.swing.TextField textProductID2;
-    private pos.swing.TextField textProductID3;
+    private pos.swing.TextField textCategoryDescription;
+    private javax.swing.JTextField textCategoryID;
+    private pos.swing.TextField textCategoryName;
     // End of variables declaration//GEN-END:variables
 }

@@ -61,6 +61,8 @@ public class Main extends javax.swing.JFrame {
         pictureBox2 = new pos.swing.PictureBox();
         Bills = new pos.swing.RoundPanel();
         jLabel2 = new javax.swing.JLabel();
+        roundPanel1 = new pos.swing.RoundPanel();
+        button1 = new pos.swing.Button();
         Sellers = new pos.main.Sellers();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -187,6 +189,21 @@ public class Main extends javax.swing.JFrame {
 
         jLabel2.setText("bills");
 
+        roundPanel1.setBackground(new java.awt.Color(255, 51, 0));
+
+        javax.swing.GroupLayout roundPanel1Layout = new javax.swing.GroupLayout(roundPanel1);
+        roundPanel1.setLayout(roundPanel1Layout);
+        roundPanel1Layout.setHorizontalGroup(
+            roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 380, Short.MAX_VALUE)
+        );
+        roundPanel1Layout.setVerticalGroup(
+            roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 290, Short.MAX_VALUE)
+        );
+
+        button1.setText("button1");
+
         javax.swing.GroupLayout BillsLayout = new javax.swing.GroupLayout(Bills);
         Bills.setLayout(BillsLayout);
         BillsLayout.setHorizontalGroup(
@@ -195,11 +212,24 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(989, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addContainerGap())
+            .addGroup(BillsLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(roundPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         BillsLayout.setVerticalGroup(
             BillsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BillsLayout.createSequentialGroup()
-                .addContainerGap(537, Short.MAX_VALUE)
+                .addGroup(BillsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(BillsLayout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(roundPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(BillsLayout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addContainerGap())
         );
@@ -316,6 +346,7 @@ public class Main extends javax.swing.JFrame {
     private pos.main.Products Products;
     private pos.main.Sellers Sellers;
     private pos.swing.Background background1;
+    private pos.swing.Button button1;
     private pos.swing.ButtonMenu buttonBills;
     private pos.swing.ButtonMenu buttonCategories;
     private pos.swing.ButtonMenu buttonProducts;
@@ -325,6 +356,7 @@ public class Main extends javax.swing.JFrame {
     private pos.swing.PanelShadow panelShadow3;
     private pos.swing.PictureBox pictureBox2;
     private pos.includes.Profile profile1;
+    private pos.swing.RoundPanel roundPanel1;
     private pos.winButtons.Win_Button win_Button1;
     // End of variables declaration//GEN-END:variables
 }

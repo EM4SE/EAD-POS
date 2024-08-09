@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package pos.main;
 
 import pos.table.TableCustom;
@@ -90,12 +86,22 @@ public class Sellers extends javax.swing.JPanel {
         buttonDeleteSeller.setFocusPainted(false);
         buttonDeleteSeller.setRippleColor(new java.awt.Color(51, 0, 255));
         buttonDeleteSeller.setShadowColor(new java.awt.Color(0, 51, 255));
+        buttonDeleteSeller.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDeleteSellerActionPerformed(evt);
+            }
+        });
 
         buttonEditSeller.setBackground(new java.awt.Color(255, 204, 102));
         buttonEditSeller.setText("Edit Seller");
         buttonEditSeller.setFocusPainted(false);
         buttonEditSeller.setRippleColor(new java.awt.Color(51, 0, 255));
         buttonEditSeller.setShadowColor(new java.awt.Color(0, 51, 255));
+        buttonEditSeller.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonEditSellerActionPerformed(evt);
+            }
+        });
 
         buttonAddSeller.setBackground(new java.awt.Color(0, 204, 255));
         buttonAddSeller.setText("Add Seller");
@@ -259,11 +265,67 @@ public class Sellers extends javax.swing.JPanel {
 
         } catch (NumberFormatException e) {
             showErrorMessage("Error: Seller ID must be a number.");
-        } catch (SQLException e) {
-            showErrorMessage("Error: Failed to insert seller data. Please check the connection details.");
         }
 
     }//GEN-LAST:event_buttonAddSellerActionPerformed
+
+    private void buttonEditSellerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditSellerActionPerformed
+
+        try {
+            String sellerIdText = textSellerID.getText().trim();
+            String sellerName = textSellerName.getText().trim();
+            String sellerPassword = textSellerPassword.getText().trim();
+
+            // Validate input
+            if (sellerIdText.isEmpty()) {
+                showErrorMessage("Error: Seller Id cannot be empty.");
+                return;
+            }
+            if (sellerName.isEmpty()) {
+                showErrorMessage("Error: Seller name cannot be empty.");
+                return;
+            }
+            if (sellerPassword.isEmpty()) {
+                showErrorMessage("Error: Seller password cannot be empty.");
+                return;
+            }
+            if (comboGender.getSelectedIndex() == -1) {
+                showErrorMessage("Error: Gender cannot be empty.");
+                return;
+            }
+            if (!isValidName(sellerName)) {
+                showErrorMessage("Error: Seller name must contain only letters.");
+                return;
+            }
+
+            int sellerId = Integer.parseInt(textSellerID.getText().trim());
+
+            if (sellerId <= 0) {
+                showErrorMessage("Error: Seller ID must be a positive number.");
+                return;
+            }
+
+            String gender = comboGender.getSelectedItem().toString();
+
+            updateSellerData(sellerId, sellerName, sellerPassword, gender);
+
+        } catch (NumberFormatException e) {
+            showErrorMessage("Error: Seller ID must be a number.");
+        }
+
+    }//GEN-LAST:event_buttonEditSellerActionPerformed
+
+    private void buttonDeleteSellerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteSellerActionPerformed
+        try {
+            int selectedRow = SellersTable.getSelectedRow();
+            int sellerId = Integer.parseInt(SellersTable.getValueAt(selectedRow, 0).toString());
+
+            deleteSellerData(sellerId);
+
+        } catch (NumberFormatException e) {
+            showErrorMessage("Error: Seller ID must be a number.");
+        }
+    }//GEN-LAST:event_buttonDeleteSellerActionPerformed
 
     private void loadSellerData() {
 
@@ -295,7 +357,7 @@ public class Sellers extends javax.swing.JPanel {
         }
     }
 
-    private void insertSeller(int sellerId, String sellerName, String sellerPassword, String gender) throws SQLException {
+    private void insertSeller(int sellerId, String sellerName, String sellerPassword, String gender) {
 
         try {
             DBConfig mycon = new DBConfig();
@@ -320,6 +382,60 @@ public class Sellers extends javax.swing.JPanel {
             } else {
                 showErrorMessage("Error: Failed to insert seller data. Please check the connection details.");
             }
+            clearFields();
+        }
+
+    }
+
+    private void updateSellerData(int sellerId, String sellerName, String sellerPassword, String gender) {
+
+        try {
+            DBConfig mycon = new DBConfig();
+            Connection con = mycon.connectDB();
+
+            String sqlUpdateSellers = "UPDATE sellers SET name = ?, password = ?, gender = ? WHERE id = ?";
+            PreparedStatement statementUpdateSellers = con.prepareStatement(sqlUpdateSellers);
+            statementUpdateSellers.setString(1, sellerName);
+            statementUpdateSellers.setString(2, sellerPassword);
+            statementUpdateSellers.setString(3, gender);
+            statementUpdateSellers.setInt(4, sellerId);
+            statementUpdateSellers.executeUpdate();
+
+            showSuccessMessage("Seller data Updated successfully.");
+            loadSellerData();
+            clearFields();
+
+        } catch (SQLException e) {
+
+            if (e.getSQLState().equals("23000")) { // SQLState for integrity constraint violation
+                showErrorMessage("Error: Seller Id Already in Used");
+            } else {
+                showErrorMessage("Error: Failed to insert seller data. Please check the connection details.");
+            }
+            clearFields();
+        }
+
+    }
+
+    private void deleteSellerData(int sellerId) {
+
+        try {
+            DBConfig mycon = new DBConfig();
+            Connection con = mycon.connectDB();
+
+            String sqlDeleteSellers = "DELETE FROM sellers WHERE id = ?";
+            PreparedStatement statementDeleteSellers = con.prepareStatement(sqlDeleteSellers);
+            statementDeleteSellers.setInt(1, sellerId);
+            statementDeleteSellers.executeUpdate();
+
+            showSuccessMessage("Seller data Deleted successfully.");
+            loadSellerData();
+            clearFields();
+
+        } catch (SQLException e) {
+
+            showErrorMessage("Error: Failed to insert seller data. Please check the connection details.");
+
             clearFields();
         }
 

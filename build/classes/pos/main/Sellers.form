@@ -206,6 +206,9 @@
           <Color blue="ff" green="33" red="0" type="rgb"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonDeleteSellerActionPerformed"/>
+      </Events>
     </Component>
     <Component class="pos.swing.Button" name="buttonEditSeller">
       <Properties>
@@ -221,6 +224,9 @@
           <Color blue="ff" green="33" red="0" type="rgb"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonEditSellerActionPerformed"/>
+      </Events>
     </Component>
     <Component class="pos.swing.Button" name="buttonAddSeller">
       <Properties>

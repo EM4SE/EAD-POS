@@ -42,9 +42,9 @@ public class Categories extends javax.swing.JPanel {
         jLabel18 = new javax.swing.JLabel();
         textCategoryName = new pos.swing.TextField();
         textCategoryDescription = new pos.swing.TextField();
-        buttonDeleteProduct = new pos.swing.Button();
-        buttonEditProduct = new pos.swing.Button();
-        buttonAddProduct = new pos.swing.Button();
+        buttonDeleteCategory = new pos.swing.Button();
+        buttonEditCategory = new pos.swing.Button();
+        buttonAddCategory = new pos.swing.Button();
         roundPanel3 = new pos.swing.RoundPanel();
         TableScollPaneCategories = new javax.swing.JScrollPane();
         CategoriesTable = new javax.swing.JTable();
@@ -71,31 +71,36 @@ public class Categories extends javax.swing.JPanel {
         textCategoryDescription.setName(""); // NOI18N
         textCategoryDescription.setShadowColor(new java.awt.Color(23, 102, 255));
 
-        buttonDeleteProduct.setBackground(new java.awt.Color(255, 102, 102));
-        buttonDeleteProduct.setText("Delete Category");
-        buttonDeleteProduct.setFocusPainted(false);
-        buttonDeleteProduct.setRippleColor(new java.awt.Color(51, 0, 255));
-        buttonDeleteProduct.setShadowColor(new java.awt.Color(0, 51, 255));
-
-        buttonEditProduct.setBackground(new java.awt.Color(255, 204, 102));
-        buttonEditProduct.setText("Edit Category");
-        buttonEditProduct.setFocusPainted(false);
-        buttonEditProduct.setRippleColor(new java.awt.Color(51, 0, 255));
-        buttonEditProduct.setShadowColor(new java.awt.Color(0, 51, 255));
-        buttonEditProduct.addActionListener(new java.awt.event.ActionListener() {
+        buttonDeleteCategory.setBackground(new java.awt.Color(255, 102, 102));
+        buttonDeleteCategory.setText("Delete Category");
+        buttonDeleteCategory.setFocusPainted(false);
+        buttonDeleteCategory.setRippleColor(new java.awt.Color(51, 0, 255));
+        buttonDeleteCategory.setShadowColor(new java.awt.Color(0, 51, 255));
+        buttonDeleteCategory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonEditProductActionPerformed(evt);
+                buttonDeleteCategoryActionPerformed(evt);
             }
         });
 
-        buttonAddProduct.setBackground(new java.awt.Color(0, 204, 255));
-        buttonAddProduct.setText("Add Category");
-        buttonAddProduct.setFocusPainted(false);
-        buttonAddProduct.setRippleColor(new java.awt.Color(51, 0, 255));
-        buttonAddProduct.setShadowColor(new java.awt.Color(0, 51, 255));
-        buttonAddProduct.addActionListener(new java.awt.event.ActionListener() {
+        buttonEditCategory.setBackground(new java.awt.Color(255, 204, 102));
+        buttonEditCategory.setText("Edit Category");
+        buttonEditCategory.setFocusPainted(false);
+        buttonEditCategory.setRippleColor(new java.awt.Color(51, 0, 255));
+        buttonEditCategory.setShadowColor(new java.awt.Color(0, 51, 255));
+        buttonEditCategory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAddProductActionPerformed(evt);
+                buttonEditCategoryActionPerformed(evt);
+            }
+        });
+
+        buttonAddCategory.setBackground(new java.awt.Color(0, 204, 255));
+        buttonAddCategory.setText("Add Category");
+        buttonAddCategory.setFocusPainted(false);
+        buttonAddCategory.setRippleColor(new java.awt.Color(51, 0, 255));
+        buttonAddCategory.setShadowColor(new java.awt.Color(0, 51, 255));
+        buttonAddCategory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAddCategoryActionPerformed(evt);
             }
         });
 
@@ -148,11 +153,11 @@ public class Categories extends javax.swing.JPanel {
                     .addComponent(textCategoryName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(textCategoryDescription, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(buttonAddProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonAddCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonEditProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonEditCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonDeleteProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(buttonDeleteCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(roundPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -172,9 +177,9 @@ public class Categories extends javax.swing.JPanel {
                 .addComponent(textCategoryDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonAddProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonEditProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonDeleteProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(buttonAddCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonEditCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonDeleteCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(44, 44, 44)
@@ -183,7 +188,7 @@ public class Categories extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttonAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddProductActionPerformed
+    private void buttonAddCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddCategoryActionPerformed
 
         try {
 
@@ -208,12 +213,11 @@ public class Categories extends javax.swing.JPanel {
         } catch (NumberFormatException e) {
             showErrorMessage("Error: Category ID must be a number.");
         }
-    }//GEN-LAST:event_buttonAddProductActionPerformed
+    }//GEN-LAST:event_buttonAddCategoryActionPerformed
 
-    private void buttonEditProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditProductActionPerformed
+    private void buttonEditCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditCategoryActionPerformed
         try {
 
-            int CategoryID = Integer.parseInt(textCategoryID.getText().trim());
             String CategoryName = textCategoryName.getText().trim();
             String CategoryDescription = textCategoryDescription.getText().trim();
 
@@ -231,11 +235,29 @@ public class Categories extends javax.swing.JPanel {
                 return;
             }
 
+            int CategoryID = Integer.parseInt(textCategoryID.getText().trim());
+
             updateCategoryData(CategoryID, CategoryName, CategoryDescription);
         } catch (NumberFormatException e) {
             showErrorMessage("Error: Category ID must be a number.");
         }
-    }//GEN-LAST:event_buttonEditProductActionPerformed
+    }//GEN-LAST:event_buttonEditCategoryActionPerformed
+
+    private void buttonDeleteCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteCategoryActionPerformed
+        try {
+            String CategoryIDText = textCategoryID.getText().trim();
+
+            if (CategoryIDText.isEmpty()) {
+                showErrorMessage("Error: Category Not Selected.");
+                return;
+            }
+            int CategoryID = Integer.parseInt(textCategoryID.getText().trim());
+            deleteCategoryrData(CategoryID);
+
+        } catch (NumberFormatException e) {
+            showErrorMessage("Error: Category ID must be a number.");
+        }
+    }//GEN-LAST:event_buttonDeleteCategoryActionPerformed
 
     private void insertCategories(String CategoryName, String CategoryDescription) {
 
@@ -257,7 +279,7 @@ public class Categories extends javax.swing.JPanel {
         } catch (SQLException e) {
 
             if (e.getSQLState().equals("23000")) { // SQLState for integrity constraint violation
-                showErrorMessage("Error: Category Id Already in Used");
+                showErrorMessage("Error: Category Name Already in Used");
             } else {
                 showErrorMessage("Error: Failed to insert Category data. Please check the connection details.");
             }
@@ -286,7 +308,7 @@ public class Categories extends javax.swing.JPanel {
         } catch (SQLException e) {
 
             if (e.getSQLState().equals("23000")) { // SQLState for integrity constraint violation
-                showErrorMessage("Error: Category Id Already in Used");
+                showErrorMessage("Error: Category Name Already in Used");
             } else {
                 showErrorMessage("Error: Failed to insert Category data. Please check the connection details.");
             }
@@ -307,11 +329,13 @@ public class Categories extends javax.swing.JPanel {
 
             DBConfig mycon = new DBConfig();
             Connection con = mycon.connectDB();
+            
             String sqlGetCategories = "SELECT * FROM categories";
             PreparedStatement statementGetCategories = con.prepareStatement(sqlGetCategories);
             ResultSet rs = statementGetCategories.executeQuery();
             DefaultTableModel model = (DefaultTableModel) CategoriesTable.getModel();
             model.setRowCount(0);
+            
             while (rs.next()) {
                 int ID = rs.getInt("category_id");
                 String Name = rs.getString("category_name");
@@ -320,7 +344,7 @@ public class Categories extends javax.swing.JPanel {
                 model.addRow(new Object[]{ID, Name, Description});
             }
         } catch (SQLException e) {
-            showErrorMessage("Error: Failed to load seller data.");
+            showErrorMessage("Error: Failed to load Categories data.");
         }
     }
 
@@ -338,6 +362,30 @@ public class Categories extends javax.swing.JPanel {
         textCategoryID.setText(String.valueOf(CategoryID));
         textCategoryName.setText(CategoryName);
         textCategoryDescription.setText(CategoryDescription);
+
+    }
+
+    private void deleteCategoryrData(int CategoryID) {
+
+        try {
+            DBConfig mycon = new DBConfig();
+            Connection con = mycon.connectDB();
+
+            String sqlDeleteCategory = "DELETE FROM categories WHERE category_id = ?";
+            PreparedStatement statementDeleteCategory = con.prepareStatement(sqlDeleteCategory);
+            statementDeleteCategory.setInt(1, CategoryID);
+            statementDeleteCategory.executeUpdate();
+
+            showSuccessMessage("Category data Deleted successfully.");
+            loadCategoriesData();
+            clearFields();
+
+        } catch (SQLException e) {
+
+            showErrorMessage("Error: Failed to Delete Category data. Please check the connection details.");
+
+            clearFields();
+        }
 
     }
 
@@ -365,9 +413,9 @@ public class Categories extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable CategoriesTable;
     private javax.swing.JScrollPane TableScollPaneCategories;
-    private pos.swing.Button buttonAddProduct;
-    private pos.swing.Button buttonDeleteProduct;
-    private pos.swing.Button buttonEditProduct;
+    private pos.swing.Button buttonAddCategory;
+    private pos.swing.Button buttonDeleteCategory;
+    private pos.swing.Button buttonEditCategory;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;

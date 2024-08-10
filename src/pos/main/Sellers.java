@@ -317,9 +317,14 @@ public class Sellers extends javax.swing.JPanel {
 
     private void buttonDeleteSellerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteSellerActionPerformed
         try {
-            int selectedRow = SellersTable.getSelectedRow();
-            int sellerId = Integer.parseInt(SellersTable.getValueAt(selectedRow, 0).toString());
+           String sellerIdText = textSellerID.getText().trim();
+            
 
+            if (sellerIdText.isEmpty()) {
+                showErrorMessage("Error: Seller Not Selected!!");
+                return;
+            }
+            int sellerId = Integer.parseInt(textSellerID.getText().trim());
             deleteSellerData(sellerId);
 
         } catch (NumberFormatException e) {

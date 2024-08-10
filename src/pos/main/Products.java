@@ -15,13 +15,15 @@ import pos.table.TableCustom;
  */
 public class Products extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Products
-     */
+
     public Products() {
         initComponents();
         TableCustom.apply(TableScollPaneProducts, TableCustom.TableType.MULTI_LINE);
         testData(ProductsTable);
+            comboboxCategory.addItem("Apple");
+comboboxCategory.addItem("Banana");
+comboboxCategory.addItem("Cherry");
+comboboxCategory.addItem("Date");
     }
 
     private void testData(JTable table) {

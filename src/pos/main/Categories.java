@@ -18,13 +18,13 @@ import pos.database.DBConfig;
  */
 public class Categories extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Categories
-     */
+   
+    
     public Categories() {
         initComponents();
         TableCustom.apply(TableScollPaneCategories, TableCustom.TableType.MULTI_LINE);
         loadCategoriesData();
+
     }
 
     /**
@@ -209,6 +209,7 @@ public class Categories extends javax.swing.JPanel {
                 return;
             }
 
+            
             insertCategories(CategoryName, CategoryDescription);
         } catch (NumberFormatException e) {
             showErrorMessage("Error: Category ID must be a number.");
@@ -275,6 +276,8 @@ public class Categories extends javax.swing.JPanel {
             showSuccessMessage("Category data inserted successfully.");
             loadCategoriesData();
             clearFields();
+            
+            
 
         } catch (SQLException e) {
 
@@ -304,6 +307,7 @@ public class Categories extends javax.swing.JPanel {
             showSuccessMessage("Category data Updated successfully.");
             loadCategoriesData();
             clearFields();
+        
 
         } catch (SQLException e) {
 
@@ -329,13 +333,13 @@ public class Categories extends javax.swing.JPanel {
 
             DBConfig mycon = new DBConfig();
             Connection con = mycon.connectDB();
-            
+
             String sqlGetCategories = "SELECT * FROM categories";
             PreparedStatement statementGetCategories = con.prepareStatement(sqlGetCategories);
             ResultSet rs = statementGetCategories.executeQuery();
             DefaultTableModel model = (DefaultTableModel) CategoriesTable.getModel();
             model.setRowCount(0);
-            
+
             while (rs.next()) {
                 int ID = rs.getInt("category_id");
                 String Name = rs.getString("category_name");
@@ -355,11 +359,11 @@ public class Categories extends javax.swing.JPanel {
             return;
         }
 
-        int CategoryID = Integer.parseInt(CategoriesTable.getValueAt(selectedRow, 0).toString());
+        String CategoryID = CategoriesTable.getValueAt(selectedRow, 0).toString();
         String CategoryName = CategoriesTable.getValueAt(selectedRow, 1).toString();
         String CategoryDescription = CategoriesTable.getValueAt(selectedRow, 2).toString();
 
-        textCategoryID.setText(String.valueOf(CategoryID));
+        textCategoryID.setText(CategoryID);
         textCategoryName.setText(CategoryName);
         textCategoryDescription.setText(CategoryDescription);
 
@@ -379,6 +383,7 @@ public class Categories extends javax.swing.JPanel {
             showSuccessMessage("Category data Deleted successfully.");
             loadCategoriesData();
             clearFields();
+           
 
         } catch (SQLException e) {
 

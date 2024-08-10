@@ -4,9 +4,19 @@
  */
 package pos.main;
 
-
+import java.io.File;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import pos.database.DBConfig;
 import pos.table.TableCustom;
 
 /**
@@ -15,61 +25,13 @@ import pos.table.TableCustom;
  */
 public class Products extends javax.swing.JPanel {
 
+    private String imagePath;
 
     public Products() {
         initComponents();
         TableCustom.apply(TableScollPaneProducts, TableCustom.TableType.MULTI_LINE);
-        testData(ProductsTable);
-            comboboxCategory.addItem("Apple");
-comboboxCategory.addItem("Banana");
-comboboxCategory.addItem("Cherry");
-comboboxCategory.addItem("Date");
-    }
+        loadProductsData();
 
-    private void testData(JTable table) {
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
-
-        model.addRow(new Object[]{3, "Aniseed Syrup", "Beverages", 18, 39});
-        model.addRow(new Object[]{4, "Chef Anton's Cajun Seasoning", "Beverages", 19, 39});
-        model.addRow(new Object[]{5, "Chef Anton's Gumbo Mix", "Beverages", 18, 39});
-        model.addRow(new Object[]{6, "Grandma's Boysenberry Spread", "Beverages", 19, 39});
-        model.addRow(new Object[]{7, "Uncle Bob's Organic Dried Pears", "Beverages", 18, 39});
-        model.addRow(new Object[]{8, "Northwoods Cranberry Sauce", "Beverages", 19, 39});
-        model.addRow(new Object[]{9, "Mishi Kobe Niku", "Beverages", 18, 39});
-        model.addRow(new Object[]{10, "Ikura", "Beverages", 19, 39});
-        model.addRow(new Object[]{11, "Queso Cabrales", "Beverages", 18, 39});
-        model.addRow(new Object[]{12, "Queso Manchego La Pastora", "Beverages", 19, 39});
-        model.addRow(new Object[]{13, "Konbu", "Beverages", 18, 39});
-        model.addRow(new Object[]{14, "Tofu", "Seafood", 19, 39});
-        model.addRow(new Object[]{15, "Genen Shouyu", "Seafood", 18, 39});
-        model.addRow(new Object[]{16, "Pavlova", "Seafood", 19, 39});
-        model.addRow(new Object[]{17, "Alice Mutton", "Seafood", 18, 39});
-        model.addRow(new Object[]{18, "Carnarvon Tigers", "Seafood", 19, 39});
-        model.addRow(new Object[]{19, "Teatime Chocolate Biscuits", "Seafood", 19, 39});
-        model.addRow(new Object[]{20, "Sir Rodney's Marmalade", "Seafood", 19, 39});
-        model.addRow(new Object[]{21, "Sir Rodney's Scones", "Seafood", 19, 39});
-        model.addRow(new Object[]{22, "Gustaf's Knäckebröd", "Seafood", 19, 39});
-        model.addRow(new Object[]{23, "Tunnbröd", "Seafood", 19, 39});
-        model.addRow(new Object[]{24, "Guaraná Fantástica", "Seafood", 19, 39});
-        model.addRow(new Object[]{25, "NuNuCa Nuß-Nougat-Creme", "Seafood", 19, 39});
-        model.addRow(new Object[]{26, "Gumbär Gummibärchen", "Seafood", 19, 39});
-        model.addRow(new Object[]{27, "Schoggi Schokolade", "Seafood", 19, 39});
-        model.addRow(new Object[]{28, "Rössle Sauerkraut", "Seafood", 19, 39});
-        model.addRow(new Object[]{29, "Thüringer Rostbratwurst", "Seafood", 19, 39});
-        model.addRow(new Object[]{30, "Nord-Ost Matjeshering", "Seafood", 19, 39});
-        model.addRow(new Object[]{31, "Gorgonzola Telino", "Seafood", 19, 39});
-        model.addRow(new Object[]{32, "Mascarpone Fabioli", "Seafood", 19, 39});
-        model.addRow(new Object[]{33, "Geitost", "Seafood", 19, 39});
-        model.addRow(new Object[]{34, "Sasquatch Ale", "Seafood", 19, 39});
-        model.addRow(new Object[]{35, "Steeleye Stout", "Seafood", 19, 39});
-        model.addRow(new Object[]{36, "Inlagd Sill", "Seafood", 19, 39});
-        model.addRow(new Object[]{37, "Gravad lax", "Seafood", 19, 39});
-        model.addRow(new Object[]{38, "Côte de Blaye", "Seafood", 19, 39});
-        model.addRow(new Object[]{39, "Chartreuse verte", "Seafood", 19, 39});
-        model.addRow(new Object[]{40, "Boston Crab Meat", "Seafood", 19, 39});
-        model.addRow(new Object[]{41, "Jack's New England Clam Chowder", "Seafood", 19, 39});
-        model.addRow(new Object[]{42, "Singaporean Hokkien Fried Mee", "Seafood", 19, 39});
-        model.addRow(new Object[]{43, "Ipoh Coffee", "Seafood", 19, 39});
     }
 
     /**
@@ -81,17 +43,18 @@ comboboxCategory.addItem("Date");
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        textProductID = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        textProductID = new pos.swing.TextField();
         textProductName = new pos.swing.TextField();
-        textProductQuantity = new pos.swing.TextField();
-        jLabel10 = new javax.swing.JLabel();
+        textProductDescription = new pos.swing.TextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         comboboxCategory = new pos.combox.CustomComboBox();
         jLabel14 = new javax.swing.JLabel();
         textProductPrice = new pos.swing.TextField();
+        buttonAddProductImage = new pos.swing.Button();
+        ProductImage = new pos.swing.PictureBox();
         buttonAddProduct = new pos.swing.Button();
         buttonEditProduct = new pos.swing.Button();
         buttonDeleteProduct = new pos.swing.Button();
@@ -99,27 +62,21 @@ comboboxCategory.addItem("Date");
         TableScollPaneProducts = new javax.swing.JScrollPane();
         ProductsTable = new javax.swing.JTable();
 
+        textProductID.setText("jTextField1");
+
         setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(23, 102, 255));
         jLabel9.setText("Manage Products");
 
-        textProductID.setToolTipText("");
-        textProductID.setName(""); // NOI18N
-        textProductID.setShadowColor(new java.awt.Color(23, 102, 255));
-
         textProductName.setToolTipText("");
         textProductName.setName(""); // NOI18N
         textProductName.setShadowColor(new java.awt.Color(23, 102, 255));
 
-        textProductQuantity.setToolTipText("");
-        textProductQuantity.setName(""); // NOI18N
-        textProductQuantity.setShadowColor(new java.awt.Color(23, 102, 255));
-
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 153, 255));
-        jLabel10.setText("Product ID");
+        textProductDescription.setToolTipText("");
+        textProductDescription.setName(""); // NOI18N
+        textProductDescription.setShadowColor(new java.awt.Color(23, 102, 255));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 153, 255));
@@ -127,21 +84,44 @@ comboboxCategory.addItem("Date");
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 153, 255));
-        jLabel12.setText("Quantity");
+        jLabel12.setText("Product Description");
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 153, 255));
-        jLabel13.setText("Price");
+        jLabel13.setText("Product Price");
 
         comboboxCategory.setShadowColor(new java.awt.Color(23, 102, 255));
+        comboboxCategory.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                comboboxCategoryFocusGained(evt);
+            }
+        });
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(0, 153, 255));
-        jLabel14.setText("Category");
+        jLabel14.setText("Product Category");
 
         textProductPrice.setToolTipText("");
         textProductPrice.setName(""); // NOI18N
         textProductPrice.setShadowColor(new java.awt.Color(23, 102, 255));
+        textProductPrice.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                textProductPriceFocusGained(evt);
+            }
+        });
+
+        buttonAddProductImage.setBackground(new java.awt.Color(51, 255, 51));
+        buttonAddProductImage.setText("Add Image");
+        buttonAddProductImage.setFocusPainted(false);
+        buttonAddProductImage.setRippleColor(new java.awt.Color(51, 0, 255));
+        buttonAddProductImage.setShadowColor(new java.awt.Color(0, 51, 255));
+        buttonAddProductImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAddProductImageActionPerformed(evt);
+            }
+        });
+
+        ProductImage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 255)));
 
         buttonAddProduct.setBackground(new java.awt.Color(0, 204, 255));
         buttonAddProduct.setText("Add Product");
@@ -173,10 +153,28 @@ comboboxCategory.addItem("Date");
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title5"
+                "Product ID", "Product Name", "Product Description", "Price", "Category", "ImagePath"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         TableScollPaneProducts.setViewportView(ProductsTable);
+        if (ProductsTable.getColumnModel().getColumnCount() > 0) {
+            ProductsTable.getColumnModel().getColumn(0).setPreferredWidth(25);
+            ProductsTable.getColumnModel().getColumn(1).setPreferredWidth(50);
+            ProductsTable.getColumnModel().getColumn(2).setPreferredWidth(175);
+            ProductsTable.getColumnModel().getColumn(3).setPreferredWidth(15);
+            ProductsTable.getColumnModel().getColumn(4).setPreferredWidth(75);
+            ProductsTable.getColumnModel().getColumn(5).setMinWidth(0);
+            ProductsTable.getColumnModel().getColumn(5).setPreferredWidth(0);
+            ProductsTable.getColumnModel().getColumn(5).setMaxWidth(0);
+        }
 
         javax.swing.GroupLayout roundPanel2Layout = new javax.swing.GroupLayout(roundPanel2);
         roundPanel2.setLayout(roundPanel2Layout);
@@ -204,89 +202,295 @@ comboboxCategory.addItem("Date");
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(65, 65, 65))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(textProductID, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(textProductName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(comboboxCategory, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(buttonAddProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(buttonEditProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(buttonDeleteProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(textProductPrice, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(textProductQuantity, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel14))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(buttonAddProductImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(ProductImage, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(buttonAddProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(buttonEditProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(buttonDeleteProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(textProductName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(comboboxCategory, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(textProductPrice, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(textProductDescription, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel11)
+                                .addComponent(jLabel12)
+                                .addComponent(jLabel13)
+                                .addComponent(jLabel14)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(roundPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel9)
-                .addGap(56, 56, 56)
-                .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textProductID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textProductName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textProductQuantity, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textProductPrice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(comboboxCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonAddProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonEditProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonDeleteProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(37, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(roundPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel9)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textProductName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textProductDescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textProductPrice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboboxCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(buttonAddProductImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(107, 107, 107)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(buttonDeleteProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(buttonEditProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(buttonAddProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(ProductImage, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(roundPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddProductActionPerformed
-System.exit(0);         // TODO add your handling code here:
+        try {
+
+            String productName = textProductName.getText().trim();
+            String ProductDescription = textProductDescription.getText().trim();
+            String productPriceText = textProductPrice.getText().trim();
+
+            // Validate input
+            if (productName.isEmpty()) {
+                showErrorMessage("Error: Seller Id cannot be empty.");
+                return;
+            }
+            if (ProductDescription.isEmpty()) {
+                showErrorMessage("Error: Seller name cannot be empty.");
+                return;
+            }
+            if (productPriceText.isEmpty()) {
+                showErrorMessage("Error: Seller password cannot be empty.");
+                return;
+            }
+            if (comboboxCategory.getSelectedIndex() == -1) {
+                showErrorMessage("Error: Gender cannot be empty.");
+                return;
+            }
+            if (!isValidName(productName)) {
+                showErrorMessage("Error: Seller name must contain only letters.");
+                return;
+            }
+
+            double productPrice = Double.parseDouble(textProductPrice.getText().trim());
+
+            if (productPrice <= 0) {
+                showErrorMessage("Error: Seller ID must be a positive number.");
+                return;
+            }
+
+            String Category = comboboxCategory.getSelectedItem().toString();
+
+            insertProducts(productName, ProductDescription, productPrice, Category, imagePath);
+            // insertSeller(sellerId, sellerName, sellerPassword, gender);
+        } catch (NumberFormatException e) {
+            showErrorMessage("Error: Seller ID must be a number.");
+        }        // TODO add your handling code here:
     }//GEN-LAST:event_buttonAddProductActionPerformed
+
+    private void buttonAddProductImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddProductImageActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        int result = fileChooser.showOpenDialog(Products.this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            imagePath = selectedFile.getAbsolutePath();
+            displayImage(imagePath);
+
+        }
+    }//GEN-LAST:event_buttonAddProductImageActionPerformed
+
+    private void textProductPriceFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textProductPriceFocusGained
+
+
+    }//GEN-LAST:event_textProductPriceFocusGained
+
+    private void comboboxCategoryFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_comboboxCategoryFocusGained
+        loadCategories();
+    }//GEN-LAST:event_comboboxCategoryFocusGained
+
+    public void loadCategories() {
+        try {
+
+            DBConfig mycon = new DBConfig();
+            Connection con = mycon.connectDB();
+
+            String sqlGetCategories = "SELECT category_name FROM categories";
+            PreparedStatement statementGetCategories = con.prepareStatement(sqlGetCategories);
+            ResultSet rs = statementGetCategories.executeQuery();
+
+            comboboxCategory.removeAllItems();
+            while (rs.next()) {
+                String Name = rs.getString("category_name");
+                comboboxCategory.addItem(Name);
+
+            }
+        } catch (SQLException e) {
+            showErrorMessage("Error: Failed to load Categories.");
+        }
+    }
+
+    private void insertProducts(String productName, String productDescription, double productPrice, String productCategory, String ImagePath) {
+
+        try {
+            DBConfig mycon = new DBConfig();
+            Connection con = mycon.connectDB();
+
+            String sql = "INSERT INTO products (product_name, product_description, product_price, product_category ,product_imagepath) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setString(1, productName);
+            statement.setString(2, productDescription);
+            statement.setDouble(3, productPrice);
+            statement.setString(4, productCategory);
+            statement.setString(5, ImagePath);
+
+            statement.executeUpdate();
+
+            showSuccessMessage("Product data inserted successfully.");
+            loadProductsData();
+            clearFields();
+
+        } catch (SQLException e) {
+
+            if (e.getSQLState().equals("23000")) { // SQLState for integrity constraint violation
+                showErrorMessage("Error: Seller Id Already in Used");
+            } else {
+                showErrorMessage("Error: Failed to insert seller data. Please check the connection details.");
+            }
+            clearFields();
+        }
+
+    }
+
+    private void loadProductsData() {
+
+        ProductsTable.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                loadSelectedRowData();
+            }
+        });
+
+        try {
+
+            DBConfig mycon = new DBConfig();
+            Connection con = mycon.connectDB();
+            String sqlGetSellers = "SELECT * FROM products";
+            PreparedStatement statementGetSellers = con.prepareStatement(sqlGetSellers);
+            ResultSet rs = statementGetSellers.executeQuery();
+            DefaultTableModel model = (DefaultTableModel) ProductsTable.getModel();
+            model.setRowCount(0);
+            while (rs.next()) {
+                int ID = rs.getInt("product_id");
+                String Name = rs.getString("product_name");
+                String Description = rs.getString("product_description");
+                String Price = rs.getString("product_price");
+                String Category = rs.getString("product_category");
+                String ImagePath = rs.getString("product_imagepath");
+
+                model.addRow(new Object[]{ID, Name, Description, Price, Category, ImagePath});
+            }
+        } catch (SQLException e) {
+            showErrorMessage("Error: Failed to load seller data.");
+        }
+    }
+
+    private void loadSelectedRowData() {
+
+        int selectedRow = ProductsTable.getSelectedRow();
+        if (selectedRow == -1) {
+            return;
+        }
+
+        String productId = ProductsTable.getValueAt(selectedRow, 0).toString();
+        String productName = ProductsTable.getValueAt(selectedRow, 1).toString();
+        String productDescription = ProductsTable.getValueAt(selectedRow, 2).toString();
+        String productPrice = ProductsTable.getValueAt(selectedRow, 3).toString();
+        String productCategory = ProductsTable.getValueAt(selectedRow, 4).toString();
+        String productImagePath = ProductsTable.getValueAt(selectedRow, 5).toString();
+
+        textProductID.setText(productId);
+        textProductName.setText(productName);
+        textProductDescription.setText(productDescription);
+        textProductPrice.setText(productPrice);
+        loadCategories();
+        comboboxCategory.setSelectedItem(productCategory);
+        ImageIcon imageIcon = new ImageIcon(productImagePath);
+        ProductImage.setImage(imageIcon);
+        ProductImage.repaint();
+
+    }
+
+    private void displayImage(String path) {
+        ImageIcon imageIcon = new ImageIcon(path);
+        ProductImage.setImage(imageIcon);
+        ProductImage.repaint();
+    }
+
+    private boolean isValidName(String name) {
+        Pattern pattern = Pattern.compile("^[a-zA-Z]+$");
+        Matcher matcher = pattern.matcher(name);
+        return matcher.matches();
+    }
+
+    private void clearFields() {
+        textProductName.setText("");
+        textProductDescription.setText("");
+        textProductPrice.setText("");
+        comboboxCategory.setSelectedIndex(-1);
+    }
+
+    private void showErrorMessage(String message) {
+        JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    private void showSuccessMessage(String message) {
+        JOptionPane.showMessageDialog(this, message, "Success", JOptionPane.INFORMATION_MESSAGE);
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private pos.swing.PictureBox ProductImage;
     private javax.swing.JTable ProductsTable;
     private javax.swing.JScrollPane TableScollPaneProducts;
     private pos.swing.Button buttonAddProduct;
+    private pos.swing.Button buttonAddProductImage;
     private pos.swing.Button buttonDeleteProduct;
     private pos.swing.Button buttonEditProduct;
     private pos.combox.CustomComboBox comboboxCategory;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel9;
     private pos.swing.RoundPanel roundPanel2;
-    private pos.swing.TextField textProductID;
+    private pos.swing.TextField textProductDescription;
+    private javax.swing.JTextField textProductID;
     private pos.swing.TextField textProductName;
     private pos.swing.TextField textProductPrice;
-    private pos.swing.TextField textProductQuantity;
     // End of variables declaration//GEN-END:variables
 }

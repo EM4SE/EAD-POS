@@ -453,12 +453,12 @@ public class Sellers extends javax.swing.JPanel {
             return;
         }
 
-        int sellerId = Integer.parseInt(SellersTable.getValueAt(selectedRow, 0).toString());
+        String sellerId = SellersTable.getValueAt(selectedRow, 0).toString();
         String sellerName = SellersTable.getValueAt(selectedRow, 1).toString();
         String sellerPassword = SellersTable.getValueAt(selectedRow, 2).toString();
         String gender = SellersTable.getValueAt(selectedRow, 3).toString();
 
-        textSellerID.setText(String.valueOf(sellerId));
+        textSellerID.setText(sellerId);
         textSellerName.setText(sellerName);
         textSellerPassword.setText(sellerPassword);
 

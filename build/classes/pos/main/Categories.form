@@ -114,7 +114,7 @@
         <Property name="text" type="java.lang.String" value="Category Description"/>
       </Properties>
     </Component>
-    <Component class="pos.swing.TextField" name="textCategoryName">
+    <Component class="Custom.Components.Swing.TextField" name="textCategoryName">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value=""/>
         <Property name="name" type="java.lang.String" value="" noResource="true"/>
@@ -123,7 +123,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="pos.swing.TextField" name="textCategoryDescription">
+    <Component class="Custom.Components.Swing.TextField" name="textCategoryDescription">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value=""/>
         <Property name="name" type="java.lang.String" value="" noResource="true"/>
@@ -132,7 +132,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="pos.swing.Button" name="buttonDeleteCategory">
+    <Component class="Custom.Components.Swing.Button" name="buttonDeleteCategory">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="66" green="66" red="ff" type="rgb"/>
@@ -150,7 +150,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonDeleteCategoryActionPerformed"/>
       </Events>
     </Component>
-    <Component class="pos.swing.Button" name="buttonEditCategory">
+    <Component class="Custom.Components.Swing.Button" name="buttonEditCategory">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="66" green="cc" red="ff" type="rgb"/>
@@ -168,7 +168,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonEditCategoryActionPerformed"/>
       </Events>
     </Component>
-    <Component class="pos.swing.Button" name="buttonAddCategory">
+    <Component class="Custom.Components.Swing.Button" name="buttonAddCategory">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="cc" red="0" type="rgb"/>
@@ -186,7 +186,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAddCategoryActionPerformed"/>
       </Events>
     </Component>
-    <Container class="pos.swing.RoundPanel" name="roundPanel3">
+    <Container class="Custom.Components.Swing.RoundPanel" name="roundPanel3">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="cc" type="rgb"/>

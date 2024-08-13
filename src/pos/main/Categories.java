@@ -4,7 +4,7 @@
  */
 package pos.main;
 
-import pos.table.TableCustom;
+import Custom.Components.table.TableCustom;
 import java.sql.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,6 +22,7 @@ public class Categories extends javax.swing.JPanel {
     
     public Categories() {
         initComponents();
+        //chnage scoll bar style and table style 
         TableCustom.apply(TableScollPaneCategories, TableCustom.TableType.MULTI_LINE);
         loadCategoriesData();
 
@@ -40,12 +41,12 @@ public class Categories extends javax.swing.JPanel {
         jLabel15 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        textCategoryName = new pos.swing.TextField();
-        textCategoryDescription = new pos.swing.TextField();
-        buttonDeleteCategory = new pos.swing.Button();
-        buttonEditCategory = new pos.swing.Button();
-        buttonAddCategory = new pos.swing.Button();
-        roundPanel3 = new pos.swing.RoundPanel();
+        textCategoryName = new Custom.Components.Swing.TextField();
+        textCategoryDescription = new Custom.Components.Swing.TextField();
+        buttonDeleteCategory = new Custom.Components.Swing.Button();
+        buttonEditCategory = new Custom.Components.Swing.Button();
+        buttonAddCategory = new Custom.Components.Swing.Button();
+        roundPanel3 = new Custom.Components.Swing.RoundPanel();
         TableScollPaneCategories = new javax.swing.JScrollPane();
         CategoriesTable = new javax.swing.JTable();
 
@@ -195,7 +196,7 @@ public class Categories extends javax.swing.JPanel {
             String CategoryName = textCategoryName.getText().trim();
             String CategoryDescription = textCategoryDescription.getText().trim();
 
-            // Validate input
+            // Validate inputs
             if (CategoryName.isEmpty()) {
                 showErrorMessage("Error: Category name cannot be empty.");
                 return;
@@ -291,6 +292,7 @@ public class Categories extends javax.swing.JPanel {
 
     }
 
+    //method to add category data 
     private void updateCategoryData(int CategoryID, String CategoryName, String CategoryDescription) {
 
         try {
@@ -321,8 +323,10 @@ public class Categories extends javax.swing.JPanel {
 
     }
 
+    //  method to load category dato to table 
     private void loadCategoriesData() {
 
+        
         CategoriesTable.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
                 loadSelectedRowData();
@@ -353,7 +357,7 @@ public class Categories extends javax.swing.JPanel {
     }
 
     private void loadSelectedRowData() {
-
+//load selected data to text boxes ignore header one 
         int selectedRow = CategoriesTable.getSelectedRow();
         if (selectedRow == -1) {
             return;
@@ -369,6 +373,7 @@ public class Categories extends javax.swing.JPanel {
 
     }
 
+    //method to delete data 
     private void deleteCategoryrData(int CategoryID) {
 
         try {
@@ -394,12 +399,14 @@ public class Categories extends javax.swing.JPanel {
 
     }
 
+    //validate name 
     private boolean isValidName(String name) {
         Pattern pattern = Pattern.compile("^[ a-zA-Z]+$");
         Matcher matcher = pattern.matcher(name);
         return matcher.matches();
     }
 
+    //clear text field 
     private void clearFields() {
 
         textCategoryID.setText("");
@@ -407,6 +414,7 @@ public class Categories extends javax.swing.JPanel {
         textCategoryDescription.setText("");
     }
 
+    
     private void showErrorMessage(String message) {
         JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
     }
@@ -418,15 +426,15 @@ public class Categories extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable CategoriesTable;
     private javax.swing.JScrollPane TableScollPaneCategories;
-    private pos.swing.Button buttonAddCategory;
-    private pos.swing.Button buttonDeleteCategory;
-    private pos.swing.Button buttonEditCategory;
+    private Custom.Components.Swing.Button buttonAddCategory;
+    private Custom.Components.Swing.Button buttonDeleteCategory;
+    private Custom.Components.Swing.Button buttonEditCategory;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private pos.swing.RoundPanel roundPanel3;
-    private pos.swing.TextField textCategoryDescription;
+    private Custom.Components.Swing.RoundPanel roundPanel3;
+    private Custom.Components.Swing.TextField textCategoryDescription;
     private javax.swing.JTextField textCategoryID;
-    private pos.swing.TextField textCategoryName;
+    private Custom.Components.Swing.TextField textCategoryName;
     // End of variables declaration//GEN-END:variables
 }

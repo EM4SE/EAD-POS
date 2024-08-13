@@ -3,7 +3,7 @@ package pos.includes;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import pos.swing.ButtonMenu;
+import Custom.Components.Swing.ButtonMenu;
 import javax.swing.JPanel;
 import pos.main.Main;
 
@@ -31,12 +31,12 @@ public class Menu extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelShadow1 = new pos.swing.PanelShadow();
+        panelShadow1 = new Custom.Components.Swing.PanelShadow();
         profile2 = new pos.includes.Profile();
-        buttonCategory = new pos.swing.ButtonMenu();
-        buttonProducts = new pos.swing.ButtonMenu();
-        buttonSellers = new pos.swing.ButtonMenu();
-        buttonBills = new pos.swing.ButtonMenu();
+        buttonCategory = new Custom.Components.Swing.ButtonMenu();
+        buttonProducts = new Custom.Components.Swing.ButtonMenu();
+        buttonSellers = new Custom.Components.Swing.ButtonMenu();
+        buttonBills = new Custom.Components.Swing.ButtonMenu();
         jButton1 = new javax.swing.JButton();
 
         buttonCategory.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/icon/2.png"))); // NOI18N
@@ -187,12 +187,12 @@ public class Menu extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private pos.swing.ButtonMenu buttonBills;
-    private pos.swing.ButtonMenu buttonCategory;
-    private pos.swing.ButtonMenu buttonProducts;
-    private pos.swing.ButtonMenu buttonSellers;
+    private Custom.Components.Swing.ButtonMenu buttonBills;
+    private Custom.Components.Swing.ButtonMenu buttonCategory;
+    private Custom.Components.Swing.ButtonMenu buttonProducts;
+    private Custom.Components.Swing.ButtonMenu buttonSellers;
     private javax.swing.JButton jButton1;
-    private pos.swing.PanelShadow panelShadow1;
+    private Custom.Components.Swing.PanelShadow panelShadow1;
     private pos.includes.Profile profile2;
     // End of variables declaration//GEN-END:variables
 }

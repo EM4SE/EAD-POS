@@ -1,6 +1,6 @@
 package pos.main;
 
-import pos.table.TableCustom;
+import Custom.Components.table.TableCustom;
 import java.sql.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,18 +30,18 @@ public class Sellers extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        textSellerName = new pos.swing.TextField();
-        textSellerPassword = new pos.swing.TextField();
-        textSellerID = new pos.swing.TextField();
-        comboGender = new pos.combox.CustomComboBox();
+        textSellerName = new Custom.Components.Swing.TextField();
+        textSellerPassword = new Custom.Components.Swing.TextField();
+        textSellerID = new Custom.Components.Swing.TextField();
+        comboGender = new Custom.Components.comboboxes.CustomComboBox();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        buttonDeleteSeller = new pos.swing.Button();
-        buttonEditSeller = new pos.swing.Button();
-        buttonAddSeller = new pos.swing.Button();
-        tablepanel = new pos.swing.RoundPanel();
+        buttonDeleteSeller = new Custom.Components.Swing.Button();
+        buttonEditSeller = new Custom.Components.Swing.Button();
+        buttonAddSeller = new Custom.Components.Swing.Button();
+        tablepanel = new Custom.Components.Swing.RoundPanel();
         TableScollPaneSellers = new javax.swing.JScrollPane();
         SellersTable = new javax.swing.JTable();
 
@@ -230,7 +230,7 @@ public class Sellers extends javax.swing.JPanel {
             String sellerName = textSellerName.getText().trim();
             String sellerPassword = textSellerPassword.getText().trim();
 
-            // Validate input
+            // Validate inputs
             if (sellerIdText.isEmpty()) {
                 showErrorMessage("Error: Seller Id cannot be empty.");
                 return;
@@ -276,7 +276,7 @@ public class Sellers extends javax.swing.JPanel {
             String sellerName = textSellerName.getText().trim();
             String sellerPassword = textSellerPassword.getText().trim();
 
-            // Validate input
+            // Validate inputs
             if (sellerIdText.isEmpty()) {
                 showErrorMessage("Error: Seller Id cannot be empty.");
                 return;
@@ -315,6 +315,7 @@ public class Sellers extends javax.swing.JPanel {
 
     }//GEN-LAST:event_buttonEditSellerActionPerformed
 
+    //method to delete data 
     private void buttonDeleteSellerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteSellerActionPerformed
         try {
            String sellerIdText = textSellerID.getText().trim();
@@ -332,6 +333,7 @@ public class Sellers extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_buttonDeleteSellerActionPerformed
 
+    //load data to table 
     private void loadSellerData() {
 
         SellersTable.getSelectionModel().addListSelectionListener(e -> {
@@ -362,6 +364,8 @@ public class Sellers extends javax.swing.JPanel {
         }
     }
 
+    //method to insert serller data 
+    
     private void insertSeller(int sellerId, String sellerName, String sellerPassword, String gender) {
 
         try {
@@ -392,6 +396,7 @@ public class Sellers extends javax.swing.JPanel {
 
     }
 
+    //method to update seller data 
     private void updateSellerData(int sellerId, String sellerName, String sellerPassword, String gender) {
 
         try {
@@ -412,6 +417,7 @@ public class Sellers extends javax.swing.JPanel {
 
         } catch (SQLException e) {
 
+            //identify duplicate keys using sql state
             if (e.getSQLState().equals("23000")) { // SQLState for integrity constraint violation
                 showErrorMessage("Error: Seller Id Already in Used");
             } else {
@@ -422,6 +428,7 @@ public class Sellers extends javax.swing.JPanel {
 
     }
 
+    //method to seller data 
     private void deleteSellerData(int sellerId) {
 
         try {
@@ -446,8 +453,10 @@ public class Sellers extends javax.swing.JPanel {
 
     }
 
+    //method to load selected data to text box 
     private void loadSelectedRowData() {
 
+        //ignore header row 
         int selectedRow = SellersTable.getSelectedRow();
         if (selectedRow == -1) {
             return;
@@ -470,12 +479,13 @@ public class Sellers extends javax.swing.JPanel {
 
     }
 
+    //method to validate data
     private boolean isValidName(String name) {
         Pattern pattern = Pattern.compile("^[a-zA-Z]+$");
         Matcher matcher = pattern.matcher(name);
         return matcher.matches();
     }
-
+//clear text boxes 
     private void clearFields() {
         textSellerID.setText("");
         textSellerName.setText("");
@@ -494,18 +504,18 @@ public class Sellers extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable SellersTable;
     private javax.swing.JScrollPane TableScollPaneSellers;
-    private pos.swing.Button buttonAddSeller;
-    private pos.swing.Button buttonDeleteSeller;
-    private pos.swing.Button buttonEditSeller;
-    private pos.combox.CustomComboBox comboGender;
+    private Custom.Components.Swing.Button buttonAddSeller;
+    private Custom.Components.Swing.Button buttonDeleteSeller;
+    private Custom.Components.Swing.Button buttonEditSeller;
+    private Custom.Components.comboboxes.CustomComboBox comboGender;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private pos.swing.RoundPanel tablepanel;
-    private pos.swing.TextField textSellerID;
-    private pos.swing.TextField textSellerName;
-    private pos.swing.TextField textSellerPassword;
+    private Custom.Components.Swing.RoundPanel tablepanel;
+    private Custom.Components.Swing.TextField textSellerID;
+    private Custom.Components.Swing.TextField textSellerName;
+    private Custom.Components.Swing.TextField textSellerPassword;
     // End of variables declaration//GEN-END:variables
 }

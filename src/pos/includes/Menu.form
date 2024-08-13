@@ -29,7 +29,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="pos.swing.PanelShadow" name="panelShadow1">
+    <Container class="Custom.Components.Swing.PanelShadow" name="panelShadow1">
 
       <Layout>
         <DimensionLayout dim="0">
@@ -80,7 +80,7 @@
       <SubComponents>
         <Component class="pos.includes.Profile" name="profile2">
         </Component>
-        <Component class="pos.swing.ButtonMenu" name="buttonCategory">
+        <Component class="Custom.Components.Swing.ButtonMenu" name="buttonCategory">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/pos/icon/2.png"/>
@@ -104,7 +104,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="pos.swing.ButtonMenu" name="buttonProducts">
+        <Component class="Custom.Components.Swing.ButtonMenu" name="buttonProducts">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/pos/icon/1.png"/>
@@ -138,7 +138,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonProductsActionPerformed"/>
           </Events>
         </Component>
-        <Component class="pos.swing.ButtonMenu" name="buttonSellers">
+        <Component class="Custom.Components.Swing.ButtonMenu" name="buttonSellers">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/pos/icon/2.png"/>
@@ -159,7 +159,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="pos.swing.ButtonMenu" name="buttonBills">
+        <Component class="Custom.Components.Swing.ButtonMenu" name="buttonBills">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/pos/icon/2.png"/>

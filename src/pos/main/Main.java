@@ -10,7 +10,7 @@ import javax.swing.ButtonGroup;
  */
 public class Main extends javax.swing.JFrame {
 
-    public static Main mainFrame;
+    public static Main mainFrame; //crated to access in another classes 
     private ButtonGroup buttonGroup;
 
     public Main() {
@@ -19,12 +19,15 @@ public class Main extends javax.swing.JFrame {
 
         mainFrame = this;
 
+        //adds side panel buttons to the group to unselect other button when select another button 
         buttonGroup = new ButtonGroup();
         buttonGroup.add(buttonSellers);
         buttonGroup.add(buttonCategories);
         buttonGroup.add(buttonBills);
         buttonGroup.add(buttonProducts);
 
+        
+        //load home panel and hide other panels 
         Products.setVisible(false);
         Sellers.setVisible(false);
         Categories.setVisible(false);
@@ -42,23 +45,23 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        background1 = new pos.swing.Background();
+        background1 = new Custom.Components.Swing.Background();
         win_Button1 = new pos.winButtons.Win_Button();
-        panelShadow1 = new pos.swing.PanelShadow();
+        panelShadow1 = new Custom.Components.Swing.PanelShadow();
         profile1 = new pos.includes.Profile();
-        buttonSellers = new pos.swing.ButtonMenu();
-        buttonCategories = new pos.swing.ButtonMenu();
-        buttonBills = new pos.swing.ButtonMenu();
-        buttonProducts = new pos.swing.ButtonMenu();
-        panelShadow3 = new pos.swing.PanelShadow();
+        buttonSellers = new Custom.Components.Swing.ButtonMenu();
+        buttonCategories = new Custom.Components.Swing.ButtonMenu();
+        buttonBills = new Custom.Components.Swing.ButtonMenu();
+        buttonProducts = new Custom.Components.Swing.ButtonMenu();
+        panelShadow3 = new Custom.Components.Swing.PanelShadow();
         Products = new pos.main.Products();
         Categories = new pos.main.Categories();
-        Home = new pos.swing.RoundPanel();
-        pictureBox2 = new pos.swing.PictureBox();
-        Bills = new pos.swing.RoundPanel();
+        Home = new Custom.Components.Swing.RoundPanel();
+        pictureBox2 = new Custom.Components.Swing.PictureBox();
+        Bills = new Custom.Components.Swing.RoundPanel();
         jLabel2 = new javax.swing.JLabel();
-        roundPanel1 = new pos.swing.RoundPanel();
-        button1 = new pos.swing.Button();
+        roundPanel1 = new Custom.Components.Swing.RoundPanel();
+        button1 = new Custom.Components.Swing.Button();
         Sellers = new pos.main.Sellers();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -336,23 +339,23 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private pos.swing.RoundPanel Bills;
+    private Custom.Components.Swing.RoundPanel Bills;
     private pos.main.Categories Categories;
-    private pos.swing.RoundPanel Home;
+    private Custom.Components.Swing.RoundPanel Home;
     private pos.main.Products Products;
     private pos.main.Sellers Sellers;
-    private pos.swing.Background background1;
-    private pos.swing.Button button1;
-    private pos.swing.ButtonMenu buttonBills;
-    private pos.swing.ButtonMenu buttonCategories;
-    private pos.swing.ButtonMenu buttonProducts;
-    private pos.swing.ButtonMenu buttonSellers;
+    private Custom.Components.Swing.Background background1;
+    private Custom.Components.Swing.Button button1;
+    private Custom.Components.Swing.ButtonMenu buttonBills;
+    private Custom.Components.Swing.ButtonMenu buttonCategories;
+    private Custom.Components.Swing.ButtonMenu buttonProducts;
+    private Custom.Components.Swing.ButtonMenu buttonSellers;
     private javax.swing.JLabel jLabel2;
-    private pos.swing.PanelShadow panelShadow1;
-    private pos.swing.PanelShadow panelShadow3;
-    private pos.swing.PictureBox pictureBox2;
+    private Custom.Components.Swing.PanelShadow panelShadow1;
+    private Custom.Components.Swing.PanelShadow panelShadow3;
+    private Custom.Components.Swing.PictureBox pictureBox2;
     private pos.includes.Profile profile1;
-    private pos.swing.RoundPanel roundPanel1;
+    private Custom.Components.Swing.RoundPanel roundPanel1;
     private pos.winButtons.Win_Button win_Button1;
     // End of variables declaration//GEN-END:variables
 }

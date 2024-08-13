@@ -107,21 +107,21 @@
         <Property name="text" type="java.lang.String" value="Manage Sellers"/>
       </Properties>
     </Component>
-    <Component class="pos.swing.TextField" name="textSellerName">
+    <Component class="Custom.Components.Swing.TextField" name="textSellerName">
       <Properties>
         <Property name="shadowColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="66" red="17" type="rgb"/>
         </Property>
       </Properties>
     </Component>
-    <Component class="pos.swing.TextField" name="textSellerPassword">
+    <Component class="Custom.Components.Swing.TextField" name="textSellerPassword">
       <Properties>
         <Property name="shadowColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="66" red="17" type="rgb"/>
         </Property>
       </Properties>
     </Component>
-    <Component class="pos.swing.TextField" name="textSellerID">
+    <Component class="Custom.Components.Swing.TextField" name="textSellerID">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value=""/>
         <Property name="name" type="java.lang.String" value="" noResource="true"/>
@@ -130,7 +130,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="pos.combox.CustomComboBox" name="comboGender">
+    <Component class="Custom.Components.comboboxes.CustomComboBox" name="comboGender">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="2">
@@ -192,7 +192,7 @@
         <Property name="text" type="java.lang.String" value="Gender"/>
       </Properties>
     </Component>
-    <Component class="pos.swing.Button" name="buttonDeleteSeller">
+    <Component class="Custom.Components.Swing.Button" name="buttonDeleteSeller">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="66" green="66" red="ff" type="rgb"/>
@@ -210,7 +210,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonDeleteSellerActionPerformed"/>
       </Events>
     </Component>
-    <Component class="pos.swing.Button" name="buttonEditSeller">
+    <Component class="Custom.Components.Swing.Button" name="buttonEditSeller">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="66" green="cc" red="ff" type="rgb"/>
@@ -228,7 +228,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonEditSellerActionPerformed"/>
       </Events>
     </Component>
-    <Component class="pos.swing.Button" name="buttonAddSeller">
+    <Component class="Custom.Components.Swing.Button" name="buttonAddSeller">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="cc" red="0" type="rgb"/>
@@ -246,7 +246,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAddSellerActionPerformed"/>
       </Events>
     </Component>
-    <Container class="pos.swing.RoundPanel" name="tablepanel">
+    <Container class="Custom.Components.Swing.RoundPanel" name="tablepanel">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="cc" type="rgb"/>

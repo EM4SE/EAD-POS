@@ -26,7 +26,7 @@
     <Property name="useNullLayout" type="boolean" value="false"/>
   </Layout>
   <SubComponents>
-    <Container class="pos.swing.Background" name="background1">
+    <Container class="Custom.Components.Swing.Background" name="background1">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="0" y="0" width="1200" height="650"/>
@@ -65,7 +65,7 @@
       <SubComponents>
         <Component class="pos.winButtons.Win_Button" name="win_Button1">
         </Component>
-        <Container class="pos.swing.PanelShadow" name="panelShadow1">
+        <Container class="Custom.Components.Swing.PanelShadow" name="panelShadow1">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -110,7 +110,7 @@
           <SubComponents>
             <Component class="pos.includes.Profile" name="profile1">
             </Component>
-            <Component class="pos.swing.ButtonMenu" name="buttonSellers">
+            <Component class="Custom.Components.Swing.ButtonMenu" name="buttonSellers">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/pos/icon/3.png"/>
@@ -137,7 +137,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSellersActionPerformed"/>
               </Events>
             </Component>
-            <Component class="pos.swing.ButtonMenu" name="buttonCategories">
+            <Component class="Custom.Components.Swing.ButtonMenu" name="buttonCategories">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/pos/icon/1.png"/>
@@ -164,7 +164,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonCategoriesActionPerformed"/>
               </Events>
             </Component>
-            <Component class="pos.swing.ButtonMenu" name="buttonBills">
+            <Component class="Custom.Components.Swing.ButtonMenu" name="buttonBills">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/pos/icon/4.png"/>
@@ -191,7 +191,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonBillsActionPerformed"/>
               </Events>
             </Component>
-            <Component class="pos.swing.ButtonMenu" name="buttonProducts">
+            <Component class="Custom.Components.Swing.ButtonMenu" name="buttonProducts">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/pos/icon/2.png"/>
@@ -220,18 +220,14 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="pos.swing.PanelShadow" name="panelShadow3">
+        <Container class="Custom.Components.Swing.PanelShadow" name="panelShadow3">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
           </Properties>
           <SubComponents>
-            <Component class="pos.main.Products" name="Products">
-            </Component>
-            <Component class="pos.main.Categories" name="Categories">
-            </Component>
-            <Container class="pos.swing.RoundPanel" name="Home">
+            <Container class="Custom.Components.Swing.RoundPanel" name="Home">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -259,7 +255,7 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Container class="pos.swing.PictureBox" name="pictureBox2">
+                <Container class="Custom.Components.Swing.PictureBox" name="pictureBox2">
                   <Properties>
                     <Property name="image" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/pos/icon/rose gold text~2.png"/>
@@ -272,7 +268,7 @@
                 </Container>
               </SubComponents>
             </Container>
-            <Container class="pos.swing.RoundPanel" name="Bills">
+            <Container class="Custom.Components.Swing.RoundPanel" name="Bills">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="fd" green="f6" red="f2" type="rgb"/>
@@ -322,7 +318,7 @@
                     <Property name="text" type="java.lang.String" value="bills"/>
                   </Properties>
                 </Component>
-                <Container class="pos.swing.RoundPanel" name="roundPanel1">
+                <Container class="Custom.Components.Swing.RoundPanel" name="roundPanel1">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="0" green="33" red="ff" type="rgb"/>
@@ -342,20 +338,18 @@
                     </DimensionLayout>
                   </Layout>
                 </Container>
-                <Component class="pos.swing.Button" name="button1">
+                <Component class="Custom.Components.Swing.Button" name="button1">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="button1"/>
                   </Properties>
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="pos.main.Sellers" name="Sellers">
-            </Component>
           </SubComponents>
           <LayoutCode>
             <CodeStatement>
               <CodeExpression id="1_panelShadow3">
-                <CodeVariable name="panelShadow3" type="8194" declaredType="pos.swing.PanelShadow"/>
+                <CodeVariable name="panelShadow3" type="8194" declaredType="Custom.Components.Swing.PanelShadow"/>
                 <ExpressionOrigin>
                   <ExpressionProvider type="ComponentRef">
                     <ComponentRef name="panelShadow3"/>

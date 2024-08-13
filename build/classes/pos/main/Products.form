@@ -38,7 +38,10 @@
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="buttonAddProductImage" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="buttonAddProductImage" max="32767" attributes="0"/>
+                                  <Component id="buttonClear" max="32767" attributes="0"/>
+                              </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="ProductImage" min="-2" pref="130" max="-2" attributes="0"/>
                           </Group>
@@ -94,17 +97,19 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="comboboxCategory" min="-2" pref="41" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="buttonAddProductImage" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="107" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="buttonDeleteProduct" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="buttonEditProduct" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="buttonAddProduct" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="buttonClear" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="ProductImage" min="-2" pref="130" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="buttonDeleteProduct" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="buttonEditProduct" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="buttonAddProduct" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
@@ -129,7 +134,7 @@
         <Property name="text" type="java.lang.String" value="Manage Products"/>
       </Properties>
     </Component>
-    <Component class="pos.swing.TextField" name="textProductName">
+    <Component class="Custom.Components.Swing.TextField" name="textProductName">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value=""/>
         <Property name="name" type="java.lang.String" value="" noResource="true"/>
@@ -138,7 +143,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="pos.swing.TextField" name="textProductDescription">
+    <Component class="Custom.Components.Swing.TextField" name="textProductDescription">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value=""/>
         <Property name="name" type="java.lang.String" value="" noResource="true"/>
@@ -180,7 +185,7 @@
         <Property name="text" type="java.lang.String" value="Product Price"/>
       </Properties>
     </Component>
-    <Component class="pos.combox.CustomComboBox" name="comboboxCategory">
+    <Component class="Custom.Components.comboboxes.CustomComboBox" name="comboboxCategory">
       <Properties>
         <Property name="shadowColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="66" red="17" type="rgb"/>
@@ -201,7 +206,7 @@
         <Property name="text" type="java.lang.String" value="Product Category"/>
       </Properties>
     </Component>
-    <Component class="pos.swing.TextField" name="textProductPrice">
+    <Component class="Custom.Components.Swing.TextField" name="textProductPrice">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value=""/>
         <Property name="name" type="java.lang.String" value="" noResource="true"/>
@@ -213,7 +218,7 @@
         <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="textProductPriceFocusGained"/>
       </Events>
     </Component>
-    <Component class="pos.swing.Button" name="buttonAddProductImage">
+    <Component class="Custom.Components.Swing.Button" name="buttonAddProductImage">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="33" green="ff" red="33" type="rgb"/>
@@ -231,7 +236,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAddProductImageActionPerformed"/>
       </Events>
     </Component>
-    <Container class="pos.swing.PictureBox" name="ProductImage">
+    <Container class="Custom.Components.Swing.PictureBox" name="ProductImage">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -246,7 +251,7 @@
         <Property name="useNullLayout" type="boolean" value="true"/>
       </Layout>
     </Container>
-    <Component class="pos.swing.Button" name="buttonAddProduct">
+    <Component class="Custom.Components.Swing.Button" name="buttonAddProduct">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="cc" red="0" type="rgb"/>
@@ -264,7 +269,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAddProductActionPerformed"/>
       </Events>
     </Component>
-    <Component class="pos.swing.Button" name="buttonEditProduct">
+    <Component class="Custom.Components.Swing.Button" name="buttonEditProduct">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="66" green="cc" red="ff" type="rgb"/>
@@ -278,8 +283,11 @@
           <Color blue="ff" green="33" red="0" type="rgb"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonEditProductActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="pos.swing.Button" name="buttonDeleteProduct">
+    <Component class="Custom.Components.Swing.Button" name="buttonDeleteProduct">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="66" green="66" red="ff" type="rgb"/>
@@ -294,7 +302,7 @@
         </Property>
       </Properties>
     </Component>
-    <Container class="pos.swing.RoundPanel" name="roundPanel2">
+    <Container class="Custom.Components.Swing.RoundPanel" name="roundPanel2">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="cc" type="rgb"/>
@@ -384,5 +392,23 @@
         </Container>
       </SubComponents>
     </Container>
+    <Component class="Custom.Components.Swing.Button" name="buttonClear">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="cc" red="0" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Clear Form"/>
+        <Property name="focusPainted" type="boolean" value="false"/>
+        <Property name="rippleColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="0" red="33" type="rgb"/>
+        </Property>
+        <Property name="shadowColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="33" red="0" type="rgb"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonClearActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

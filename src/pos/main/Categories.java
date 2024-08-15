@@ -18,8 +18,6 @@ import pos.database.DBConfig;
  */
 public class Categories extends javax.swing.JPanel {
 
-   
-    
     public Categories() {
         initComponents();
         //chnage scoll bar style and table style 
@@ -49,6 +47,7 @@ public class Categories extends javax.swing.JPanel {
         roundPanel3 = new Custom.Components.Swing.RoundPanel();
         TableScollPaneCategories = new javax.swing.JScrollPane();
         CategoriesTable = new javax.swing.JTable();
+        buttonClear = new Custom.Components.Swing.Button();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -128,7 +127,7 @@ public class Categories extends javax.swing.JPanel {
             roundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roundPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(TableScollPaneCategories, javax.swing.GroupLayout.DEFAULT_SIZE, 656, Short.MAX_VALUE)
+                .addComponent(TableScollPaneCategories, javax.swing.GroupLayout.DEFAULT_SIZE, 663, Short.MAX_VALUE)
                 .addContainerGap())
         );
         roundPanel3Layout.setVerticalGroup(
@@ -139,27 +138,42 @@ public class Categories extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        buttonClear.setBackground(new java.awt.Color(204, 204, 255));
+        buttonClear.setText("Clear Form");
+        buttonClear.setFocusPainted(false);
+        buttonClear.setRippleColor(new java.awt.Color(51, 0, 255));
+        buttonClear.setShadowColor(new java.awt.Color(0, 51, 255));
+        buttonClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonClearActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel17)
-                            .addComponent(jLabel18)))
-                    .addComponent(textCategoryName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textCategoryDescription, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(buttonAddCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonEditCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonDeleteCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(textCategoryName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(textCategoryDescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel17)
+                                    .addComponent(jLabel18)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(buttonAddCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(buttonEditCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(buttonDeleteCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 5, Short.MAX_VALUE))
+                    .addComponent(buttonClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(roundPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -181,6 +195,8 @@ public class Categories extends javax.swing.JPanel {
                     .addComponent(buttonAddCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonEditCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonDeleteCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(buttonClear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(44, 44, 44)
@@ -210,7 +226,6 @@ public class Categories extends javax.swing.JPanel {
                 return;
             }
 
-            
             insertCategories(CategoryName, CategoryDescription);
         } catch (NumberFormatException e) {
             showErrorMessage("Error: Category ID must be a number.");
@@ -261,6 +276,10 @@ public class Categories extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_buttonDeleteCategoryActionPerformed
 
+    private void buttonClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClearActionPerformed
+        clearFields();
+    }//GEN-LAST:event_buttonClearActionPerformed
+
     private void insertCategories(String CategoryName, String CategoryDescription) {
 
         try {
@@ -277,8 +296,6 @@ public class Categories extends javax.swing.JPanel {
             showSuccessMessage("Category data inserted successfully.");
             loadCategoriesData();
             clearFields();
-            
-            
 
         } catch (SQLException e) {
 
@@ -309,7 +326,6 @@ public class Categories extends javax.swing.JPanel {
             showSuccessMessage("Category data Updated successfully.");
             loadCategoriesData();
             clearFields();
-        
 
         } catch (SQLException e) {
 
@@ -326,7 +342,6 @@ public class Categories extends javax.swing.JPanel {
     //  method to load category dato to table 
     private void loadCategoriesData() {
 
-        
         CategoriesTable.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
                 loadSelectedRowData();
@@ -388,7 +403,6 @@ public class Categories extends javax.swing.JPanel {
             showSuccessMessage("Category data Deleted successfully.");
             loadCategoriesData();
             clearFields();
-           
 
         } catch (SQLException e) {
 
@@ -414,7 +428,6 @@ public class Categories extends javax.swing.JPanel {
         textCategoryDescription.setText("");
     }
 
-    
     private void showErrorMessage(String message) {
         JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
     }
@@ -427,6 +440,7 @@ public class Categories extends javax.swing.JPanel {
     private javax.swing.JTable CategoriesTable;
     private javax.swing.JScrollPane TableScollPaneCategories;
     private Custom.Components.Swing.Button buttonAddCategory;
+    private Custom.Components.Swing.Button buttonClear;
     private Custom.Components.Swing.Button buttonDeleteCategory;
     private Custom.Components.Swing.Button buttonEditCategory;
     private javax.swing.JLabel jLabel15;

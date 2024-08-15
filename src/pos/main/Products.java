@@ -158,6 +158,11 @@ public class Products extends javax.swing.JPanel {
         buttonDeleteProduct.setFocusPainted(false);
         buttonDeleteProduct.setRippleColor(new java.awt.Color(51, 0, 255));
         buttonDeleteProduct.setShadowColor(new java.awt.Color(0, 51, 255));
+        buttonDeleteProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDeleteProductActionPerformed(evt);
+            }
+        });
 
         roundPanel2.setBackground(new java.awt.Color(204, 255, 255));
 
@@ -206,7 +211,7 @@ public class Products extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        buttonClear.setBackground(new java.awt.Color(0, 204, 255));
+        buttonClear.setBackground(new java.awt.Color(204, 204, 255));
         buttonClear.setText("Clear Form");
         buttonClear.setFocusPainted(false);
         buttonClear.setRippleColor(new java.awt.Color(51, 0, 255));
@@ -278,13 +283,15 @@ public class Products extends javax.swing.JPanel {
                         .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(comboboxCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ProductImage, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
                                 .addComponent(buttonAddProductImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(buttonClear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(ProductImage, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(28, 28, 28)
+                                .addComponent(buttonClear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(buttonDeleteProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -300,7 +307,6 @@ public class Products extends javax.swing.JPanel {
     private void buttonAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddProductActionPerformed
         try {
 
-            textProductID.setText("");
             String productName = textProductName.getText().trim();
             String ProductDescription = textProductDescription.getText().trim();
             String productPriceText = textProductPrice.getText().trim();
@@ -337,17 +343,17 @@ public class Products extends javax.swing.JPanel {
             String Category = comboboxCategory.getSelectedItem().toString();
 
             insertProducts(productName, ProductDescription, productPrice, Category, imagePath);
-            
+
         } catch (NumberFormatException e) {
             showErrorMessage("Error: Entered Price id Invalid ");
-        }        // TODO add your handling code here:
+        }
     }//GEN-LAST:event_buttonAddProductActionPerformed
 
     private void buttonAddProductImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddProductImageActionPerformed
-        
+
         //open j file chooser 
         JFileChooser fileChooser = new JFileChooser();
-        
+
         //filter files only showing image file with file extentions 
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Image Files", "jpg", "png", "gif", "jpeg");
         fileChooser.setFileFilter(filter);
@@ -356,14 +362,14 @@ public class Products extends javax.swing.JPanel {
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             String fileName = selectedFile.getName();
-            String projectImageDir = "src/main/resources/images/"; 
+            String projectImageDir = "src/main/resources/images/";
 
             //create new directory to store the selected image 
             new File(projectImageDir).mkdirs();
             Path destinationPath = Paths.get(projectImageDir + fileName);
 
             try {
-                
+
                 //copy files to the new directory 
                 Files.copy(selectedFile.toPath(), destinationPath, StandardCopyOption.REPLACE_EXISTING);
 
@@ -385,19 +391,82 @@ public class Products extends javax.swing.JPanel {
 
     }//GEN-LAST:event_textProductPriceFocusGained
 
+    //reload combobox when clicked on combobox
     private void comboboxCategoryFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_comboboxCategoryFocusGained
         loadCategories();
     }//GEN-LAST:event_comboboxCategoryFocusGained
 
     private void buttonEditProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditProductActionPerformed
-        // TODO add your handling code here:
+        try {
+            String productIDText = textProductID.getText().trim();
+            String productName = textProductName.getText().trim();
+            String ProductDescription = textProductDescription.getText().trim();
+            String productPriceText = textProductPrice.getText().trim();
+
+            // Validate inputs
+            // Validate inputs
+            if (productIDText.isEmpty()) {
+                showErrorMessage("Error: Product Not Selected.");
+                return;
+            }
+            if (productName.isEmpty()) {
+                showErrorMessage("Error: Product Name cannot be empty.");
+                return;
+            }
+            if (ProductDescription.isEmpty()) {
+                showErrorMessage("Error: Product Description cannot be empty.");
+                return;
+            }
+            if (productPriceText.isEmpty()) {
+                showErrorMessage("Error: Product Price cannot be empty.");
+                return;
+            }
+            if (comboboxCategory.getSelectedIndex() == -1) {
+                showErrorMessage("Error: Product Category cannot be empty.");
+                return;
+            }
+            if (!isValidName(productName)) {
+                showErrorMessage("Error: Product name must contain only letters.");
+                return;
+            }
+            int ProductID = Integer.parseInt(textProductID.getText().trim());
+            double productPrice = Double.parseDouble(textProductPrice.getText().trim());
+
+            if (productPrice <= 0) {
+                showErrorMessage("Error: Price must be a positive number.");
+                return;
+            }
+
+            String Category = comboboxCategory.getSelectedItem().toString();
+
+            editProducts(ProductID, productName, ProductDescription, productPrice, Category, imagePath);
+
+        } catch (NumberFormatException e) {
+            showErrorMessage("Error: Entered Price id Invalid ");
+        }
     }//GEN-LAST:event_buttonEditProductActionPerformed
 
     private void buttonClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClearActionPerformed
-         clearFields();
+        clearFields();
     }//GEN-LAST:event_buttonClearActionPerformed
 
-    
+    private void buttonDeleteProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteProductActionPerformed
+       try {
+           String ProductIdText = textProductID.getText().trim();
+            
+
+            if (ProductIdText.isEmpty()) {
+                showErrorMessage("Error: Product Not Selected!!");
+                return;
+            }
+            int sellerId = Integer.parseInt(textProductID.getText().trim());
+            deleteProducts(sellerId);
+
+        } catch (NumberFormatException e) {
+            showErrorMessage("Error: Product ID must be a number.");
+        }
+    }//GEN-LAST:event_buttonDeleteProductActionPerformed
+
     //load categories from categories table to combobox 
     public void loadCategories() {
         try {
@@ -420,7 +489,6 @@ public class Products extends javax.swing.JPanel {
         }
     }
 
-    
     //method to insert products 
     private void insertProducts(String productName, String productDescription, double productPrice, String productCategory, String ImagePath) {
 
@@ -454,7 +522,62 @@ public class Products extends javax.swing.JPanel {
 
     }
 
-    
+    private void editProducts(int productID, String productName, String productDescription, double productPrice, String productCategory, String ImagePath) {
+
+        try {
+            DBConfig mycon = new DBConfig();
+            Connection con = mycon.connectDB();
+
+            String sql = "UPDATE products SET product_name = ?, product_description = ?, product_price = ?, product_category = ?,product_imagepath = ? WHERE product_id = ? ";
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setString(1, productName);
+            statement.setString(2, productDescription);
+            statement.setDouble(3, productPrice);
+            statement.setString(4, productCategory);
+            statement.setString(5, ImagePath);
+            statement.setInt(6, productID);
+
+            statement.executeUpdate();
+
+            showSuccessMessage("Product data Edited successfully.");
+            loadProductsData();
+            clearFields();
+
+        } catch (SQLException e) {
+
+            if (e.getSQLState().equals("23000")) { // SQLState for integrity constraint violation
+                showErrorMessage("Error: Product Already in Used");
+            } else {
+                showErrorMessage("Error: Failed to Edit Product data. Please check the connection details.");
+            }
+            clearFields();
+        }
+
+    }
+
+     private void deleteProducts(int ProductID) {
+
+        try {
+            DBConfig mycon = new DBConfig();
+            Connection con = mycon.connectDB();
+
+            String sqlDeleteProducts = "DELETE FROM products WHERE product_id = ?";
+            PreparedStatement statementDeleteProducts = con.prepareStatement(sqlDeleteProducts);
+            statementDeleteProducts.setInt(1, ProductID);
+            statementDeleteProducts.executeUpdate();
+
+            showSuccessMessage("Products data Deleted successfully.");
+            loadProductsData();
+            clearFields();
+
+        } catch (SQLException e) {
+
+            showErrorMessage("Error: Failed to Delete Products data. Please check the connection details.");
+
+            clearFields();
+        }
+
+    }
     //load data to table 
     private void loadProductsData() {
 
@@ -509,7 +632,8 @@ public class Products extends javax.swing.JPanel {
         textProductPrice.setText(productPrice);
         loadCategories();
         comboboxCategory.setSelectedItem(productCategory);
-        
+        imagePath = productImagePath;
+
         //load image to image box 
         ImageIcon imageIcon = new ImageIcon(productImagePath);
         ProductImage.setImage(imageIcon);
@@ -517,7 +641,6 @@ public class Products extends javax.swing.JPanel {
 
     }
 
-    
     private void displayImage(String path) {
         ImageIcon imageIcon = new ImageIcon(path);
         ProductImage.setImage(imageIcon);
@@ -537,6 +660,8 @@ public class Products extends javax.swing.JPanel {
         textProductDescription.setText("");
         textProductPrice.setText("");
         comboboxCategory.setSelectedIndex(-1);
+        ProductImage.setImage(null);
+        ProductImage.repaint();
     }
 
     private void showErrorMessage(String message) {

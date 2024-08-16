@@ -20,6 +20,7 @@ import pos.database.DBConfig;
  */
 public class SellerUI extends javax.swing.JFrame {
 
+    int ProductID;
     String category;
     Products products1;
 
@@ -27,6 +28,7 @@ public class SellerUI extends javax.swing.JFrame {
         initComponents();
         TableCustom.apply(sellerscollpane, TableCustom.TableType.MULTI_LINE);
         loadCategories();
+        loadSelectedRowData();
         loadForm();
         loadBill();
     }
@@ -128,7 +130,7 @@ public class SellerUI extends javax.swing.JFrame {
         ProductsLoad = new javax.swing.JPanel();
         comboboxCategory = new Custom.Components.comboboxes.CustomComboBox();
         FilterButton = new Custom.Components.Swing.Button();
-        button2 = new Custom.Components.Swing.Button();
+        buttonDelete = new Custom.Components.Swing.Button();
         panelShadow4 = new Custom.Components.Swing.PanelShadow();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -206,8 +208,13 @@ public class SellerUI extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        button2.setBackground(new java.awt.Color(255, 102, 102));
-        button2.setText("Delete");
+        buttonDelete.setBackground(new java.awt.Color(255, 102, 102));
+        buttonDelete.setText("Delete");
+        buttonDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDeleteActionPerformed(evt);
+            }
+        });
 
         panelShadow4.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -284,27 +291,23 @@ public class SellerUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Item", "Qty", "Price"
+                "ID", "Item", "Qty", "Price"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        tableBill.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                tableBillMouseExited(evt);
-            }
-        });
         sellerscollpane.setViewportView(tableBill);
         if (tableBill.getColumnModel().getColumnCount() > 0) {
-            tableBill.getColumnModel().getColumn(0).setPreferredWidth(100);
-            tableBill.getColumnModel().getColumn(1).setPreferredWidth(20);
-            tableBill.getColumnModel().getColumn(2).setPreferredWidth(50);
+            tableBill.getColumnModel().getColumn(0).setPreferredWidth(0);
+            tableBill.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tableBill.getColumnModel().getColumn(2).setPreferredWidth(20);
+            tableBill.getColumnModel().getColumn(3).setPreferredWidth(50);
         }
 
         billtext.setColumns(20);
@@ -327,15 +330,12 @@ public class SellerUI extends javax.swing.JFrame {
                         .addComponent(sellerscollpane, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BillScrollpane, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panelShadow4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelShadow2Layout.createSequentialGroup()
-                        .addGroup(panelShadow2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panelShadow4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelShadow2Layout.createSequentialGroup()
-                                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelShadow2Layout.createSequentialGroup()
                 .addGap(391, 391, 391)
                 .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 719, Short.MAX_VALUE)
@@ -358,7 +358,7 @@ public class SellerUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelShadow2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(panelShadow4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(panelShadow3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -404,8 +404,14 @@ public class SellerUI extends javax.swing.JFrame {
 
     private void loadBill() {
 
+        tableBill.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                loadSelectedRowData();
+            }
+        });
         try {
             Bill();
+            cal();
 
             DBConfig mycon = new DBConfig();
             Connection con = mycon.connectDB();
@@ -425,7 +431,7 @@ public class SellerUI extends javax.swing.JFrame {
                 int Qty = rs.getInt("qty");
                 double TotalPrice = rs.getDouble("totalprice");
 
-                model.addRow(new Object[]{Name, Qty, TotalPrice});
+                model.addRow(new Object[]{ID, Name, Qty, TotalPrice});
             }
         } catch (SQLException e) {
             showErrorMessage(e.toString());
@@ -435,12 +441,13 @@ public class SellerUI extends javax.swing.JFrame {
     public void cal() {
         //cal total table values
 
+        try{
         int numOfRow = tableBill.getRowCount();
         double tot = 0.0;
 
         for (int i = 0; i < numOfRow; i++) {
 
-            double value = Double.valueOf(tableBill.getValueAt(i, 2).toString());
+            double value = Double.parseDouble(tableBill.getValueAt(i, 3).toString());
 
             tot += value;
 
@@ -448,7 +455,9 @@ public class SellerUI extends javax.swing.JFrame {
 
         DecimalFormat df = new DecimalFormat("00.00");
         labelTotal.setText(df.format(tot));
-
+        }catch(NumberFormatException ex ){
+             showErrorMessage("Error: Failed to cal total amount.");
+        }
     }
 
     public void pay() {
@@ -464,13 +473,14 @@ public class SellerUI extends javax.swing.JFrame {
         }
 
         try {
-            double tot = Double.valueOf(totalText);
-            double paid = Double.valueOf(payText);
+            double tot = Double.parseDouble(totalText);
+            double paid = Double.parseDouble(payText);
             double balance = paid - tot;
 
             DecimalFormat df = new DecimalFormat("00.00");
 
             labelBalance.setText(String.valueOf(df.format(balance)));
+            Bill();
 
         } catch (NumberFormatException e) {
             // Handle invalid number format
@@ -478,54 +488,59 @@ public class SellerUI extends javax.swing.JFrame {
         }
     }
 
-       public void Bill() {
+    public void Bill() {
         // bill print
-        
+
         try {
-            
-           billtext.setText("                         EMASE Resturant \n");
+
+            billtext.setText("                         EMASE Resturant \n");
             billtext.setText(billtext.getText() + "                         268/ Matale Road, \n");
             billtext.setText(billtext.getText() + "                         Kandy, Sri lanka, \n");
             billtext.setText(billtext.getText() + "                         +9475 6441389, \n");
             billtext.setText(billtext.getText() + "-------------------------------------------------------------------------\n");
-            billtext.setText(billtext.getText() + "  Item \t\tQty \tPrice" +"\n");
+            billtext.setText(billtext.getText() + "  Item \t\tQty \tPrice" + "\n");
             billtext.setText(billtext.getText() + "-------------------------------------------------------------------------\n");
-            
+
             DefaultTableModel df = (DefaultTableModel) tableBill.getModel();
-            
+
             // get table Product details
-            
             for (int i = 0; i < tableBill.getRowCount(); i++) {
-                
-                String Name = df.getValueAt(i, 0).toString();
-                String Qty = df.getValueAt(i, 1).toString();
-                String Price = df.getValueAt(i, 2).toString();
-                
-                billtext.setText(billtext.getText() +"  "+ Name+"\t\t"+Qty +"\t"+Price + "\n");
+
+                String Name = df.getValueAt(i, 1).toString();
+                String Qty = df.getValueAt(i, 2).toString();
+                String Price = df.getValueAt(i, 3).toString();
+
+                billtext.setText(billtext.getText() + "  " + Name + "\t\t" + Qty + "\t" + Price + "\n");
             }
-            
+
             billtext.setText(billtext.getText() + "-------------------------------------------------------------------------\n");
-            billtext.setText(billtext.getText() + "Sub Total : " + labelTotal.getText() +"\n");
-            billtext.setText(billtext.getText() + "Cash      : " + textCash.getText() +"\n");
-            billtext.setText(billtext.getText() + "Balance   : " + labelBalance.getText() +"\n");
+            billtext.setText(billtext.getText() + "Sub Total : " + labelTotal.getText() + "\n");
+            billtext.setText(billtext.getText() + "Cash      : " + textCash.getText() + "\n");
+            billtext.setText(billtext.getText() + "Balance   : " + labelBalance.getText() + "\n");
             billtext.setText(billtext.getText() + "-------------------------------------------------------------------------\n");
-            billtext.setText(billtext.getText() + "                     Thanks For Your Business...!"+"\n");
+            billtext.setText(billtext.getText() + "                     Thanks For Your Business...!" + "\n");
             billtext.setText(billtext.getText() + "-------------------------------------------------------------------------\n");
-            billtext.setText(billtext.getText() + "                     Software by Anjana Ekanayaka"+"\n");
-            
-           
-       
-            
+            billtext.setText(billtext.getText() + "                     Software by Anjana Ekanayaka" + "\n");
+
         } catch (Exception e) {
-            
+
             JOptionPane.showMessageDialog(this, e, "Error", JOptionPane.ERROR_MESSAGE);
-            
-            
+
         }
-        
-        
-        
-        
+
+    }
+
+    private void loadSelectedRowData() {
+
+        //ignore header row 
+        int selectedRow = tableBill.getSelectedRow();
+        if (selectedRow == -1) {
+            return;
+        }
+
+        String ProductIDText = tableBill.getValueAt(selectedRow, 0).toString();
+        ProductID = Integer.parseInt(ProductIDText.trim());
+
     }
 
     private void FilterButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FilterButtonMouseClicked
@@ -537,12 +552,8 @@ public class SellerUI extends javax.swing.JFrame {
         loadForm();
     }//GEN-LAST:event_FilterButtonActionPerformed
 
-    private void tableBillMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableBillMouseExited
-        loadBill();
-    }//GEN-LAST:event_tableBillMouseExited
-
     private void ProductsLoadMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProductsLoadMouseMoved
-        try {
+       try {
 
             loadBill();
             Thread.sleep(100);
@@ -554,6 +565,26 @@ public class SellerUI extends javax.swing.JFrame {
     private void textCashKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textCashKeyReleased
         pay();
     }//GEN-LAST:event_textCashKeyReleased
+
+    private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
+        try {
+            DBConfig mycon = new DBConfig();
+            Connection con = mycon.connectDB();
+
+            String sqlDelete = "DELETE FROM cart WHERE product_id = ?";
+            PreparedStatement statementDelete = con.prepareStatement(sqlDelete);
+            statementDelete.setInt(1, ProductID);
+            statementDelete.executeUpdate();
+
+            showSuccessMessage("Data Deleted successfully.");
+            loadBill();
+
+        } catch (SQLException e) {
+
+            showErrorMessage("Error: Failed to Delete seller data. Please check the connection details.");
+
+        }
+    }//GEN-LAST:event_buttonDeleteActionPerformed
 
     public void showErrorMessage(String message) {
         JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
@@ -606,7 +637,7 @@ public class SellerUI extends javax.swing.JFrame {
     private Custom.Components.Swing.Background background1;
     private javax.swing.JTextArea billtext;
     private Custom.Components.Swing.Button button1;
-    private Custom.Components.Swing.Button button2;
+    private Custom.Components.Swing.Button buttonDelete;
     private Custom.Components.comboboxes.CustomComboBox comboboxCategory;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

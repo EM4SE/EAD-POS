@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package pos.SellerUI;
+
 import javax.swing.ImageIcon;
+
 /**
  *
  * @author Anjana
@@ -14,8 +16,13 @@ public class Products extends javax.swing.JPanel {
      * Creates new form Products
      */
     public Products() {
-        initComponents();
-        labelName.setText("Anjana Ekanayaka");
+        SellerUI sellui = new SellerUI();
+
+        sellui.setVisible(true);
+        
+        sellui.loadBill();
+
+        // initComponents();
     }
 
     public Products(int ProductID, String ProductName, String ProductCategory, double ProductPrice, String ImagePath) {

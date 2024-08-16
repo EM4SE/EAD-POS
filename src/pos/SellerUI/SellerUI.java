@@ -4,11 +4,13 @@
  */
 package pos.SellerUI;
 
+import Custom.Components.table.TableCustom;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import pos.database.DBConfig;
 
 /**
@@ -21,8 +23,10 @@ public class SellerUI extends javax.swing.JFrame {
 
     public SellerUI() {
         initComponents();
+        TableCustom.apply(sellerscollpane, TableCustom.TableType.MULTI_LINE);
         loadCategories();
         loadForm();
+        
     }
 
     private void loadForm() {
@@ -131,8 +135,8 @@ public class SellerUI extends javax.swing.JFrame {
         textField1 = new Custom.Components.Swing.TextField();
         total1 = new javax.swing.JLabel();
         button1 = new Custom.Components.Swing.Button();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        sellerscollpane = new javax.swing.JScrollPane();
+        tableBill = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jLabel5 = new javax.swing.JLabel();
@@ -263,18 +267,28 @@ public class SellerUI extends javax.swing.JFrame {
         button1.setText("Pay & Print");
         button1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableBill.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Item", "Qty", "Price"
             }
-        ));
-        jScrollPane2.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        sellerscollpane.setViewportView(tableBill);
+        if (tableBill.getColumnModel().getColumnCount() > 0) {
+            tableBill.getColumnModel().getColumn(0).setPreferredWidth(100);
+            tableBill.getColumnModel().getColumn(1).setPreferredWidth(20);
+            tableBill.getColumnModel().getColumn(2).setPreferredWidth(50);
+        }
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -301,7 +315,7 @@ public class SellerUI extends javax.swing.JFrame {
                                 .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(panelShadow2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(sellerscollpane, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelShadow2Layout.createSequentialGroup()
@@ -322,7 +336,7 @@ public class SellerUI extends javax.swing.JFrame {
                         .addGap(0, 8, Short.MAX_VALUE)
                         .addGroup(panelShadow2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE))
+                            .addComponent(sellerscollpane, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelShadow2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -369,6 +383,35 @@ public class SellerUI extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    public void loadBill() {
+
+        try {
+
+            DBConfig mycon = new DBConfig();
+            Connection con = mycon.connectDB();
+            String sqlcaltotprice = "UPDATE cart SET totalprice = qty * price ";
+            PreparedStatement statementTotal = con.prepareStatement(sqlcaltotprice);
+           statementTotal.executeUpdate();
+            
+            String sqlGeBills = "SELECT * FROM cart";
+            PreparedStatement statementBills = con.prepareStatement(sqlGeBills);
+            ResultSet rs = statementBills.executeQuery();
+            DefaultTableModel model = (DefaultTableModel) tableBill.getModel();
+            model.setRowCount(0);
+
+            while (rs.next()) {
+                int ID = rs.getInt("product_id");
+                String Name = rs.getString("product_name");
+                int Qty = rs.getInt("qty");
+                double TotalPrice = rs.getDouble("totalprice");
+
+                model.addRow(new Object[]{Name, Qty, TotalPrice});
+            }
+        } catch (SQLException e) {
+            showErrorMessage(e.toString());
+        }
+    }
 
     private void FilterButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FilterButtonMouseClicked
         loadForm();
@@ -417,7 +460,7 @@ public class SellerUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SellerUI().setVisible(true);
+                new Products().setVisible(false);
             }
         });
     }
@@ -435,13 +478,13 @@ public class SellerUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
     private Custom.Components.Swing.PanelShadow panelShadow2;
     private Custom.Components.Swing.PanelShadow panelShadow3;
     private Custom.Components.Swing.PanelShadow panelShadow4;
+    private javax.swing.JScrollPane sellerscollpane;
+    private javax.swing.JTable tableBill;
     private Custom.Components.Swing.TextField textField1;
     private javax.swing.JLabel total;
     private javax.swing.JLabel total1;

@@ -5,6 +5,13 @@
 package pos.SellerUI;
 
 import javax.swing.ImageIcon;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import pos.database.DBConfig;
+import pos.SellerUI.SellerUI;
 
 /**
  *
@@ -12,21 +19,26 @@ import javax.swing.ImageIcon;
  */
 public class Products extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Products
-     */
-    public Products() {
-        SellerUI sellui = new SellerUI();
+    int productID;
+    String productName;
+    double productPrice;
 
+    SellerUI sellui;
+
+    public Products() {
+
+        sellui = new SellerUI();
         sellui.setVisible(true);
-        
-        sellui.loadBill();
 
         // initComponents();
     }
 
     public Products(int ProductID, String ProductName, String ProductCategory, double ProductPrice, String ImagePath) {
         initComponents();
+        this.productID = ProductID;
+        this.productName = ProductName;
+        this.productPrice = ProductPrice;
+
         labelName.setText(ProductName);
         labelPrice.setText(Double.toString(ProductPrice));
         labelCategory.setText(ProductCategory);
@@ -49,8 +61,8 @@ public class Products extends javax.swing.JPanel {
         labelName = new javax.swing.JLabel();
         labelCategory = new javax.swing.JLabel();
         picture = new Custom.Components.Swing.PictureBox();
-        textField1 = new Custom.Components.Swing.TextField();
-        button1 = new Custom.Components.Swing.Button();
+        textqty = new Custom.Components.Swing.TextField();
+        buttonadd = new Custom.Components.Swing.Button();
         labelPrice = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(242, 246, 253));
@@ -68,11 +80,16 @@ public class Products extends javax.swing.JPanel {
         labelCategory.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelCategory.setText("Product Category");
 
-        textField1.setShadowColor(new java.awt.Color(51, 0, 255));
+        textqty.setShadowColor(new java.awt.Color(51, 0, 255));
 
-        button1.setBackground(new java.awt.Color(0, 204, 255));
-        button1.setText("Add to Cart");
-        button1.setRippleColor(new java.awt.Color(255, 0, 0));
+        buttonadd.setBackground(new java.awt.Color(0, 204, 255));
+        buttonadd.setText("Add to Cart");
+        buttonadd.setRippleColor(new java.awt.Color(255, 0, 0));
+        buttonadd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonaddActionPerformed(evt);
+            }
+        });
 
         labelPrice.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         labelPrice.setForeground(new java.awt.Color(51, 204, 0));
@@ -84,9 +101,9 @@ public class Products extends javax.swing.JPanel {
         panelShadow1Layout.setHorizontalGroup(
             panelShadow1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(labelCategory, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(textField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(textqty, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(labelPrice, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(button1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(buttonadd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelShadow1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelName, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
@@ -104,9 +121,9 @@ public class Products extends javax.swing.JPanel {
                 .addGap(0, 0, 0)
                 .addComponent(labelCategory)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(textqty, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(buttonadd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
 
@@ -122,14 +139,91 @@ public class Products extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void buttonaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonaddActionPerformed
+
+        try {
+
+            String Quantitytext = textqty.getText().trim();
+
+            // Validate inputs
+            if (Quantitytext.isEmpty()) {
+                showErrorMessage("Error: Quantity cannot be empty.");
+                return;
+            }
+            int Quantity = Integer.parseInt(textqty.getText().trim());
+
+            if (Quantity <= 0) {
+                showErrorMessage("Error: Quantity must be a positive number.");
+                return;
+            }
+
+            addtobill(Quantity);
+           
+        } catch (NumberFormatException e) {
+            showErrorMessage("Error: Quantity must be a number.");
+        }
+
+
+    }//GEN-LAST:event_buttonaddActionPerformed
+
+    private void addtobill(int Quantity) {
+        try {
+
+            DBConfig mycon = new DBConfig();
+            Connection con = mycon.connectDB();
+
+            // check if the product with the given ID already exists
+            String checkSql = "SELECT COUNT(*) FROM cart WHERE product_id = ?";
+            PreparedStatement checkStatement = con.prepareStatement(checkSql);
+            checkStatement.setInt(1, productID);
+            ResultSet resultSet = checkStatement.executeQuery();
+
+            if (resultSet.next() && resultSet.getInt(1) > 0) {
+                // product exists, update the record
+                String updateSql = "UPDATE cart  SET qty  = ? WHERE product_id = ?";
+                PreparedStatement updateStatement = con.prepareStatement(updateSql);
+                updateStatement.setInt(1, Quantity);
+                updateStatement.setInt(2, productID);
+                updateStatement.executeUpdate();
+
+                showSuccessMessage("Product Quantity updated successfully.");
+            } else {
+                // Product does not exist, insert a new record
+                String insertSql = "INSERT INTO cart (product_id, product_name, qty, price) VALUES (?, ?, ?, ?)";
+                PreparedStatement insertStatement = con.prepareStatement(insertSql);
+                insertStatement.setInt(1, productID);
+                insertStatement.setString(2, productName);
+                insertStatement.setInt(3, Quantity);
+                insertStatement.setDouble(4, productPrice);
+                insertStatement.executeUpdate();
+
+                showSuccessMessage("Product inserted successfully.");
+            }
+
+        } catch (SQLException e) {
+            if (e.getSQLState().equals("23000")) { // SQLState for integrity constraint violation
+                showErrorMessage("Error: Product Id Already in Use");
+            } else {
+                showErrorMessage(e.toString());
+            }
+        }
+    }
+
+    public void showErrorMessage(String message) {
+        JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void showSuccessMessage(String message) {
+        JOptionPane.showMessageDialog(this, message, "Success", JOptionPane.INFORMATION_MESSAGE);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Custom.Components.Swing.Button button1;
+    private Custom.Components.Swing.Button buttonadd;
     private javax.swing.JLabel labelCategory;
     private javax.swing.JLabel labelName;
     private javax.swing.JLabel labelPrice;
     private Custom.Components.Swing.PanelShadow panelShadow1;
     private Custom.Components.Swing.PictureBox picture;
-    private Custom.Components.Swing.TextField textField1;
+    private Custom.Components.Swing.TextField textqty;
     // End of variables declaration//GEN-END:variables
 }

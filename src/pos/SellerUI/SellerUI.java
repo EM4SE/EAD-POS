@@ -20,13 +20,13 @@ import pos.database.DBConfig;
 public class SellerUI extends javax.swing.JFrame {
 
     String category;
-
+    
     public SellerUI() {
         initComponents();
         TableCustom.apply(sellerscollpane, TableCustom.TableType.MULTI_LINE);
         loadCategories();
         loadForm();
-        
+        loadBill();
     }
 
     private void loadForm() {
@@ -422,11 +422,11 @@ public class SellerUI extends javax.swing.JFrame {
         loadForm();
     }//GEN-LAST:event_FilterButtonActionPerformed
 
-    private void showErrorMessage(String message) {
+    public void showErrorMessage(String message) {
         JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
-    private void showSuccessMessage(String message) {
+    public void showSuccessMessage(String message) {
         JOptionPane.showMessageDialog(this, message, "Success", JOptionPane.INFORMATION_MESSAGE);
     }
 

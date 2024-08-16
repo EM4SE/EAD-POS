@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import pos.database.DBConfig;
@@ -20,7 +21,8 @@ import pos.database.DBConfig;
 public class SellerUI extends javax.swing.JFrame {
 
     String category;
-    
+    Products products1;
+
     public SellerUI() {
         initComponents();
         TableCustom.apply(sellerscollpane, TableCustom.TableType.MULTI_LINE);
@@ -55,7 +57,7 @@ public class SellerUI extends javax.swing.JFrame {
                     String ImagePath = rs.getString("product_imagepath");
 
                     //call parametered constructor to assign values
-                    Products products1 = new pos.SellerUI.Products(ProductID, ProductName, ProductCategory, ProductPrice, ImagePath);
+                    products1 = new pos.SellerUI.Products(ProductID, ProductName, ProductCategory, ProductPrice, ImagePath);
                     ProductsLoad.add(products1);
 
                 }
@@ -81,7 +83,7 @@ public class SellerUI extends javax.swing.JFrame {
                     double ProductPrice = rs.getDouble("product_price");
                     String ImagePath = rs.getString("product_imagepath");
                     //call parametered constructor to assign values
-                    Products products1 = new pos.SellerUI.Products(ProductID, ProductName, ProductCategory, ProductPrice, ImagePath);
+                    products1 = new pos.SellerUI.Products(ProductID, ProductName, ProductCategory, ProductPrice, ImagePath);
                     ProductsLoad.add(products1);
 
                 }
@@ -131,14 +133,14 @@ public class SellerUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        total = new javax.swing.JLabel();
-        textField1 = new Custom.Components.Swing.TextField();
-        total1 = new javax.swing.JLabel();
+        labelTotal = new javax.swing.JLabel();
+        textCash = new Custom.Components.Swing.TextField();
+        labelBalance = new javax.swing.JLabel();
         button1 = new Custom.Components.Swing.Button();
         sellerscollpane = new javax.swing.JScrollPane();
         tableBill = new javax.swing.JTable();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        BillScrollpane = new Custom.Components.ScollBar.ScrollPaneWin11();
+        billtext = new javax.swing.JTextArea();
         jLabel5 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout ProductsLayout = new javax.swing.GroupLayout(Products);
@@ -160,6 +162,11 @@ public class SellerUI extends javax.swing.JFrame {
         panelShadow2.setBackground(new java.awt.Color(255, 255, 255));
 
         ProductsLoad.setBackground(new java.awt.Color(242, 246, 253));
+        ProductsLoad.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                ProductsLoadMouseMoved(evt);
+            }
+        });
         ProductsLoad.setLayout(new java.awt.GridLayout(0, 3, 7, 7));
         jScrollPane1.setViewportView(ProductsLoad);
 
@@ -213,13 +220,18 @@ public class SellerUI extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
         jLabel3.setText("Balance :");
 
-        total.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
-        total.setText("00");
+        labelTotal.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
+        labelTotal.setText("00");
 
-        textField1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        textCash.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        textCash.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                textCashKeyReleased(evt);
+            }
+        });
 
-        total1.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
-        total1.setText("00");
+        labelBalance.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
+        labelBalance.setText("00");
 
         javax.swing.GroupLayout panelShadow4Layout = new javax.swing.GroupLayout(panelShadow4);
         panelShadow4.setLayout(panelShadow4Layout);
@@ -231,17 +243,17 @@ public class SellerUI extends javax.swing.JFrame {
                     .addGroup(panelShadow4Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(textCash, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panelShadow4Layout.createSequentialGroup()
                         .addGroup(panelShadow4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelShadow4Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(total, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(labelTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panelShadow4Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(total1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(labelBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -251,15 +263,15 @@ public class SellerUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelShadow4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(total))
+                    .addComponent(labelTotal))
                 .addGap(3, 3, 3)
                 .addGroup(panelShadow4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
-                    .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textCash, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0)
                 .addGroup(panelShadow4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(total1))
+                    .addComponent(labelBalance))
                 .addContainerGap())
         );
 
@@ -283,6 +295,11 @@ public class SellerUI extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tableBill.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                tableBillMouseExited(evt);
+            }
+        });
         sellerscollpane.setViewportView(tableBill);
         if (tableBill.getColumnModel().getColumnCount() > 0) {
             tableBill.getColumnModel().getColumn(0).setPreferredWidth(100);
@@ -290,9 +307,9 @@ public class SellerUI extends javax.swing.JFrame {
             tableBill.getColumnModel().getColumn(2).setPreferredWidth(50);
         }
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane3.setViewportView(jTextArea1);
+        billtext.setColumns(20);
+        billtext.setRows(5);
+        BillScrollpane.setViewportView(billtext);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -307,17 +324,18 @@ public class SellerUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelShadow2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelShadow2Layout.createSequentialGroup()
+                        .addComponent(sellerscollpane, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BillScrollpane, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelShadow2Layout.createSequentialGroup()
                         .addGroup(panelShadow2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(panelShadow4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panelShadow2Layout.createSequentialGroup()
                                 .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(panelShadow2Layout.createSequentialGroup()
-                        .addComponent(sellerscollpane, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelShadow2Layout.createSequentialGroup()
                 .addGap(391, 391, 391)
                 .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 719, Short.MAX_VALUE)
@@ -335,7 +353,7 @@ public class SellerUI extends javax.swing.JFrame {
                     .addGroup(panelShadow2Layout.createSequentialGroup()
                         .addGap(0, 8, Short.MAX_VALUE)
                         .addGroup(panelShadow2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
+                            .addComponent(BillScrollpane, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(sellerscollpane, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelShadow2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -384,16 +402,17 @@ public class SellerUI extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    public void loadBill() {
+    private void loadBill() {
 
         try {
+            Bill();
 
             DBConfig mycon = new DBConfig();
             Connection con = mycon.connectDB();
             String sqlcaltotprice = "UPDATE cart SET totalprice = qty * price ";
             PreparedStatement statementTotal = con.prepareStatement(sqlcaltotprice);
-           statementTotal.executeUpdate();
-            
+            statementTotal.executeUpdate();
+
             String sqlGeBills = "SELECT * FROM cart";
             PreparedStatement statementBills = con.prepareStatement(sqlGeBills);
             ResultSet rs = statementBills.executeQuery();
@@ -413,6 +432,102 @@ public class SellerUI extends javax.swing.JFrame {
         }
     }
 
+    public void cal() {
+        //cal total table values
+
+        int numOfRow = tableBill.getRowCount();
+        double tot = 0.0;
+
+        for (int i = 0; i < numOfRow; i++) {
+
+            double value = Double.valueOf(tableBill.getValueAt(i, 2).toString());
+
+            tot += value;
+
+        }
+
+        DecimalFormat df = new DecimalFormat("00.00");
+        labelTotal.setText(df.format(tot));
+
+    }
+
+    public void pay() {
+        // pat btn action
+
+        String totalText = labelTotal.getText();
+        String payText = textCash.getText();
+
+        // Check if the total or pay fields are empty or null
+        if (payText == null || payText.isEmpty()) {
+            showErrorMessage("Please enter valid values Pay");
+            return;
+        }
+
+        try {
+            double tot = Double.valueOf(totalText);
+            double paid = Double.valueOf(payText);
+            double balance = paid - tot;
+
+            DecimalFormat df = new DecimalFormat("00.00");
+
+            labelBalance.setText(String.valueOf(df.format(balance)));
+
+        } catch (NumberFormatException e) {
+            // Handle invalid number format
+            JOptionPane.showMessageDialog(this, "Please enter valid values Pay", "Input Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+       public void Bill() {
+        // bill print
+        
+        try {
+            
+           billtext.setText("                         EMASE Resturant \n");
+            billtext.setText(billtext.getText() + "                         268/ Matale Road, \n");
+            billtext.setText(billtext.getText() + "                         Kandy, Sri lanka, \n");
+            billtext.setText(billtext.getText() + "                         +9475 6441389, \n");
+            billtext.setText(billtext.getText() + "-------------------------------------------------------------------------\n");
+            billtext.setText(billtext.getText() + "  Item \t\tQty \tPrice" +"\n");
+            billtext.setText(billtext.getText() + "-------------------------------------------------------------------------\n");
+            
+            DefaultTableModel df = (DefaultTableModel) tableBill.getModel();
+            
+            // get table Product details
+            
+            for (int i = 0; i < tableBill.getRowCount(); i++) {
+                
+                String Name = df.getValueAt(i, 0).toString();
+                String Qty = df.getValueAt(i, 1).toString();
+                String Price = df.getValueAt(i, 2).toString();
+                
+                billtext.setText(billtext.getText() +"  "+ Name+"\t\t"+Qty +"\t"+Price + "\n");
+            }
+            
+            billtext.setText(billtext.getText() + "-------------------------------------------------------------------------\n");
+            billtext.setText(billtext.getText() + "Sub Total : " + labelTotal.getText() +"\n");
+            billtext.setText(billtext.getText() + "Cash      : " + textCash.getText() +"\n");
+            billtext.setText(billtext.getText() + "Balance   : " + labelBalance.getText() +"\n");
+            billtext.setText(billtext.getText() + "-------------------------------------------------------------------------\n");
+            billtext.setText(billtext.getText() + "                     Thanks For Your Business...!"+"\n");
+            billtext.setText(billtext.getText() + "-------------------------------------------------------------------------\n");
+            billtext.setText(billtext.getText() + "                     Software by Anjana Ekanayaka"+"\n");
+            
+           
+       
+            
+        } catch (Exception e) {
+            
+            JOptionPane.showMessageDialog(this, e, "Error", JOptionPane.ERROR_MESSAGE);
+            
+            
+        }
+        
+        
+        
+        
+    }
+
     private void FilterButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FilterButtonMouseClicked
         loadForm();
     }//GEN-LAST:event_FilterButtonMouseClicked
@@ -421,6 +536,24 @@ public class SellerUI extends javax.swing.JFrame {
 
         loadForm();
     }//GEN-LAST:event_FilterButtonActionPerformed
+
+    private void tableBillMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableBillMouseExited
+        loadBill();
+    }//GEN-LAST:event_tableBillMouseExited
+
+    private void ProductsLoadMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProductsLoadMouseMoved
+        try {
+
+            loadBill();
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_ProductsLoadMouseMoved
+
+    private void textCashKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textCashKeyReleased
+        pay();
+    }//GEN-LAST:event_textCashKeyReleased
 
     public void showErrorMessage(String message) {
         JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
@@ -466,10 +599,12 @@ public class SellerUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane BillScrollpane;
     private Custom.Components.Swing.Button FilterButton;
     private javax.swing.JPanel Products;
     private javax.swing.JPanel ProductsLoad;
     private Custom.Components.Swing.Background background1;
+    private javax.swing.JTextArea billtext;
     private Custom.Components.Swing.Button button1;
     private Custom.Components.Swing.Button button2;
     private Custom.Components.comboboxes.CustomComboBox comboboxCategory;
@@ -478,16 +613,14 @@ public class SellerUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel labelBalance;
+    private javax.swing.JLabel labelTotal;
     private Custom.Components.Swing.PanelShadow panelShadow2;
     private Custom.Components.Swing.PanelShadow panelShadow3;
     private Custom.Components.Swing.PanelShadow panelShadow4;
     private javax.swing.JScrollPane sellerscollpane;
     private javax.swing.JTable tableBill;
-    private Custom.Components.Swing.TextField textField1;
-    private javax.swing.JLabel total;
-    private javax.swing.JLabel total1;
+    private Custom.Components.Swing.TextField textCash;
     private pos.winButtons.Win_Button win_Button1;
     // End of variables declaration//GEN-END:variables
 }

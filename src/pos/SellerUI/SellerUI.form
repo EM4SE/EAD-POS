@@ -116,9 +116,9 @@
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="-2" pref="391" max="-2" attributes="0"/>
-                      <Component id="jLabel5" pref="719" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="268" max="-2" attributes="0"/>
+                      <EmptySpace pref="422" max="32767" attributes="0"/>
+                      <Component id="labelName" min="-2" pref="600" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="356" max="-2" attributes="0"/>
                       <Component id="win_Button1" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -127,23 +127,23 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="win_Button1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel5" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="win_Button1" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelName" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="0" pref="8" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="BillScrollpane" alignment="0" min="-2" pref="467" max="-2" attributes="0"/>
-                                  <Component id="sellerscollpane" alignment="0" pref="467" max="32767" attributes="0"/>
+                                  <Component id="BillScrollpane" pref="467" max="32767" attributes="0"/>
+                                  <Component id="sellerscollpane" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="button1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="buttonDelete" alignment="0" min="-2" pref="56" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="button1" max="32767" attributes="0"/>
+                                  <Component id="buttonDelete" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="panelShadow4" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="panelShadow3" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -176,7 +176,7 @@
                               <Component id="comboboxCategory" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                               <Component id="FilterButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="9" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="jScrollPane1" min="-2" pref="658" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -365,6 +365,9 @@
                   <Font name="Segoe UI" size="36" style="1"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button1ActionPerformed"/>
+              </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="sellerscollpane">
               <AuxValues>
@@ -430,7 +433,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JLabel" name="jLabel5">
+            <Component class="javax.swing.JLabel" name="labelName">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="18" style="1"/>

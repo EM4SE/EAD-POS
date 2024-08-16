@@ -28,7 +28,7 @@ public class Products extends javax.swing.JPanel {
 
     public Products() {
         initComponents();
-        sellui = new SellerUI();
+        sellui = new SellerUI("AnjanaEkanayaka");
         sellui.setVisible(true);
     }
 
@@ -43,7 +43,7 @@ public class Products extends javax.swing.JPanel {
         labelCategory.setText(ProductCategory);
 
         ImageIcon imageIcon = new ImageIcon(ImagePath);
-        picture.setImage(imageIcon);
+        picture.setIcon(imageIcon);
         picture.repaint();
     }
 
@@ -54,10 +54,10 @@ public class Products extends javax.swing.JPanel {
         panelShadow1 = new Custom.Components.Swing.PanelShadow();
         labelName = new javax.swing.JLabel();
         labelCategory = new javax.swing.JLabel();
-        picture = new Custom.Components.Swing.PictureBox();
         textqty = new Custom.Components.Swing.TextField();
         buttonadd = new Custom.Components.Swing.Button();
         labelPrice = new javax.swing.JLabel();
+        picture = new Custom.Components.Swing.ImageAvatar();
 
         setBackground(new java.awt.Color(242, 246, 253));
         setMaximumSize(new java.awt.Dimension(190, 319));
@@ -98,7 +98,7 @@ public class Products extends javax.swing.JPanel {
             .addComponent(textqty, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(labelPrice, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(buttonadd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelShadow1Layout.createSequentialGroup()
+            .addGroup(panelShadow1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelName, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
                 .addContainerGap())
@@ -116,7 +116,7 @@ public class Products extends javax.swing.JPanel {
                 .addComponent(labelCategory)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(textqty, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(buttonadd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
@@ -217,7 +217,7 @@ public class Products extends javax.swing.JPanel {
     private javax.swing.JLabel labelName;
     private javax.swing.JLabel labelPrice;
     private Custom.Components.Swing.PanelShadow panelShadow1;
-    private Custom.Components.Swing.PictureBox picture;
+    private Custom.Components.Swing.ImageAvatar picture;
     private Custom.Components.Swing.TextField textqty;
     // End of variables declaration//GEN-END:variables
 

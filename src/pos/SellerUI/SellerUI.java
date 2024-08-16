@@ -24,8 +24,9 @@ public class SellerUI extends javax.swing.JFrame {
     String category;
     Products products1;
 
-    public SellerUI() {
+    public SellerUI(String Sellername) {
         initComponents();
+        labelName.setText(Sellername);
         TableCustom.apply(sellerscollpane, TableCustom.TableType.MULTI_LINE);
         loadCategories();
         loadSelectedRowData();
@@ -143,7 +144,7 @@ public class SellerUI extends javax.swing.JFrame {
         tableBill = new javax.swing.JTable();
         BillScrollpane = new Custom.Components.ScollBar.ScrollPaneWin11();
         billtext = new javax.swing.JTextArea();
-        jLabel5 = new javax.swing.JLabel();
+        labelName = new javax.swing.JLabel();
 
         javax.swing.GroupLayout ProductsLayout = new javax.swing.GroupLayout(Products);
         Products.setLayout(ProductsLayout);
@@ -204,7 +205,7 @@ public class SellerUI extends javax.swing.JFrame {
                 .addGroup(panelShadow3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboboxCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(FilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -285,6 +286,11 @@ public class SellerUI extends javax.swing.JFrame {
         button1.setBackground(new java.awt.Color(0, 204, 102));
         button1.setText("Pay & Print");
         button1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button1ActionPerformed(evt);
+            }
+        });
 
         tableBill.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -314,9 +320,9 @@ public class SellerUI extends javax.swing.JFrame {
         billtext.setRows(5);
         BillScrollpane.setViewportView(billtext);
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Seller Name");
+        labelName.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        labelName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelName.setText("Seller Name");
 
         javax.swing.GroupLayout panelShadow2Layout = new javax.swing.GroupLayout(panelShadow2);
         panelShadow2.setLayout(panelShadow2Layout);
@@ -337,9 +343,9 @@ public class SellerUI extends javax.swing.JFrame {
                         .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelShadow2Layout.createSequentialGroup()
-                .addGap(391, 391, 391)
-                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 719, Short.MAX_VALUE)
-                .addGap(268, 268, 268)
+                .addContainerGap(422, Short.MAX_VALUE)
+                .addComponent(labelName, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(356, 356, 356)
                 .addComponent(win_Button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         panelShadow2Layout.setVerticalGroup(
@@ -347,19 +353,19 @@ public class SellerUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelShadow2Layout.createSequentialGroup()
                 .addGroup(panelShadow2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(win_Button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(labelName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelShadow2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelShadow2Layout.createSequentialGroup()
-                        .addGap(0, 8, Short.MAX_VALUE)
+                        .addGap(8, 8, 8)
                         .addGroup(panelShadow2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(BillScrollpane, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sellerscollpane, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE))
+                            .addComponent(BillScrollpane, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
+                            .addComponent(sellerscollpane))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelShadow2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelShadow2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(button1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(buttonDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(panelShadow4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(panelShadow3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
@@ -586,6 +592,10 @@ public class SellerUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_button1ActionPerformed
+
     public void showErrorMessage(String message) {
         JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
     }
@@ -642,9 +652,9 @@ public class SellerUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelBalance;
+    private javax.swing.JLabel labelName;
     private javax.swing.JLabel labelTotal;
     private Custom.Components.Swing.PanelShadow panelShadow2;
     private Custom.Components.Swing.PanelShadow panelShadow3;

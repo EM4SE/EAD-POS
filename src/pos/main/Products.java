@@ -648,7 +648,7 @@ public class Products extends javax.swing.JPanel {
     }
 
     private boolean isValidName(String name) {
-        Pattern pattern = Pattern.compile("^[a-zA-Z]+$");
+        Pattern pattern = Pattern.compile("^[ a-zA-Z]+$");
         Matcher matcher = pattern.matcher(name);
         return matcher.matches();
     }

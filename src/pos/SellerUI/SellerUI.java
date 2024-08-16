@@ -39,7 +39,7 @@ public class SellerUI extends javax.swing.JFrame {
         ProductsLoad.removeAll();
         ProductsLoad.removeAll();
         ProductsLoad.repaint();
-        category = comboboxCategory.getSelectedItem().toString();
+        category = comboboxCategory.getSelectedItem().toString().trim();
 
         if ("All".equals(category) || "".equals(category)) {
             try {
@@ -129,8 +129,8 @@ public class SellerUI extends javax.swing.JFrame {
         panelShadow3 = new Custom.Components.Swing.PanelShadow();
         jScrollPane1 = new Custom.Components.ScollBar.ScrollPaneWin11();
         ProductsLoad = new javax.swing.JPanel();
-        comboboxCategory = new Custom.Components.comboboxes.CustomComboBox();
         FilterButton = new Custom.Components.Swing.Button();
+        comboboxCategory = new Custom.Components.comboboxes.ComboBoxSuggestion();
         buttonDelete = new Custom.Components.Swing.Button();
         panelShadow4 = new Custom.Components.Swing.PanelShadow();
         jLabel1 = new javax.swing.JLabel();
@@ -173,8 +173,6 @@ public class SellerUI extends javax.swing.JFrame {
         ProductsLoad.setLayout(new java.awt.GridLayout(0, 3, 7, 7));
         jScrollPane1.setViewportView(ProductsLoad);
 
-        comboboxCategory.setShadowColor(new java.awt.Color(23, 102, 255));
-
         FilterButton.setBackground(new java.awt.Color(255, 153, 0));
         FilterButton.setText("Filter");
         FilterButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -188,23 +186,30 @@ public class SellerUI extends javax.swing.JFrame {
             }
         });
 
+        comboboxCategory.setEditable(false);
+        comboboxCategory.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboboxCategoryItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelShadow3Layout = new javax.swing.GroupLayout(panelShadow3);
         panelShadow3.setLayout(panelShadow3Layout);
         panelShadow3Layout.setHorizontalGroup(
             panelShadow3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE)
             .addGroup(panelShadow3Layout.createSequentialGroup()
-                .addComponent(comboboxCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(comboboxCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(FilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(214, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE)
         );
         panelShadow3Layout.setVerticalGroup(
             panelShadow3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelShadow3Layout.createSequentialGroup()
                 .addGroup(panelShadow3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboboxCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(FilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(FilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboboxCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -310,7 +315,9 @@ public class SellerUI extends javax.swing.JFrame {
         });
         sellerscollpane.setViewportView(tableBill);
         if (tableBill.getColumnModel().getColumnCount() > 0) {
+            tableBill.getColumnModel().getColumn(0).setMinWidth(0);
             tableBill.getColumnModel().getColumn(0).setPreferredWidth(0);
+            tableBill.getColumnModel().getColumn(0).setMaxWidth(0);
             tableBill.getColumnModel().getColumn(1).setPreferredWidth(100);
             tableBill.getColumnModel().getColumn(2).setPreferredWidth(20);
             tableBill.getColumnModel().getColumn(3).setPreferredWidth(50);
@@ -343,7 +350,7 @@ public class SellerUI extends javax.swing.JFrame {
                         .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelShadow2Layout.createSequentialGroup()
-                .addContainerGap(422, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(labelName, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(356, 356, 356)
                 .addComponent(win_Button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -512,9 +519,9 @@ public class SellerUI extends javax.swing.JFrame {
             // get table Product details
             for (int i = 0; i < tableBill.getRowCount(); i++) {
 
-                String Name = df.getValueAt(i, 1).toString();
-                String Qty = df.getValueAt(i, 2).toString();
-                String Price = df.getValueAt(i, 3).toString();
+                String Name = df.getValueAt(i, 1).toString().trim();
+                String Qty = df.getValueAt(i, 2).toString().trim();
+                String Price = df.getValueAt(i, 3).toString().trim();
 
                 billtext.setText(billtext.getText() + "  " + Name + "\t\t" + Qty + "\t" + Price + "\n");
             }
@@ -596,6 +603,10 @@ public class SellerUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_button1ActionPerformed
 
+    private void comboboxCategoryItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboboxCategoryItemStateChanged
+       loadForm();
+    }//GEN-LAST:event_comboboxCategoryItemStateChanged
+
     public void showErrorMessage(String message) {
         JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
     }
@@ -648,7 +659,7 @@ public class SellerUI extends javax.swing.JFrame {
     private javax.swing.JTextArea billtext;
     private Custom.Components.Swing.Button button1;
     private Custom.Components.Swing.Button buttonDelete;
-    private Custom.Components.comboboxes.CustomComboBox comboboxCategory;
+    private Custom.Components.comboboxes.ComboBoxSuggestion comboboxCategory;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

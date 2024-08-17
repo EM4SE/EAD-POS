@@ -34,10 +34,10 @@ public class SellerUI extends javax.swing.JFrame {
         this.SellerName = Sellername;
         labelName.setText(Sellername);
         TableCustom.apply(sellerscollpane, TableCustom.TableType.MULTI_LINE);
+        TableCustom.apply(recieptsscrollpane, TableCustom.TableType.MULTI_LINE);
         loadCategories();
-        loadSelectedRowData();
         loadForm("All");
-        loadBill();
+        loadreciepts();
     }
 
     private void loadForm(String Cat) {
@@ -149,6 +149,8 @@ public class SellerUI extends javax.swing.JFrame {
         BillScrollpane = new Custom.Components.ScollBar.ScrollPaneWin11();
         billtext = new javax.swing.JTextArea();
         labelName = new javax.swing.JLabel();
+        recieptsscrollpane = new javax.swing.JScrollPane();
+        tableReciepts = new javax.swing.JTable();
 
         javax.swing.GroupLayout ProductsLayout = new javax.swing.GroupLayout(Products);
         Products.setLayout(ProductsLayout);
@@ -190,8 +192,8 @@ public class SellerUI extends javax.swing.JFrame {
             panelShadow3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelShadow3Layout.createSequentialGroup()
                 .addComponent(comboboxCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE)
+                .addContainerGap(373, Short.MAX_VALUE))
+            .addComponent(jScrollPane1)
         );
         panelShadow3Layout.setVerticalGroup(
             panelShadow3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -317,23 +319,59 @@ public class SellerUI extends javax.swing.JFrame {
         labelName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelName.setText("Seller Name");
 
+        tableReciepts.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Seller ID", "Amount", "Date", "Text"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        recieptsscrollpane.setViewportView(tableReciepts);
+        if (tableReciepts.getColumnModel().getColumnCount() > 0) {
+            tableReciepts.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tableReciepts.getColumnModel().getColumn(1).setPreferredWidth(20);
+            tableReciepts.getColumnModel().getColumn(2).setPreferredWidth(100);
+            tableReciepts.getColumnModel().getColumn(3).setMinWidth(0);
+            tableReciepts.getColumnModel().getColumn(3).setPreferredWidth(0);
+            tableReciepts.getColumnModel().getColumn(3).setMaxWidth(0);
+        }
+
         javax.swing.GroupLayout panelShadow2Layout = new javax.swing.GroupLayout(panelShadow2);
         panelShadow2.setLayout(panelShadow2Layout);
         panelShadow2Layout.setHorizontalGroup(
             panelShadow2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelShadow2Layout.createSequentialGroup()
                 .addComponent(panelShadow3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelShadow2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelShadow2Layout.createSequentialGroup()
+                        .addGroup(panelShadow2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelShadow2Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(buttonPay, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelShadow2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panelShadow4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(7, 7, 7)
+                        .addComponent(recieptsscrollpane, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE))
+                    .addGroup(panelShadow2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(sellerscollpane, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BillScrollpane, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(panelShadow4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelShadow2Layout.createSequentialGroup()
-                        .addComponent(buttonPay, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(BillScrollpane, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelShadow2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -352,14 +390,17 @@ public class SellerUI extends javax.swing.JFrame {
                     .addGroup(panelShadow2Layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addGroup(panelShadow2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(BillScrollpane, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
-                            .addComponent(sellerscollpane))
+                            .addComponent(BillScrollpane)
+                            .addComponent(sellerscollpane, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelShadow2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(buttonPay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(buttonDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(panelShadow4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(panelShadow2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelShadow2Layout.createSequentialGroup()
+                                .addGroup(panelShadow2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(buttonPay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(buttonDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(panelShadow4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(recieptsscrollpane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                     .addComponent(panelShadow3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -368,21 +409,21 @@ public class SellerUI extends javax.swing.JFrame {
         background1.setLayout(background1Layout);
         background1Layout.setHorizontalGroup(
             background1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1470, Short.MAX_VALUE)
+            .addGap(0, 1471, Short.MAX_VALUE)
             .addGroup(background1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(background1Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(panelShadow2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
+                    .addComponent(panelShadow2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         background1Layout.setVerticalGroup(
             background1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 823, Short.MAX_VALUE)
+            .addGap(0, 819, Short.MAX_VALUE)
             .addGroup(background1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, background1Layout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(background1Layout.createSequentialGroup()
+                    .addContainerGap()
                     .addComponent(panelShadow2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -395,12 +436,42 @@ public class SellerUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(background1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(background1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void loadreciepts() {
+        tableReciepts.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                selectreciepts();
+            }
+        });
+        try {
+            DBConfig mycon = new DBConfig();
+            Connection con = mycon.connectDB();
+
+            String sqlGeBills = "SELECT * FROM bills";
+            PreparedStatement statementBills = con.prepareStatement(sqlGeBills);
+            ResultSet rs = statementBills.executeQuery();
+            DefaultTableModel model = (DefaultTableModel) tableReciepts.getModel();
+            model.setRowCount(0);
+
+            while (rs.next()) {
+                int ID = rs.getInt("seller_id");
+                String date = rs.getString("datetime");
+                String Bill = rs.getString("receipt");
+                double TotalPrice = rs.getDouble("totalprice");
+
+                model.addRow(new Object[]{ID, TotalPrice, date, Bill});
+            }
+        } catch (SQLException e) {
+            showErrorMessage(e.toString());
+        }
+    }
 
     private void loadBill() {
 
@@ -545,6 +616,18 @@ public class SellerUI extends javax.swing.JFrame {
 
     }
 
+    private void selectreciepts() {
+        int selectedRow = tableReciepts.getSelectedRow();
+        if (selectedRow == -1) {
+            return;
+        }
+
+        String BillText = tableReciepts.getValueAt(selectedRow, 3).toString();
+
+        billtext.setText(BillText);
+
+    }
+
     private void insertbills() {
         try {
 
@@ -644,10 +727,10 @@ public class SellerUI extends javax.swing.JFrame {
                 return;
             }
             pay();
-
             invoicesaver();
             billtext.print();
             insertbills();
+            loadreciepts();
 
         } catch (PrinterException e) {
             System.out.println(e);
@@ -728,8 +811,10 @@ public class SellerUI extends javax.swing.JFrame {
     private Custom.Components.Swing.PanelShadow panelShadow2;
     private Custom.Components.Swing.PanelShadow panelShadow3;
     private Custom.Components.Swing.PanelShadow panelShadow4;
+    private javax.swing.JScrollPane recieptsscrollpane;
     private javax.swing.JScrollPane sellerscollpane;
     private javax.swing.JTable tableBill;
+    private javax.swing.JTable tableReciepts;
     private Custom.Components.Swing.TextField textCash;
     private pos.winButtons.Win_Button win_Button1;
     // End of variables declaration//GEN-END:variables

@@ -565,9 +565,9 @@ public class SellerUI extends javax.swing.JFrame {
 
             loadBill();
             cal();
-            Bill();
             textCash.setText("");
             labelBalance.setText("00.00");
+            Bill();
 
             showSuccessMessage("Payamet Process successfully.");
         } catch (SQLException | NumberFormatException e) {

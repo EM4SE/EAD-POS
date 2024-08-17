@@ -1,4 +1,3 @@
-
 package pos.main;
 
 import java.awt.Color;
@@ -14,6 +13,7 @@ public class Main extends javax.swing.JFrame {
     private ButtonGroup buttonGroup;
 
     public Main() {
+
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
 
@@ -26,7 +26,6 @@ public class Main extends javax.swing.JFrame {
         buttonGroup.add(buttonBills);
         buttonGroup.add(buttonProducts);
 
-        
         //load home panel and hide other panels 
         Products.setVisible(false);
         Sellers.setVisible(false);
@@ -54,15 +53,15 @@ public class Main extends javax.swing.JFrame {
         buttonBills = new Custom.Components.Swing.ButtonMenu();
         buttonProducts = new Custom.Components.Swing.ButtonMenu();
         panelShadow3 = new Custom.Components.Swing.PanelShadow();
-        Products = new pos.main.Products();
-        Categories = new pos.main.Categories();
         Home = new Custom.Components.Swing.RoundPanel();
         pictureBox2 = new Custom.Components.Swing.PictureBox();
+        Products = new pos.main.Products();
+        Sellers = new pos.main.Sellers();
         Bills = new Custom.Components.Swing.RoundPanel();
         jLabel2 = new javax.swing.JLabel();
         roundPanel1 = new Custom.Components.Swing.RoundPanel();
         button1 = new Custom.Components.Swing.Button();
-        Sellers = new pos.main.Sellers();
+        Categories = new pos.main.Categories();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -158,8 +157,6 @@ public class Main extends javax.swing.JFrame {
 
         panelShadow3.setBackground(new java.awt.Color(255, 255, 255));
         panelShadow3.setLayout(new javax.swing.OverlayLayout(panelShadow3));
-        panelShadow3.add(Products);
-        panelShadow3.add(Categories);
 
         Home.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -183,6 +180,8 @@ public class Main extends javax.swing.JFrame {
         );
 
         panelShadow3.add(Home);
+        panelShadow3.add(Products);
+        panelShadow3.add(Sellers);
 
         Bills.setBackground(new java.awt.Color(242, 246, 253));
 
@@ -234,7 +233,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         panelShadow3.add(Bills);
-        panelShadow3.add(Sellers);
+        panelShadow3.add(Categories);
 
         javax.swing.GroupLayout background1Layout = new javax.swing.GroupLayout(background1);
         background1.setLayout(background1Layout);

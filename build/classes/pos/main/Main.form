@@ -268,6 +268,10 @@
                 </Container>
               </SubComponents>
             </Container>
+            <Component class="pos.main.Products" name="Products">
+            </Component>
+            <Component class="pos.main.Sellers" name="Sellers">
+            </Component>
             <Container class="Custom.Components.Swing.RoundPanel" name="Bills">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -345,6 +349,8 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="pos.main.Categories" name="Categories">
+            </Component>
           </SubComponents>
           <LayoutCode>
             <CodeStatement>

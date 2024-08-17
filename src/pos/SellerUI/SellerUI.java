@@ -1,10 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package pos.SellerUI;
 
 import Custom.Components.table.TableCustom;
+import java.awt.print.PrinterException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,18 +27,17 @@ public class SellerUI extends javax.swing.JFrame {
         TableCustom.apply(sellerscollpane, TableCustom.TableType.MULTI_LINE);
         loadCategories();
         loadSelectedRowData();
-        loadForm();
+        loadForm("All");
         loadBill();
     }
 
-    private void loadForm() {
+    private void loadForm(String Cat) {
 
         ProductsLoad.removeAll();
-        ProductsLoad.removeAll();
+        ProductsLoad.revalidate();
         ProductsLoad.repaint();
-        category = comboboxCategory.getSelectedItem().toString().trim();
 
-        if ("All".equals(category) || "".equals(category)) {
+        if ("All".equals(Cat) || "".equals(Cat)) {
             try {
 
                 DBConfig mycon = new DBConfig();
@@ -75,7 +71,7 @@ public class SellerUI extends javax.swing.JFrame {
 
                 String sqlGetProducts = "SELECT * FROM products WHERE product_category = ? ";
                 PreparedStatement statementGetProducts = con.prepareStatement(sqlGetProducts);
-                statementGetProducts.setString(1, category);
+                statementGetProducts.setString(1, Cat);
                 ResultSet rs = statementGetProducts.executeQuery();
 
                 while (rs.next()) {
@@ -127,10 +123,9 @@ public class SellerUI extends javax.swing.JFrame {
         panelShadow2 = new Custom.Components.Swing.PanelShadow();
         win_Button1 = new pos.winButtons.Win_Button();
         panelShadow3 = new Custom.Components.Swing.PanelShadow();
+        comboboxCategory = new Custom.Components.comboboxes.ComboBoxSuggestion();
         jScrollPane1 = new Custom.Components.ScollBar.ScrollPaneWin11();
         ProductsLoad = new javax.swing.JPanel();
-        FilterButton = new Custom.Components.Swing.Button();
-        comboboxCategory = new Custom.Components.comboboxes.ComboBoxSuggestion();
         buttonDelete = new Custom.Components.Swing.Button();
         panelShadow4 = new Custom.Components.Swing.PanelShadow();
         jLabel1 = new javax.swing.JLabel();
@@ -139,7 +134,7 @@ public class SellerUI extends javax.swing.JFrame {
         labelTotal = new javax.swing.JLabel();
         textCash = new Custom.Components.Swing.TextField();
         labelBalance = new javax.swing.JLabel();
-        button1 = new Custom.Components.Swing.Button();
+        buttonPay = new Custom.Components.Swing.Button();
         sellerscollpane = new javax.swing.JScrollPane();
         tableBill = new javax.swing.JTable();
         BillScrollpane = new Custom.Components.ScollBar.ScrollPaneWin11();
@@ -164,6 +159,13 @@ public class SellerUI extends javax.swing.JFrame {
 
         panelShadow2.setBackground(new java.awt.Color(255, 255, 255));
 
+        comboboxCategory.setEditable(false);
+        comboboxCategory.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboboxCategoryItemStateChanged(evt);
+            }
+        });
+
         ProductsLoad.setBackground(new java.awt.Color(242, 246, 253));
         ProductsLoad.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -173,43 +175,19 @@ public class SellerUI extends javax.swing.JFrame {
         ProductsLoad.setLayout(new java.awt.GridLayout(0, 3, 7, 7));
         jScrollPane1.setViewportView(ProductsLoad);
 
-        FilterButton.setBackground(new java.awt.Color(255, 153, 0));
-        FilterButton.setText("Filter");
-        FilterButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                FilterButtonMouseClicked(evt);
-            }
-        });
-        FilterButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FilterButtonActionPerformed(evt);
-            }
-        });
-
-        comboboxCategory.setEditable(false);
-        comboboxCategory.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                comboboxCategoryItemStateChanged(evt);
-            }
-        });
-
         javax.swing.GroupLayout panelShadow3Layout = new javax.swing.GroupLayout(panelShadow3);
         panelShadow3.setLayout(panelShadow3Layout);
         panelShadow3Layout.setHorizontalGroup(
             panelShadow3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelShadow3Layout.createSequentialGroup()
                 .addComponent(comboboxCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(FilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(214, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE)
         );
         panelShadow3Layout.setVerticalGroup(
             panelShadow3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelShadow3Layout.createSequentialGroup()
-                .addGroup(panelShadow3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(FilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comboboxCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(comboboxCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -288,12 +266,12 @@ public class SellerUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        button1.setBackground(new java.awt.Color(0, 204, 102));
-        button1.setText("Pay & Print");
-        button1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        button1.addActionListener(new java.awt.event.ActionListener() {
+        buttonPay.setBackground(new java.awt.Color(0, 204, 102));
+        buttonPay.setText("Pay & Print");
+        buttonPay.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        buttonPay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button1ActionPerformed(evt);
+                buttonPayActionPerformed(evt);
             }
         });
 
@@ -324,6 +302,7 @@ public class SellerUI extends javax.swing.JFrame {
         }
 
         billtext.setColumns(20);
+        billtext.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         billtext.setRows(5);
         BillScrollpane.setViewportView(billtext);
 
@@ -345,7 +324,7 @@ public class SellerUI extends javax.swing.JFrame {
                         .addComponent(BillScrollpane, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(panelShadow4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelShadow2Layout.createSequentialGroup()
-                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonPay, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -370,7 +349,7 @@ public class SellerUI extends javax.swing.JFrame {
                             .addComponent(sellerscollpane))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelShadow2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(button1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(buttonPay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(buttonDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(panelShadow4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -454,22 +433,22 @@ public class SellerUI extends javax.swing.JFrame {
     public void cal() {
         //cal total table values
 
-        try{
-        int numOfRow = tableBill.getRowCount();
-        double tot = 0.0;
+        try {
+            int numOfRow = tableBill.getRowCount();
+            double tot = 0.0;
 
-        for (int i = 0; i < numOfRow; i++) {
+            for (int i = 0; i < numOfRow; i++) {
 
-            double value = Double.parseDouble(tableBill.getValueAt(i, 3).toString());
+                double value = Double.parseDouble(tableBill.getValueAt(i, 3).toString());
 
-            tot += value;
+                tot += value;
 
-        }
+            }
 
-        DecimalFormat df = new DecimalFormat("00.00");
-        labelTotal.setText(df.format(tot));
-        }catch(NumberFormatException ex ){
-             showErrorMessage("Error: Failed to cal total amount.");
+            DecimalFormat df = new DecimalFormat("00.00");
+            labelTotal.setText(df.format(tot));
+        } catch (NumberFormatException ex) {
+            showErrorMessage("Error: Failed to cal total amount.");
         }
     }
 
@@ -496,8 +475,9 @@ public class SellerUI extends javax.swing.JFrame {
             Bill();
 
         } catch (NumberFormatException e) {
-            // Handle invalid number format
-            JOptionPane.showMessageDialog(this, "Please enter valid values Pay", "Input Error", JOptionPane.ERROR_MESSAGE);
+
+            showErrorMessage("Please enter valid values Pay");
+
         }
     }
 
@@ -506,10 +486,10 @@ public class SellerUI extends javax.swing.JFrame {
 
         try {
 
-            billtext.setText("                         EMASE Resturant \n");
-            billtext.setText(billtext.getText() + "                         268/ Matale Road, \n");
-            billtext.setText(billtext.getText() + "                         Kandy, Sri lanka, \n");
-            billtext.setText(billtext.getText() + "                         +9475 6441389, \n");
+            billtext.setText("                                    EMASE Resturant \n");
+            billtext.setText(billtext.getText() + "                                    268/ Matale Road, \n");
+            billtext.setText(billtext.getText() + "                                    Kandy, Sri lanka, \n");
+            billtext.setText(billtext.getText() + "                                    +9475 6441389, \n");
             billtext.setText(billtext.getText() + "-------------------------------------------------------------------------\n");
             billtext.setText(billtext.getText() + "  Item \t\tQty \tPrice" + "\n");
             billtext.setText(billtext.getText() + "-------------------------------------------------------------------------\n");
@@ -556,17 +536,8 @@ public class SellerUI extends javax.swing.JFrame {
 
     }
 
-    private void FilterButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FilterButtonMouseClicked
-        loadForm();
-    }//GEN-LAST:event_FilterButtonMouseClicked
-
-    private void FilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FilterButtonActionPerformed
-
-        loadForm();
-    }//GEN-LAST:event_FilterButtonActionPerformed
-
     private void ProductsLoadMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProductsLoadMouseMoved
-       try {
+        try {
 
             loadBill();
             Thread.sleep(100);
@@ -599,12 +570,23 @@ public class SellerUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
-    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_button1ActionPerformed
+    private void buttonPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPayActionPerformed
+        try {
+
+            pay();
+            billtext.print();
+
+        } catch (PrinterException e) {
+            System.out.println(e);
+        }
+
+    }//GEN-LAST:event_buttonPayActionPerformed
 
     private void comboboxCategoryItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboboxCategoryItemStateChanged
-       loadForm();
+
+        category = comboboxCategory.getSelectedItem().toString().trim();
+        //showSuccessMessage(category);
+        loadForm(category);
     }//GEN-LAST:event_comboboxCategoryItemStateChanged
 
     public void showErrorMessage(String message) {
@@ -652,13 +634,12 @@ public class SellerUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane BillScrollpane;
-    private Custom.Components.Swing.Button FilterButton;
     private javax.swing.JPanel Products;
     private javax.swing.JPanel ProductsLoad;
     private Custom.Components.Swing.Background background1;
     private javax.swing.JTextArea billtext;
-    private Custom.Components.Swing.Button button1;
     private Custom.Components.Swing.Button buttonDelete;
+    private Custom.Components.Swing.Button buttonPay;
     private Custom.Components.comboboxes.ComboBoxSuggestion comboboxCategory;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

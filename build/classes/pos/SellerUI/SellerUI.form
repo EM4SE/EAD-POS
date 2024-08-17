@@ -108,7 +108,7 @@
                           </Group>
                           <Component id="panelShadow4" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="button1" min="-2" pref="296" max="-2" attributes="0"/>
+                              <Component id="buttonPay" min="-2" pref="296" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="buttonDelete" min="-2" pref="97" max="-2" attributes="0"/>
                           </Group>
@@ -140,7 +140,7 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="button1" max="32767" attributes="0"/>
+                                  <Component id="buttonPay" max="32767" attributes="0"/>
                                   <Component id="buttonDelete" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
@@ -162,9 +162,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="comboboxCategory" min="-2" pref="274" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="FilterButton" min="-2" pref="147" max="-2" attributes="0"/>
-                          <EmptySpace pref="214" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                       <Component id="jScrollPane1" pref="647" max="32767" attributes="0"/>
                   </Group>
@@ -172,10 +170,7 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="FilterButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="comboboxCategory" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="comboboxCategory" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="jScrollPane1" min="-2" pref="658" max="-2" attributes="0"/>
                       </Group>
@@ -183,6 +178,14 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
+                <Component class="Custom.Components.comboboxes.ComboBoxSuggestion" name="comboboxCategory">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="comboboxCategoryItemStateChanged"/>
+                  </Events>
+                </Component>
                 <Container class="javax.swing.JScrollPane" name="jScrollPane1">
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new Custom.Components.ScollBar.ScrollPaneWin11()"/>
@@ -209,26 +212,6 @@
                     </Container>
                   </SubComponents>
                 </Container>
-                <Component class="Custom.Components.Swing.Button" name="FilterButton">
-                  <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="0" green="99" red="ff" type="rgb"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Filter"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="FilterButtonMouseClicked"/>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FilterButtonActionPerformed"/>
-                  </Events>
-                </Component>
-                <Component class="Custom.Components.comboboxes.ComboBoxSuggestion" name="comboboxCategory">
-                  <Properties>
-                    <Property name="editable" type="boolean" value="false"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="comboboxCategoryItemStateChanged"/>
-                  </Events>
-                </Component>
               </SubComponents>
             </Container>
             <Component class="Custom.Components.Swing.Button" name="buttonDelete">
@@ -356,7 +339,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="Custom.Components.Swing.Button" name="button1">
+            <Component class="Custom.Components.Swing.Button" name="buttonPay">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="cc" red="0" type="rgb"/>
@@ -367,7 +350,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonPayActionPerformed"/>
               </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="sellerscollpane">
@@ -429,6 +412,9 @@
                 <Component class="javax.swing.JTextArea" name="billtext">
                   <Properties>
                     <Property name="columns" type="int" value="20"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="10" style="0"/>
+                    </Property>
                     <Property name="rows" type="int" value="5"/>
                   </Properties>
                 </Component>

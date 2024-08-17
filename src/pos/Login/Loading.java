@@ -5,7 +5,8 @@
 package pos.Login;
 
 import java.awt.Color;
-
+import javax.swing.JOptionPane;
+import javax.swing.*;
 /**
  *
  * @author Anjana
@@ -19,6 +20,46 @@ public class Loading extends javax.swing.JFrame {
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
         pic.setBackground(new Color(0, 0, 0, 0));
+
+        loading();
+
+    }
+
+    private void loading() {
+        progress.setValue(0);
+
+        SwingWorker<Void, Integer> worker = new SwingWorker<Void, Integer>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                for (int i = 0; i <= 100; i++) {
+                    Thread.sleep(50);  // Simulate some work being done
+                    publish(i);
+                }
+                return null;
+            }
+
+            @Override
+            protected void process(java.util.List<Integer> chunks) {
+                int latestValue = chunks.get(chunks.size() - 1);
+                progress.setValue(latestValue);
+            }
+
+            @Override
+            protected void done() {
+              
+               showSuccessMessage("Done");
+            }
+        };
+
+        worker.execute();
+    }
+
+    public void showErrorMessage(String message) {
+        JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void showSuccessMessage(String message) {
+        JOptionPane.showMessageDialog(this, message, "Success", JOptionPane.INFORMATION_MESSAGE);
     }
 
     /**
@@ -31,38 +72,40 @@ public class Loading extends javax.swing.JFrame {
     private void initComponents() {
 
         pic = new Custom.Components.Swing.PictureBox();
-        jProgressBar1 = new javax.swing.JProgressBar();
+        progress = new Custom.Components.Swing.ProgressBarCustom();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        pic.setImage(new javax.swing.ImageIcon(getClass().getResource("/pos/icon/rose gold text~2.png"))); // NOI18N
+        pic.setImage(new javax.swing.ImageIcon(getClass().getResource("/pos/icon/res.png"))); // NOI18N
         pic.setOpaque(true);
 
-        jProgressBar1.setValue(50);
-        jProgressBar1.setBorder(null);
+        progress.setForeground(new java.awt.Color(0, 153, 255));
+        progress.setValue(40);
+        progress.setColorString(new java.awt.Color(0, 0, 0));
+        progress.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pic, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(191, Short.MAX_VALUE)
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(157, 157, 157))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(progress, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(77, 77, 77)
-                .addComponent(pic, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(pic, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(progress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -106,7 +149,7 @@ public class Loading extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JProgressBar jProgressBar1;
     private Custom.Components.Swing.PictureBox pic;
+    private Custom.Components.Swing.ProgressBarCustom progress;
     // End of variables declaration//GEN-END:variables
 }

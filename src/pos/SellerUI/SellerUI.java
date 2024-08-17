@@ -20,9 +20,13 @@ public class SellerUI extends javax.swing.JFrame {
     int ProductID;
     String category;
     Products products1;
+    String SellerName;
+    int SellerID;
 
-    public SellerUI(String Sellername) {
+    public SellerUI(int SellerID, String Sellername) {
         initComponents();
+        this.SellerID = SellerID;
+        this.SellerName = Sellername;
         labelName.setText(Sellername);
         TableCustom.apply(sellerscollpane, TableCustom.TableType.MULTI_LINE);
         loadCategories();
@@ -257,13 +261,12 @@ public class SellerUI extends javax.swing.JFrame {
                     .addComponent(labelTotal))
                 .addGap(3, 3, 3)
                 .addGroup(panelShadow4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(textCash, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0)
                 .addGroup(panelShadow4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(labelBalance))
-                .addContainerGap())
+                    .addComponent(labelBalance)))
         );
 
         buttonPay.setBackground(new java.awt.Color(0, 204, 102));
@@ -352,7 +355,8 @@ public class SellerUI extends javax.swing.JFrame {
                             .addComponent(buttonDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(panelShadow4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(panelShadow3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(panelShadow3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout background1Layout = new javax.swing.GroupLayout(background1);
@@ -534,6 +538,43 @@ public class SellerUI extends javax.swing.JFrame {
 
     }
 
+    private void insertbills() {
+        try {
+
+            double total = Double.parseDouble(labelTotal.getText().trim());
+            double cash = Double.parseDouble(textCash.getText().trim());
+            double balance = Double.parseDouble(labelBalance.getText().trim());
+            String receipt = billtext.getText();
+
+            DBConfig mycon = new DBConfig();
+            Connection con = mycon.connectDB();
+
+            String insertSql = "INSERT INTO bills (seller_id, seller_name, receipt, totalprice,cash,balance) VALUES (?, ?, ?, ?,? ,?)";
+            PreparedStatement insertStatement = con.prepareStatement(insertSql);
+            insertStatement.setInt(1, SellerID);
+            insertStatement.setString(2, SellerName);
+            insertStatement.setString(3, receipt);
+            insertStatement.setDouble(4, total);
+            insertStatement.setDouble(5, cash);
+            insertStatement.setDouble(6, balance);
+            insertStatement.executeUpdate();
+
+            String truncateSql = "TRUNCATE cart;";
+            PreparedStatement truncateStatement = con.prepareStatement(truncateSql);
+            truncateStatement.executeUpdate();
+
+            loadBill();
+            cal();
+            Bill();
+            textCash.setText("");
+            labelBalance.setText("00.00");
+
+            showSuccessMessage("Payamet Process successfully.");
+        } catch (SQLException | NumberFormatException e) {
+            showErrorMessage(e.toString());
+        }
+    }
+
     private void ProductsLoadMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProductsLoadMouseMoved
         try {
 
@@ -583,6 +624,7 @@ public class SellerUI extends javax.swing.JFrame {
             }
             pay();
             billtext.print();
+            insertbills();
 
         } catch (PrinterException e) {
             System.out.println(e);

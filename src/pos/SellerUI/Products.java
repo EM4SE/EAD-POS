@@ -28,7 +28,7 @@ public class Products extends javax.swing.JPanel {
 
     public Products() {
         initComponents();
-        sellui = new SellerUI("AnjanaEkanayaka");
+        sellui = new SellerUI(2966,"AnjanaEkanayaka");
         sellui.setVisible(true);
     }
 

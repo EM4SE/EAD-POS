@@ -302,7 +302,6 @@ public class SellerUI extends javax.swing.JFrame {
         }
 
         billtext.setColumns(20);
-        billtext.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         billtext.setRows(5);
         BillScrollpane.setViewportView(billtext);
 
@@ -477,7 +476,6 @@ public class SellerUI extends javax.swing.JFrame {
         } catch (NumberFormatException e) {
 
             showErrorMessage("Please enter valid values Pay");
-
         }
     }
 
@@ -517,7 +515,7 @@ public class SellerUI extends javax.swing.JFrame {
 
         } catch (Exception e) {
 
-            JOptionPane.showMessageDialog(this, e, "Error", JOptionPane.ERROR_MESSAGE);
+            showErrorMessage(e.toString());
 
         }
 
@@ -572,12 +570,26 @@ public class SellerUI extends javax.swing.JFrame {
 
     private void buttonPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPayActionPerformed
         try {
+            String payText = textCash.getText();
+            double balance = Double.parseDouble(labelBalance.getText().trim());
 
+            if (payText == null || payText.isEmpty()) {
+                showErrorMessage("Please enter valid values Pay");
+                return;
+            }
+            if (balance < 0) {
+                showErrorMessage("Paid Amount is not sufficient");
+                return;
+            }
             pay();
             billtext.print();
 
         } catch (PrinterException e) {
             System.out.println(e);
+        } catch (NumberFormatException e) {
+
+            showErrorMessage("Please enter valid values Pay");
+
         }
 
     }//GEN-LAST:event_buttonPayActionPerformed

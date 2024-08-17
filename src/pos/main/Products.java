@@ -185,7 +185,7 @@ public class Products extends javax.swing.JPanel {
         TableScollPaneProducts.setViewportView(ProductsTable);
         if (ProductsTable.getColumnModel().getColumnCount() > 0) {
             ProductsTable.getColumnModel().getColumn(0).setPreferredWidth(0);
-            ProductsTable.getColumnModel().getColumn(1).setPreferredWidth(100);
+            ProductsTable.getColumnModel().getColumn(1).setPreferredWidth(75);
             ProductsTable.getColumnModel().getColumn(2).setPreferredWidth(175);
             ProductsTable.getColumnModel().getColumn(3).setPreferredWidth(15);
             ProductsTable.getColumnModel().getColumn(4).setPreferredWidth(75);

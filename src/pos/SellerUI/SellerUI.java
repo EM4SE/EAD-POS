@@ -7,9 +7,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import pos.database.DBConfig;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  *
@@ -515,6 +520,8 @@ public class SellerUI extends javax.swing.JFrame {
             billtext.setText(billtext.getText() + "-------------------------------------------------------------------------\n");
             billtext.setText(billtext.getText() + "                     Thanks For Your Business...!" + "\n");
             billtext.setText(billtext.getText() + "-------------------------------------------------------------------------\n");
+            billtext.setText(billtext.getText() + "                             " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + "\n");
+            billtext.setText(billtext.getText() + "-------------------------------------------------------------------------\n");
             billtext.setText(billtext.getText() + "                     Software by Anjana Ekanayaka" + "\n");
 
         } catch (Exception e) {
@@ -575,6 +582,20 @@ public class SellerUI extends javax.swing.JFrame {
         }
     }
 
+    private void invoicesaver() {
+        String folderPath = "D:\\Invoices\\"; // Specify your folder path here
+        LocalDateTime now = LocalDateTime.now();
+        String fileName = "Invoice_" + now.format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + ".txt";
+        String filePath = folderPath + fileName;
+
+        try (PrintWriter writer = new PrintWriter(new FileWriter(filePath))) {
+            writer.print(billtext.getText());
+            showSuccessMessage("Bill has been saved to: " + filePath);
+        } catch (IOException e) {
+            showErrorMessage("Error writing to file: " + e.getMessage());
+        }
+    }
+
     private void ProductsLoadMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProductsLoadMouseMoved
         try {
 
@@ -623,6 +644,8 @@ public class SellerUI extends javax.swing.JFrame {
                 return;
             }
             pay();
+
+            invoicesaver();
             billtext.print();
             insertbills();
 

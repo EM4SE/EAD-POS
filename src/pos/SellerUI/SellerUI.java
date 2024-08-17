@@ -1,6 +1,7 @@
 package pos.SellerUI;
 
 import Custom.Components.table.TableCustom;
+import java.awt.Color;
 import java.awt.print.PrinterException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -30,6 +31,7 @@ public class SellerUI extends javax.swing.JFrame {
 
     public SellerUI(int SellerID, String Sellername) {
         initComponents();
+        //setBackground(new Color(0, 0, 0, 0));
         this.SellerID = SellerID;
         this.SellerName = Sellername;
         labelName.setText(Sellername);
@@ -454,7 +456,7 @@ public class SellerUI extends javax.swing.JFrame {
             DBConfig mycon = new DBConfig();
             Connection con = mycon.connectDB();
 
-            String sqlGeBills = "SELECT * FROM bills";
+            String sqlGeBills = "SELECT * FROM bills ORDER BY id DESC";
             PreparedStatement statementBills = con.prepareStatement(sqlGeBills);
             ResultSet rs = statementBills.executeQuery();
             DefaultTableModel model = (DefaultTableModel) tableReciepts.getModel();

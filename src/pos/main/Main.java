@@ -63,8 +63,7 @@ public class Main extends javax.swing.JFrame {
         buttonBills = new Custom.Components.Swing.ButtonMenu();
         buttonProducts = new Custom.Components.Swing.ButtonMenu();
         panelShadow3 = new Custom.Components.Swing.PanelShadow();
-        Home = new Custom.Components.Swing.RoundPanel();
-        pictureBox2 = new Custom.Components.Swing.PictureBox();
+        Home = new pos.main.Home();
         Products = new pos.main.Products();
         Sellers = new pos.main.Sellers();
         Bills = new Custom.Components.Swing.RoundPanel();
@@ -168,28 +167,6 @@ public class Main extends javax.swing.JFrame {
 
         panelShadow3.setBackground(new java.awt.Color(255, 255, 255));
         panelShadow3.setLayout(new javax.swing.OverlayLayout(panelShadow3));
-
-        Home.setBackground(new java.awt.Color(255, 255, 255));
-
-        pictureBox2.setImage(new javax.swing.ImageIcon(getClass().getResource("/pos/icon/rose gold text~2.png"))); // NOI18N
-
-        javax.swing.GroupLayout HomeLayout = new javax.swing.GroupLayout(Home);
-        Home.setLayout(HomeLayout);
-        HomeLayout.setHorizontalGroup(
-            HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HomeLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pictureBox2, javax.swing.GroupLayout.DEFAULT_SIZE, 1004, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        HomeLayout.setVerticalGroup(
-            HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(HomeLayout.createSequentialGroup()
-                .addGap(90, 90, 90)
-                .addComponent(pictureBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(124, Short.MAX_VALUE))
-        );
-
         panelShadow3.add(Home);
         panelShadow3.add(Products);
         panelShadow3.add(Sellers);
@@ -412,7 +389,7 @@ public class Main extends javax.swing.JFrame {
     private Custom.Components.Swing.RoundPanel Bills;
     private javax.swing.JScrollPane BillsScrollPane;
     private pos.main.Categories Categories;
-    private Custom.Components.Swing.RoundPanel Home;
+    private pos.main.Home Home;
     private pos.main.Products Products;
     private pos.main.Sellers Sellers;
     private javax.swing.JTable TableBills;
@@ -424,7 +401,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private Custom.Components.Swing.PanelShadow panelShadow1;
     private Custom.Components.Swing.PanelShadow panelShadow3;
-    private Custom.Components.Swing.PictureBox pictureBox2;
     private pos.includes.Profile profile1;
     private pos.winButtons.Win_Button win_Button1;
     // End of variables declaration//GEN-END:variables

@@ -1,7 +1,15 @@
 package pos.main;
 
+import Custom.Components.table.TableCustom;
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import pos.database.DBConfig;
 
 /**
  *
@@ -16,6 +24,8 @@ public class Main extends javax.swing.JFrame {
 
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
+        TableCustom.apply(BillsScrollPane, TableCustom.TableType.MULTI_LINE);
+        loadreciepts();
 
         mainFrame = this;
 
@@ -58,9 +68,10 @@ public class Main extends javax.swing.JFrame {
         Products = new pos.main.Products();
         Sellers = new pos.main.Sellers();
         Bills = new Custom.Components.Swing.RoundPanel();
-        jLabel2 = new javax.swing.JLabel();
-        roundPanel1 = new Custom.Components.Swing.RoundPanel();
-        button1 = new Custom.Components.Swing.Button();
+        BillsScrollPane = new javax.swing.JScrollPane();
+        TableBills = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        BillTxt = new javax.swing.JTextArea();
         Categories = new pos.main.Categories();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -183,52 +194,60 @@ public class Main extends javax.swing.JFrame {
         panelShadow3.add(Products);
         panelShadow3.add(Sellers);
 
-        Bills.setBackground(new java.awt.Color(242, 246, 253));
+        Bills.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel2.setText("bills");
+        TableBills.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Seller ID", "Seller Name", "Date", "Amount", "Bill"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
 
-        roundPanel1.setBackground(new java.awt.Color(255, 51, 0));
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        BillsScrollPane.setViewportView(TableBills);
+        if (TableBills.getColumnModel().getColumnCount() > 0) {
+            TableBills.getColumnModel().getColumn(0).setPreferredWidth(5);
+            TableBills.getColumnModel().getColumn(1).setPreferredWidth(30);
+            TableBills.getColumnModel().getColumn(2).setPreferredWidth(50);
+            TableBills.getColumnModel().getColumn(3).setPreferredWidth(50);
+            TableBills.getColumnModel().getColumn(4).setMinWidth(0);
+            TableBills.getColumnModel().getColumn(4).setPreferredWidth(0);
+            TableBills.getColumnModel().getColumn(4).setMaxWidth(0);
+        }
 
-        javax.swing.GroupLayout roundPanel1Layout = new javax.swing.GroupLayout(roundPanel1);
-        roundPanel1.setLayout(roundPanel1Layout);
-        roundPanel1Layout.setHorizontalGroup(
-            roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 380, Short.MAX_VALUE)
-        );
-        roundPanel1Layout.setVerticalGroup(
-            roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 290, Short.MAX_VALUE)
-        );
-
-        button1.setText("button1");
+        BillTxt.setColumns(20);
+        BillTxt.setRows(5);
+        jScrollPane2.setViewportView(BillTxt);
 
         javax.swing.GroupLayout BillsLayout = new javax.swing.GroupLayout(Bills);
         Bills.setLayout(BillsLayout);
         BillsLayout.setHorizontalGroup(
             BillsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BillsLayout.createSequentialGroup()
-                .addContainerGap(989, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addContainerGap())
             .addGroup(BillsLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(roundPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(BillsScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         BillsLayout.setVerticalGroup(
             BillsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BillsLayout.createSequentialGroup()
+            .addGroup(BillsLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(BillsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(BillsLayout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(roundPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(BillsLayout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
-                .addComponent(jLabel2)
+                    .addComponent(BillsScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
                 .addContainerGap())
         );
 
@@ -301,6 +320,57 @@ public class Main extends javax.swing.JFrame {
         Home.setVisible(false);
     }//GEN-LAST:event_buttonSellersActionPerformed
 
+    private void loadreciepts() {
+        TableBills.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                selectreciepts();
+            }
+        });
+        try {
+            DBConfig mycon = new DBConfig();
+            Connection con = mycon.connectDB();
+
+            String sqlGeBills = "SELECT * FROM bills ORDER BY id DESC";
+            PreparedStatement statementBills = con.prepareStatement(sqlGeBills);
+            ResultSet rs = statementBills.executeQuery();
+            DefaultTableModel model = (DefaultTableModel) TableBills.getModel();
+            model.setRowCount(0);
+
+            while (rs.next()) {
+                int ID = rs.getInt("seller_id");
+                String Name = rs.getString("seller_name");
+                String date = rs.getString("datetime");
+                String Bill = rs.getString("receipt");
+                double TotalPrice = rs.getDouble("totalprice");
+
+                model.addRow(new Object[]{ID, Name, date, TotalPrice, Bill});
+            }
+            con.close();
+        } catch (SQLException e) {
+            showErrorMessage(e.toString());
+        }
+    }
+
+    private void selectreciepts() {
+        int selectedRow = TableBills.getSelectedRow();
+        if (selectedRow == -1) {
+            return;
+        }
+
+        String BillText = TableBills.getValueAt(selectedRow, 4).toString();
+
+        BillTxt.setText(BillText);
+
+    }
+
+    public void showErrorMessage(String message) {
+        JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void showSuccessMessage(String message) {
+        JOptionPane.showMessageDialog(this, message, "Success", JOptionPane.INFORMATION_MESSAGE);
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -338,23 +408,24 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea BillTxt;
     private Custom.Components.Swing.RoundPanel Bills;
+    private javax.swing.JScrollPane BillsScrollPane;
     private pos.main.Categories Categories;
     private Custom.Components.Swing.RoundPanel Home;
     private pos.main.Products Products;
     private pos.main.Sellers Sellers;
+    private javax.swing.JTable TableBills;
     private Custom.Components.Swing.Background background1;
-    private Custom.Components.Swing.Button button1;
     private Custom.Components.Swing.ButtonMenu buttonBills;
     private Custom.Components.Swing.ButtonMenu buttonCategories;
     private Custom.Components.Swing.ButtonMenu buttonProducts;
     private Custom.Components.Swing.ButtonMenu buttonSellers;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane2;
     private Custom.Components.Swing.PanelShadow panelShadow1;
     private Custom.Components.Swing.PanelShadow panelShadow3;
     private Custom.Components.Swing.PictureBox pictureBox2;
     private pos.includes.Profile profile1;
-    private Custom.Components.Swing.RoundPanel roundPanel1;
     private pos.winButtons.Win_Button win_Button1;
     // End of variables declaration//GEN-END:variables
 }

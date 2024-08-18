@@ -45,7 +45,7 @@ public class Home extends javax.swing.JPanel {
             }
             con.close();
         } catch (SQLException e) {
-            showErrorMessage("Error: Failed to load Categories data.");
+            showErrorMessage("Error: Failed to load Count data.");
         }
     }
     
@@ -68,7 +68,7 @@ public class Home extends javax.swing.JPanel {
             }
             con.close();
         } catch (SQLException e) {
-            showErrorMessage("Error: Failed to load Categories data.");
+            showErrorMessage("Error: Failed to load Count data.");
         }
     }
      
@@ -90,7 +90,7 @@ public class Home extends javax.swing.JPanel {
             }
             con.close();
         } catch (SQLException e) {
-            showErrorMessage("Error: Failed to load Categories data.");
+            showErrorMessage("Error: Failed to load Count data.");
         }
     }
 
@@ -98,9 +98,7 @@ public class Home extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
-    private void showSuccessMessage(String message) {
-        JOptionPane.showMessageDialog(this, message, "Success", JOptionPane.INFORMATION_MESSAGE);
-    }
+   
 
     /**
      * This method is called from within the constructor to initialize the form.

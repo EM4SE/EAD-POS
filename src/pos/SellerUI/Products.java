@@ -192,6 +192,7 @@ public class Products extends javax.swing.JPanel {
 
                 showSuccessMessage("Product inserted successfully.");
             }
+            con.close();
 
         } catch (SQLException e) {
             if (e.getSQLState().equals("23000")) { // SQLState for integrity constraint violation

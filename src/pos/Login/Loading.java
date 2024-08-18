@@ -7,32 +7,28 @@ package pos.Login;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.*;
+
 /**
  *
  * @author Anjana
  */
 public class Loading extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Login
-     */
+    Login login;
+    static Loading loadingpane;
+
     public Loading() {
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
         pic.setBackground(new Color(0, 0, 0, 0));
 
-        loading();
-
-    }
-
-    private void loading() {
         progress.setValue(0);
 
         SwingWorker<Void, Integer> worker = new SwingWorker<Void, Integer>() {
             @Override
             protected Void doInBackground() throws Exception {
                 for (int i = 0; i <= 100; i++) {
-                    Thread.sleep(50);  // Simulate some work being done
+                    Thread.sleep(10);  // Simulate some work being done
                     publish(i);
                 }
                 return null;
@@ -46,12 +42,14 @@ public class Loading extends javax.swing.JFrame {
 
             @Override
             protected void done() {
-              
-               showSuccessMessage("Done");
+                loadingpane.setVisible(false);
+                login = new Login();
+                login.setVisible(true);
             }
         };
 
         worker.execute();
+
     }
 
     public void showErrorMessage(String message) {
@@ -143,7 +141,8 @@ public class Loading extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Loading().setVisible(true);
+                loadingpane = new Loading();
+                loadingpane.setVisible(true);
             }
         });
     }

@@ -69,6 +69,7 @@ public class SellerUI extends javax.swing.JFrame {
                     ProductsLoad.add(products1);
 
                 }
+                con.close();
             } catch (SQLException e) {
                 showErrorMessage("Error: Failed to load Products.");
             }
@@ -95,6 +96,7 @@ public class SellerUI extends javax.swing.JFrame {
                     ProductsLoad.add(products1);
 
                 }
+                con.close();
             } catch (SQLException e) {
                 showErrorMessage("Error: Failed to load Categories.");
             }
@@ -118,6 +120,7 @@ public class SellerUI extends javax.swing.JFrame {
                 comboboxCategory.addItem(Name);
 
             }
+            con.close();
         } catch (SQLException e) {
             showErrorMessage("Error: Failed to load Categories.");
         }
@@ -468,6 +471,7 @@ public class SellerUI extends javax.swing.JFrame {
 
                 model.addRow(new Object[]{ID, TotalPrice, date, Bill});
             }
+            con.close();
         } catch (SQLException e) {
             showErrorMessage(e.toString());
         }
@@ -504,6 +508,7 @@ public class SellerUI extends javax.swing.JFrame {
 
                 model.addRow(new Object[]{ID, Name, Qty, TotalPrice});
             }
+            con.close();
         } catch (SQLException e) {
             showErrorMessage(e.toString());
         }
@@ -658,7 +663,7 @@ public class SellerUI extends javax.swing.JFrame {
             textCash.setText("");
             labelBalance.setText("00.00");
             Bill();
-
+            con.close();
             showSuccessMessage("Payamet Process successfully.");
         } catch (SQLException | NumberFormatException e) {
             showErrorMessage(e.toString());
@@ -705,7 +710,7 @@ public class SellerUI extends javax.swing.JFrame {
 
             showSuccessMessage("Data Deleted successfully.");
             loadBill();
-
+            con.close();
         } catch (SQLException e) {
 
             showErrorMessage("Error: Failed to Delete seller data. Please check the connection details.");

@@ -451,9 +451,8 @@ public class Products extends javax.swing.JPanel {
     }//GEN-LAST:event_buttonClearActionPerformed
 
     private void buttonDeleteProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteProductActionPerformed
-       try {
-           String ProductIdText = textProductID.getText().trim();
-            
+        try {
+            String ProductIdText = textProductID.getText().trim();
 
             if (ProductIdText.isEmpty()) {
                 showErrorMessage("Error: Product Not Selected!!");
@@ -484,6 +483,7 @@ public class Products extends javax.swing.JPanel {
                 comboboxCategory.addItem(Name);
 
             }
+            con.close();
         } catch (SQLException e) {
             showErrorMessage("Error: Failed to load Categories.");
         }
@@ -509,7 +509,7 @@ public class Products extends javax.swing.JPanel {
             showSuccessMessage("Product data inserted successfully.");
             loadProductsData();
             clearFields();
-
+            con.close();
         } catch (SQLException e) {
 
             if (e.getSQLState().equals("23000")) { // SQLState for integrity constraint violation
@@ -542,7 +542,7 @@ public class Products extends javax.swing.JPanel {
             showSuccessMessage("Product data Edited successfully.");
             loadProductsData();
             clearFields();
-
+            con.close();
         } catch (SQLException e) {
 
             if (e.getSQLState().equals("23000")) { // SQLState for integrity constraint violation
@@ -555,7 +555,7 @@ public class Products extends javax.swing.JPanel {
 
     }
 
-     private void deleteProducts(int ProductID) {
+    private void deleteProducts(int ProductID) {
 
         try {
             DBConfig mycon = new DBConfig();
@@ -569,7 +569,7 @@ public class Products extends javax.swing.JPanel {
             showSuccessMessage("Products data Deleted successfully.");
             loadProductsData();
             clearFields();
-
+            con.close();
         } catch (SQLException e) {
 
             showErrorMessage("Error: Failed to Delete Products data. Please check the connection details.");
@@ -578,6 +578,7 @@ public class Products extends javax.swing.JPanel {
         }
 
     }
+
     //load data to table 
     private void loadProductsData() {
 
@@ -605,7 +606,9 @@ public class Products extends javax.swing.JPanel {
                 String ImagePath = rs.getString("product_imagepath");
 
                 model.addRow(new Object[]{ID, Name, Description, Price, Category, ImagePath});
+
             }
+            con.close();
         } catch (SQLException e) {
             showErrorMessage("Error: Failed to load Product data.");
         }

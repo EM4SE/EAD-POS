@@ -331,8 +331,7 @@ public class Sellers extends javax.swing.JPanel {
     //method to delete data 
     private void buttonDeleteSellerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteSellerActionPerformed
         try {
-           String sellerIdText = textSellerID.getText().trim();
-            
+            String sellerIdText = textSellerID.getText().trim();
 
             if (sellerIdText.isEmpty()) {
                 showErrorMessage("Error: Seller Not Selected!!");
@@ -347,7 +346,7 @@ public class Sellers extends javax.swing.JPanel {
     }//GEN-LAST:event_buttonDeleteSellerActionPerformed
 
     private void buttonClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClearActionPerformed
-      clearFields();
+        clearFields();
     }//GEN-LAST:event_buttonClearActionPerformed
 
     //load data to table 
@@ -376,13 +375,13 @@ public class Sellers extends javax.swing.JPanel {
 
                 model.addRow(new Object[]{ID, Name, Password, Gender});
             }
+            con.close();
         } catch (SQLException e) {
             showErrorMessage("Error: Failed to load seller data.");
         }
     }
 
     //method to insert serller data 
-    
     private void insertSeller(int sellerId, String sellerName, String sellerPassword, String gender) {
 
         try {
@@ -400,7 +399,7 @@ public class Sellers extends javax.swing.JPanel {
             showSuccessMessage("Seller data inserted successfully.");
             loadSellerData();
             clearFields();
-
+            con.close();
         } catch (SQLException e) {
 
             if (e.getSQLState().equals("23000")) { // SQLState for integrity constraint violation
@@ -431,7 +430,7 @@ public class Sellers extends javax.swing.JPanel {
             showSuccessMessage("Seller data Updated successfully.");
             loadSellerData();
             clearFields();
-
+            con.close();
         } catch (SQLException e) {
 
             //identify duplicate keys using sql state
@@ -460,7 +459,7 @@ public class Sellers extends javax.swing.JPanel {
             showSuccessMessage("Seller data Deleted successfully.");
             loadSellerData();
             clearFields();
-
+            con.close();
         } catch (SQLException e) {
 
             showErrorMessage("Error: Failed to Delete seller data. Please check the connection details.");
@@ -503,6 +502,7 @@ public class Sellers extends javax.swing.JPanel {
         return matcher.matches();
     }
 //clear text boxes 
+
     private void clearFields() {
         textSellerID.setText("");
         textSellerName.setText("");

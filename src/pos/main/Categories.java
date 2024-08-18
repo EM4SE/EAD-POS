@@ -296,6 +296,7 @@ public class Categories extends javax.swing.JPanel {
             showSuccessMessage("Category data inserted successfully.");
             loadCategoriesData();
             clearFields();
+            con.close();
 
         } catch (SQLException e) {
 
@@ -326,6 +327,7 @@ public class Categories extends javax.swing.JPanel {
             showSuccessMessage("Category data Updated successfully.");
             loadCategoriesData();
             clearFields();
+            con.close();
 
         } catch (SQLException e) {
 
@@ -366,6 +368,7 @@ public class Categories extends javax.swing.JPanel {
 
                 model.addRow(new Object[]{ID, Name, Description});
             }
+            con.close();
         } catch (SQLException e) {
             showErrorMessage("Error: Failed to load Categories data.");
         }
@@ -404,6 +407,7 @@ public class Categories extends javax.swing.JPanel {
             loadCategoriesData();
             clearFields();
 
+            con.close();
         } catch (SQLException e) {
 
             showErrorMessage("Error: Failed to Delete Category data. Please check the connection details.");

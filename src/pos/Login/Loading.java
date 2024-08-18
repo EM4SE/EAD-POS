@@ -19,6 +19,7 @@ public class Loading extends javax.swing.JFrame {
 
     public Loading() {
         initComponents();
+        loadingpane = this;
         setBackground(new Color(0, 0, 0, 0));
         pic.setBackground(new Color(0, 0, 0, 0));
 

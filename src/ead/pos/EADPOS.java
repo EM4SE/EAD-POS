@@ -4,7 +4,8 @@
  */
 package ead.pos;
 
-import pos.main.Main;
+
+import pos.Login.*;
 
 /**
  *
@@ -17,7 +18,7 @@ public class EADPOS {
      */
     public static void main(String[] args) {
 
-        Main main = new Main();
+        Loading main = new Loading();
         main.setVisible(true);
         // TODO code application logic here
     }

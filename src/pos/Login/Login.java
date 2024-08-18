@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import pos.database.DBConfig;
+import pos.SellerUI.SellerUI;
+import pos.main.Main;
 
 /**
  *
@@ -218,7 +220,7 @@ public class Login extends javax.swing.JFrame {
         labelMessage.setText("");
     }//GEN-LAST:event_textPasswordKeyTyped
 
-    private void authenticateUser(String username, String password) {
+     private void authenticateUser(String username, String password) {
 
         try {
 
@@ -226,24 +228,34 @@ public class Login extends javax.swing.JFrame {
             Connection con = mycon.connectDB();
 
             // check if the product with the given ID already exists
-            String checkSql = "SELECT COUNT(*) FROM sellers WHERE id  = ? AND password = ?";
+            String checkSql = "SELECT COUNT(*),name FROM sellers WHERE id  = ? AND password = ?";
             PreparedStatement checkStatement = con.prepareStatement(checkSql);
             checkStatement.setString(1, username);
             checkStatement.setString(2, password);
             ResultSet resultSet = checkStatement.executeQuery();
 
             if (resultSet.next() && resultSet.getInt(1) > 0) {
+                int userid = Integer.parseInt(username.trim());
+                String Name = resultSet.getString("name");
                 showSuccessMessage("password Seller correct");
+                SellerUI seller = new SellerUI(userid,Name);
+                seller.setVisible(true);
+                this.setVisible(false);
+                
 
             } else {
-                String checkSqlAdmin = "SELECT COUNT(*) FROM admin WHERE username =? AND password =?";
+                String checkSqlAdmin = "SELECT COUNT(*),name FROM admin WHERE username =? AND password =?";
                 PreparedStatement AdmincheckStatement = con.prepareStatement(checkSqlAdmin);
                 AdmincheckStatement.setString(1, username);
                 AdmincheckStatement.setString(2, password);
                 ResultSet AdminresultSet = AdmincheckStatement.executeQuery();
 
                 if (AdminresultSet.next() && AdminresultSet.getInt(1) > 0) {
+                    String Name = resultSet.getString("name");
                     showSuccessMessage("password admin correct");
+                    Main main = new Main();
+                    main.setVisible(true);
+                    this.setVisible(false);
                 } else {
 
                     labelMessage.setText("Username or Password Incorrect !");
@@ -259,7 +271,6 @@ public class Login extends javax.swing.JFrame {
 
         }
     }
-
     public void showErrorMessage(String message) {
         JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
     }

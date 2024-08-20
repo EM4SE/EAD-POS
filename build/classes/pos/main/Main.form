@@ -227,47 +227,8 @@
             </Property>
           </Properties>
           <SubComponents>
-            <Container class="Custom.Components.Swing.RoundPanel" name="Home">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-              </Properties>
-
-              <Layout>
-                <DimensionLayout dim="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="pictureBox2" pref="1004" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-                <DimensionLayout dim="1">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
-                          <Component id="pictureBox2" min="-2" pref="345" max="-2" attributes="0"/>
-                          <EmptySpace pref="124" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-              </Layout>
-              <SubComponents>
-                <Container class="Custom.Components.Swing.PictureBox" name="pictureBox2">
-                  <Properties>
-                    <Property name="image" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/pos/icon/rose gold text~2.png"/>
-                    </Property>
-                  </Properties>
-
-                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
-                    <Property name="useNullLayout" type="boolean" value="true"/>
-                  </Layout>
-                </Container>
-              </SubComponents>
-            </Container>
+            <Component class="pos.main.Home" name="Home">
+            </Component>
             <Component class="pos.main.Products" name="Products">
             </Component>
             <Component class="pos.main.Sellers" name="Sellers">

@@ -83,6 +83,11 @@ public class Login extends javax.swing.JFrame {
         labelMessage.setText("jLabel2");
 
         textPassword.setLabelText("Password");
+        textPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textPasswordKeyTyped(evt);
+            }
+        });
 
         buttonExit.setBackground(new java.awt.Color(255, 51, 51));
         buttonExit.setForeground(new java.awt.Color(255, 255, 255));
@@ -231,7 +236,7 @@ public class Login extends javax.swing.JFrame {
             if (resultSet.next() && resultSet.getInt(1) > 0) {
                 int userid = Integer.parseInt(username.trim());
                 String Name = resultSet.getString("name");
-                showSuccessMessage("password Seller correct");
+               // showSuccessMessage("password Seller correct");
                 SellerUI seller = new SellerUI(userid,Name);
                 seller.setVisible(true);
                 this.setVisible(false);
@@ -246,7 +251,7 @@ public class Login extends javax.swing.JFrame {
 
                 if (AdminresultSet.next() && AdminresultSet.getInt(1) > 0) {
                     String Name = resultSet.getString("name");
-                    showSuccessMessage("password admin correct");
+                  //  showSuccessMessage("password admin correct");
                     Main main = new Main();
                     main.setVisible(true);
                     this.setVisible(false);

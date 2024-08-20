@@ -179,7 +179,7 @@ public class Products extends javax.swing.JPanel {
                 updateStatement.setInt(2, productID);
                 updateStatement.executeUpdate();
 
-                showSuccessMessage("Product Quantity updated successfully.");
+               // showSuccessMessage("Product Quantity updated successfully.");
             } else {
                 // Product does not exist, insert a new record
                 String insertSql = "INSERT INTO cart (product_id, product_name, qty, price) VALUES (?, ?, ?, ?)";
@@ -190,7 +190,7 @@ public class Products extends javax.swing.JPanel {
                 insertStatement.setDouble(4, productPrice);
                 insertStatement.executeUpdate();
 
-                showSuccessMessage("Product inserted successfully.");
+               // showSuccessMessage("Product inserted successfully.");
             }
             con.close();
 

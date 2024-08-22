@@ -15,6 +15,7 @@ import pos.database.DBConfig;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.File;
 
 /**
  *
@@ -671,10 +672,20 @@ public class SellerUI extends javax.swing.JFrame {
     }
 
     private void invoicesaver() {
-        String folderPath = "D:\\Invoices\\"; // Specify your folder path here
+        String folderPath = "Invoices/"; // Specify your folder path here
         LocalDateTime now = LocalDateTime.now();
         String fileName = "Invoice_" + now.format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + ".txt";
         String filePath = folderPath + fileName;
+
+        File directory = new File(folderPath);
+        if (!directory.exists()) {
+            if (directory.mkdirs()) {
+                showSuccessMessage("Directory created: " + folderPath);
+            } else {
+                showErrorMessage("Failed to create directory: " + folderPath);
+                return;
+            }
+        }
 
         try (PrintWriter writer = new PrintWriter(new FileWriter(filePath))) {
             writer.print(billtext.getText());

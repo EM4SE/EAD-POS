@@ -16,6 +16,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.File;
+import java.util.HashMap;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -538,7 +547,7 @@ public class SellerUI extends javax.swing.JFrame {
     }
 
     public void pay() {
-        // pat btn action
+        // pay btn action
 
         String totalText = labelTotal.getText();
         String payText = textCash.getText();
@@ -634,6 +643,7 @@ public class SellerUI extends javax.swing.JFrame {
 
     }
 
+    //function to create and store bills in data base 
     private void insertbills() {
         try {
 
@@ -672,11 +682,12 @@ public class SellerUI extends javax.swing.JFrame {
     }
 
     private void invoicesaver() {
-        String folderPath = "Invoices/"; // Specify your folder path here
+        String folderPath = "Invoices/";
         LocalDateTime now = LocalDateTime.now();
         String fileName = "Invoice_" + now.format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + ".txt";
         String filePath = folderPath + fileName;
 
+        //create derectory if there no directory
         File directory = new File(folderPath);
         if (!directory.exists()) {
             if (directory.mkdirs()) {
@@ -730,6 +741,7 @@ public class SellerUI extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
     private void buttonPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPayActionPerformed
+
         try {
             String payText = textCash.getText();
             double balance = Double.parseDouble(labelBalance.getText().trim());
@@ -742,6 +754,31 @@ public class SellerUI extends javax.swing.JFrame {
                 showErrorMessage("Paid Amount is not sufficient");
                 return;
             }
+
+            try {
+                DBConfig mycon = new DBConfig();
+                Connection con = mycon.connectDB();
+
+                JasperDesign jasdi = JRXmlLoader.load("src/pos/reports/Bill.jrxml");
+
+
+                String sql = "SELECT * from cart";
+                JRDesignQuery newQuery = new JRDesignQuery();
+                newQuery.setText(sql);
+
+                jasdi.setQuery(newQuery);
+                
+                HashMap<String, Object> para = new HashMap<>();
+                para.put("CASH", textCash.getText());
+                para.put("BALANCE", labelBalance.getText());
+
+                JasperReport js = JasperCompileManager.compileReport(jasdi);
+                JasperPrint jp = JasperFillManager.fillReport(js, para, con);
+                JasperViewer.viewReport(jp);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(rootPane, e);
+            }
+
             pay();
             invoicesaver();
             billtext.print();

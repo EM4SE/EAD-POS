@@ -497,7 +497,7 @@ public class Sellers extends javax.swing.JPanel {
 
     //method to validate data
     private boolean isValidName(String name) {
-        Pattern pattern = Pattern.compile("^[a-zA-Z]+$");
+        Pattern pattern = Pattern.compile("^[ a-zA-Z]+$");
         Matcher matcher = pattern.matcher(name);
         return matcher.matches();
     }

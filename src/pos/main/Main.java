@@ -10,6 +10,11 @@ import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import pos.database.DBConfig;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.view.JasperViewer;
+
+import java.util.HashMap;
+import net.sf.jasperreports.engine.util.JRLoader;
 
 /**
  *
@@ -71,6 +76,9 @@ public class Main extends javax.swing.JFrame {
         TableBills = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         BillTxt = new javax.swing.JTextArea();
+        ProductReport = new Custom.Components.Swing.Button();
+        sellersReport = new Custom.Components.Swing.Button();
+        SalesReport = new Custom.Components.Swing.Button();
         Categories = new pos.main.Categories();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -207,14 +215,48 @@ public class Main extends javax.swing.JFrame {
         BillTxt.setRows(5);
         jScrollPane2.setViewportView(BillTxt);
 
+        ProductReport.setBackground(new java.awt.Color(204, 204, 255));
+        ProductReport.setText("Product Report");
+        ProductReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ProductReportActionPerformed(evt);
+            }
+        });
+
+        sellersReport.setBackground(new java.awt.Color(204, 204, 255));
+        sellersReport.setText("Sellers Report");
+        sellersReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sellersReportActionPerformed(evt);
+            }
+        });
+
+        SalesReport.setBackground(new java.awt.Color(204, 204, 255));
+        SalesReport.setText("Sales Report");
+        SalesReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SalesReportActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout BillsLayout = new javax.swing.GroupLayout(Bills);
         Bills.setLayout(BillsLayout);
         BillsLayout.setHorizontalGroup(
             BillsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BillsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(BillsScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(BillsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(BillsLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(BillsScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(BillsLayout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(sellersReport, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ProductReport, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(SalesReport, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -223,8 +265,15 @@ public class Main extends javax.swing.JFrame {
             .addGroup(BillsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(BillsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BillsScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
+                    .addGroup(BillsLayout.createSequentialGroup()
+                        .addComponent(BillsScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(BillsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ProductReport, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sellersReport, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SalesReport, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -296,6 +345,60 @@ public class Main extends javax.swing.JFrame {
         Bills.setVisible(false);
         Home.setVisible(false);
     }//GEN-LAST:event_buttonSellersActionPerformed
+
+    private void ProductReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProductReportActionPerformed
+       try {
+            // Load the report design
+            JasperReport jasperReport = JasperCompileManager.compileReport("D:\\NIBM Projects\\EAD\\EAD-POS\\src\\pos\\reports\\Products.jasper");
+
+
+            HashMap<String, Object> parameters = new HashMap<>();
+            // Fill the report
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, new JREmptyDataSource());
+
+            // View the report
+            JasperViewer.viewReport(jasperPrint, false);
+        } catch (JRException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error showing report: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_ProductReportActionPerformed
+
+    private void sellersReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sellersReportActionPerformed
+       try {
+            // Load the report design
+            JasperReport jasperReport = JasperCompileManager.compileReport("D:\\NIBM Projects\\EAD\\EAD-POS\\src\\pos\\reports\\Sellers.jasper");
+
+
+            HashMap<String, Object> parameters = new HashMap<>();
+            // Fill the report
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, new JREmptyDataSource());
+
+            // View the report
+            JasperViewer.viewReport(jasperPrint, false);
+        } catch (JRException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error showing report: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_sellersReportActionPerformed
+
+    private void SalesReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalesReportActionPerformed
+        try {
+            // Load the report design
+            JasperReport jasperReport = JasperCompileManager.compileReport("D:\\NIBM Projects\\EAD\\EAD-POS\\src\\pos\\reports\\Sales.jasper");
+
+
+            HashMap<String, Object> parameters = new HashMap<>();
+            // Fill the report
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, new JREmptyDataSource());
+
+            // View the report
+            JasperViewer.viewReport(jasperPrint, false);
+        } catch (JRException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error showing report: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_SalesReportActionPerformed
 
     private void loadreciepts() {
         TableBills.getSelectionModel().addListSelectionListener(e -> {
@@ -390,7 +493,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane BillsScrollPane;
     private pos.main.Categories Categories;
     private pos.main.Home Home;
+    private Custom.Components.Swing.Button ProductReport;
     private pos.main.Products Products;
+    private Custom.Components.Swing.Button SalesReport;
     private pos.main.Sellers Sellers;
     private javax.swing.JTable TableBills;
     private Custom.Components.Swing.Background background1;
@@ -402,6 +507,7 @@ public class Main extends javax.swing.JFrame {
     private Custom.Components.Swing.PanelShadow panelShadow1;
     private Custom.Components.Swing.PanelShadow panelShadow3;
     private pos.includes.Profile profile1;
+    private Custom.Components.Swing.Button sellersReport;
     private pos.winButtons.Win_Button win_Button1;
     // End of variables declaration//GEN-END:variables
 }
